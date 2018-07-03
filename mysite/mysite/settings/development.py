@@ -15,3 +15,13 @@ SECRET_KEY = config.get('keys','SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'OPTIONS': {
+            'option_files': '/usr/local/etc/my.cnf',
+            'use_pure': True,
+        },
+    }
+}

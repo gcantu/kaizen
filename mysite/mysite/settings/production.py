@@ -10,3 +10,13 @@ SECRET_KEY = config.get('keys','SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['18.222.154.241', 'ec2-18-222-154-241.us-east-2.compute.amazonaws.com']
+
+# Database
+DATABASES = {
+'default': {
+    'ENGINE': 'django.db.backends.mysql',
+    'OPTIONS': {
+        'read_default_file': '/etc/mysql/my.cnf',
+    },
+}
+}
