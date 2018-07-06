@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ProposalCreate
+from .views import CreateProposalView
 
 urlpatterns = [
-    path('new', ProposalCreate.as_view(), name='proposal-new'),
+    path('new', CreateProposalView.as_view(), name='proposal-new'),
 ]

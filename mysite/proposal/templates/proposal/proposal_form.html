@@ -1,6 +1,18 @@
 
 
 <form action="{% url 'proposal-new' %}" method="post">
-    {{ form }}
-    <input type="submit" value="OK">
+  <table>
+    {{ form.as_table }}
+  </table>
+  {% for formset in inlines %}
+    <div id="{{ formset.prefix }}">
+    {% for subform in formset.forms %}
+      <table>
+      {{ subform.as_table }}
+      </table>
+    {% endfor %}
+    {{ formset.management_form }}
+    </div>
+  {% endfor %}
+  <input type="submit" value="OK"/>
 </form>
