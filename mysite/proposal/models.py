@@ -137,8 +137,5 @@ class proposal_item(models.Model):
     def __str__(self):
         return self.proposal_item_id
 
-    def get_absolute_url(self):
-        return reverse('proposal-detail', kwargs={'pk': self.pk})
-
     class Meta:
         db_table = 'proposal_item'
