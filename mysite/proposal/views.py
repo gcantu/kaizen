@@ -1,12 +1,12 @@
 from extra_views import CreateWithInlinesView
 
 from .models import customer
-from .forms import ProposalInline
+from .forms import ProposalInline, ProposalItemInline
 
 
 class CreateProposalView(CreateWithInlinesView):
     model = customer
-    inlines = [ProposalInline]
+    inlines = [ProposalInline, ProposalItemInline]
     fields = "__all__"
     template_name = 'proposal/proposal_form.html'
 

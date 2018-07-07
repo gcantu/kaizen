@@ -1,6 +1,6 @@
 
 
-<form action="{% url 'proposal-new' %}" method="post">
+<!-- <form action="{% url 'proposal-new' %}" method="post">
   <table>
     {{ form.as_table }}
   </table>
@@ -14,5 +14,48 @@
     {{ formset.management_form }}
     </div>
   {% endfor %}
+  <input type="submit" value="OK"/>
+</form> -->
+
+<!-- <form action="{% url 'proposal-new' %}" method="post">
+  <table>
+    {{ form.as_table }}
+  </table>
+  {{ formset.management_form }}
+  <table>
+    {% for formset in inlines %}
+      {% for form in formset %}
+        {{ form }}
+      {% endfor %}
+    {% endfor %}
+  </table>
+  <input type="submit" value="OK"/>
+</form> -->
+
+<form action="{% url 'proposal-new' %}" method="post">
+  <table>
+    {{ form.as_table }}
+  </table>
+  {{ formset.management_form }}
+  <table>
+      <thead>
+        {% for formset in inlines %}
+          {% for form in formset %}
+            {% if forloop.first %}
+              {% for field in form %}
+                  <th>{{ field.label_tag }}</th>
+              {% endfor %}
+            {% endif %}
+      </thead>
+      <tbody>
+            <tr>
+              {% for field in form %}
+                <td>{{ field }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+  </table>
   <input type="submit" value="OK"/>
 </form>

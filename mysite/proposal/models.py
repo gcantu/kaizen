@@ -111,6 +111,7 @@ class proposal_item(models.Model):
     HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
     LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
     TILT_ROD_CHOICES = [('Aluminum', 'Aluminum'), ('Front', 'Front'), ('Side and Back', 'Side and Back')]
+    customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
     product_model = models.ForeignKey(product_model, models.SET_NULL, blank=True, null=True)
