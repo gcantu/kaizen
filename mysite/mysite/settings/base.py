@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'extra_views',
 ]
 
 MIDDLEWARE = [
@@ -105,4 +106,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'proposal-new'
+# LOGIN_REDIRECT_URL = 'proposal-new'
+LOGIN_REDIRECT_URL = 'customer-type'
