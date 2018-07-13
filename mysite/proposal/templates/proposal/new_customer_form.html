@@ -1,8 +1,8 @@
+
 <form method="post">
   {% csrf_token %}
-  {{ formset.management_form }}
   <table>
-    {{ form }}
+      {{ form }}
   </table>
   <input type="submit" value="OK"/>
 </form>

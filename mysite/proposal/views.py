@@ -1,103 +1,57 @@
-from extra_views import CreateWithInlinesView
+from django.shortcuts import render
+from django.urls import reverse
 
-from .models import customer
-from .forms import ProposalInline, ProposalItemInline
+from django.views.generic.edit import CreateView
+from extra_views import ModelFormSetView
+from .models import customer, proposal, proposal_item
 
 
-class CreateProposalView(CreateWithInlinesView):
+def CustomerType(request):
+    return render(request, 'proposal/customer_type.html')
+
+
+def ExistingCustomer(request):
+    return render(request, 'proposal/existing_customer.html')
+
+
+class NewCustomer(CreateView):
     model = customer
-    inlines = [ProposalInline, ProposalItemInline]
-    fields = "__all__"
-    template_name = 'proposal/proposal_form.html'
+    fields = '__all__'
+    template_name = 'proposal/new_customer_form.html'
 
     def get_success_url(self):
-        return self.object.get_absolute_url()
-
-# ---------------------------------------------------
-# from django.views.generic.edit import CreateView
-# from .forms import CustomerForm # , ProposalFormSet
-# from extra_views import InlineFormSet, CreateWithInlinesView
-# from extra_views.generic import GenericInlineFormSetFactory
+        return reverse('proposal-new', kwargs={'pk': self.object.pk})
 
 
-# from extra_views import InlineFormSetView
-#
-# class ProposalCreate(InlineFormSetView):
-#     model = customer
-#     inline_model = proposal
-#     fields="__all__"
+class CreateProposal(CreateView):
+    model = proposal
+    template_name = 'proposal/proposal_form.html'
+    fields = ('created_date', 'notes', 'agents', 'measured_by')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.customer_id = self.kwargs['pk']
+        self.object.save()
+        form.save_m2m()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('proposal-item', kwargs={'pk': self.object.pk})
 
 
-# SI FUNCIONA ----------------------------
-# from extra_views import ModelFormSetView
-# from .models import customer
-# from django.forms import formset_factory
-#
-# class ProposalCreate(ModelFormSetView):
-#     template_name = 'proposal/proposal_form.html'
-#     model = customer
-#     factory_kwargs={'extra': 2}
-#     fields="__all__"
-# SI FUNCIONA ----------------------------
+class ProposalItem(ModelFormSetView):
+    model = proposal_item
+    template_name = 'proposal/proposal_item.html'
+    fields = ('product', 'product_type', 'product_finish', 'quantity', 'product_color', 'location', 'louver', 'panels', 'int_ext', 'trim', 'trim_type', 'tilt_rod', 'hinges', 'hinge_color', 'width', 'height', 'height_center', 'height_left', 'height_right', 'approved') #product_model
+    queryset = proposal.objects.none()
+    factory_kwargs={'extra': 10}
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.customer_id = self.kwargs['pk']
+        self.object.save()
+        form.save_m2m()
+        return super().form_valid(form)
 
-# class ProposalCreate(InlineFormSetView):
-#     model = customer
-#     inline_model = proposal
-
-# class ProposalInline(InlineFormSet):
-#     model = proposal
-#     fields = '__all__'
-
-
-# class TagInline(GenericInlineFormSetFactory):
-#     model = Tag
-#     fields = '__all__'
-
-
-# class ProposalCreate(CreateWithInlinesView):
-#     model = customer
-#     inlines = [ProposalInline]
-#     fields = '__all__'
-#     template_name = 'proposal/proposal_form.html'
-
-# class ProposalCreate(CreateView):
-#     model = customer
-#     form_class = CustomerForm
-#     template_name = 'proposal/proposal_form.html'
-#
-#     def get(self, request, *args, **kwargs):
-#         self.object = None
-#         form_class = self.get_form_class()
-#         form = self.get_form(form_class)
-#         proposal_form = ProposalFormSet()
-#         # proposal_item_form = ProposalItemFormSet()
-#         return self.render_to_response(
-#             self.get_context_data(form=form,
-#                                   proposal_form=proposal_form))
-#                                   # proposal_item_form=proposal_item_form))
-#
-#     def post(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         form_class = self.get_form_class()
-#         form = self.get_form(form_class)
-#         proposal_form = ProposalFormSet(self.request.POST)
-#         # instruction_form = InstructionFormSet(self.request.POST)
-#         if (form.is_valid() and proposal_form.is_valid()):
-#             return self.form_valid(form, proposal_form) # , instruction_form)
-#         else:
-#             return self.form_invalid(form, proposal_form) # , instruction_form)
-#
-#     def form_valid(self, form, proposal_form): # , instruction_form):
-#         self.object = form.save()
-#         proposal_form.instance = self.object
-#         proposal_form.save()
-#         # instruction_form.instance = self.object
-#         # instruction_form.save()
-#         return HttpResponseRedirect(self.get_success_url())
-#
-#     def form_invalid(self, form, proposal_form): # , instruction_form):
-#         return self.render_to_response(
-#             self.get_context_data(form=form,
-#                                   proposal_form=proposal_form))
-#                                   # instruction_form=instruction_form))
+    def get_success_url(self):
+        return reverse('proposal-item', kwargs={'pk': self.object.pk})

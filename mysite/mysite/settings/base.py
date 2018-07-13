@@ -106,4 +106,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'proposal-new'
+# LOGIN_REDIRECT_URL = 'proposal-new'
+LOGIN_REDIRECT_URL = 'customer-type'
