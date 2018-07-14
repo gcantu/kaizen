@@ -1,9 +1,9 @@
-from django.shortcuts import render
 from django.urls import reverse
-
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from extra_views import ModelFormSetView
+
 from .models import customer, proposal, proposal_item
+from .forms import ProposalItemFormSet
 
 
 def CustomerType(request):
@@ -39,19 +39,25 @@ class CreateProposal(CreateView):
         return reverse('proposal-item', kwargs={'pk': self.object.pk})
 
 
-class ProposalItem(ModelFormSetView):
-    model = proposal_item
-    template_name = 'proposal/proposal_item.html'
-    fields = ('product', 'product_type', 'product_finish', 'quantity', 'product_color', 'location', 'louver', 'panels', 'int_ext', 'trim', 'trim_type', 'tilt_rod', 'hinges', 'hinge_color', 'width', 'height', 'height_center', 'height_left', 'height_right', 'approved') #product_model
-    queryset = proposal.objects.none()
-    factory_kwargs={'extra': 10}
+def ProposalItem(request, pk):
+    if request.method == 'POST':
+        formset = ProposalItemFormSet(
+            request.POST,
+            queryset=proposal_item.objects.none(),
+        )
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.customer_id = self.kwargs['pk']
-        self.object.save()
-        form.save_m2m()
-        return super().form_valid(form)
+        if formset.is_valid():
+            instances = formset.save(commit=False)
+            for instance in instances:
+                instance.proposal_id = pk
+                instance.save()
+            formset.save_m2m()
+            return redirect('manufacturing-report')
+    else:
+        formset = ProposalItemFormSet(queryset=proposal_item.objects.none())
 
-    def get_success_url(self):
-        return reverse('proposal-item', kwargs={'pk': self.object.pk})
+    return render(request, 'proposal/proposal_item.html', {'formset': formset})
+
+
+def ManufacturingReport(request):
+    return render(request, 'proposal/manufacturing_report.html')
