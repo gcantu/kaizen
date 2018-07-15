@@ -75,7 +75,7 @@ class product_model(models.Model):
     product_finish = models.ManyToManyField(product_finish, through='product_price')
 
     def __str__(self):
-        return self.model_name
+        return f'Model: {self.model_name}.'
 
     class Meta:
         db_table = 'product_model'
@@ -87,7 +87,7 @@ class product_price(models.Model):
     price_per_sqft = models.IntegerField()
 
     def __str__(self):
-        return self.product_price_id
+        return f'Product Model: {self.product_model}, Price/sq.ft: ${price_per_sqft} .'
 
     class Meta:
         db_table = 'product_price'
@@ -101,7 +101,7 @@ class proposal(models.Model):
     notes = models.TextField()
 
     def __str__(self):
-        return self.proposal_id
+        return f'Proposal ID: {self.id}.'
 
     class Meta:
         db_table = 'proposal'
@@ -113,32 +113,33 @@ class proposal_item(models.Model):
     TRIM_TYPE_CHOICES = [('Colonial', 'Colonial'), ('Flat', 'Flat'), ('Modern', 'Modern')]
     HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
     LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
+    # LOUVER_CHOICES = [(2.5, 2.5), (3.5, 3.5), (4.5, 4.5)]
     TILT_ROD_CHOICES = [('Aluminum', 'Aluminum'), ('Front', 'Front'), ('Side and Back', 'Side and Back')]
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
     product_model = models.ForeignKey(product_model, models.SET_NULL, blank=True, null=True)
     product_type = models.ForeignKey(product_type, models.SET_NULL, blank=True, null=True)
     product_finish = models.ForeignKey(product_finish, models.SET_NULL, blank=True, null=True)
-    quantity = models.IntegerField(null=True)
+    quantity = models.IntegerField(blank=True, null=True)
     product_color = models.CharField(max_length=100, blank=True)
     location = models.CharField(max_length=100, blank=True)
-    louver = models.IntegerField(choices=LOUVER_CHOICES, null=True)
-    panels = models.IntegerField(null=True)
+    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
+    panels = models.IntegerField(blank=True, null=True)
     int_ext = models.CharField(max_length=3, choices=INT_EXT_CHOICES, blank=True)
-    trim = models.IntegerField(choices=TRIM_CHOICES, blank=True)
+    trim = models.IntegerField(choices=TRIM_CHOICES, blank=True, null=True)
     trim_type = models.CharField(max_length=25, choices=TRIM_TYPE_CHOICES, blank=True)
     tilt_rod = models.CharField(max_length=25, choices=TILT_ROD_CHOICES, blank=True)
     hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
     hinge_color = models.CharField(max_length=100, blank=True)
-    width = models.IntegerField(null=True)
-    height = models.IntegerField(null=True)
-    height_center = models.IntegerField(null=True)
-    height_left = models.IntegerField(null=True)
-    height_right = models.IntegerField(null=True)
+    width = models.FloatField(blank=True, null=True)
+    height = models.FloatField(blank=True, null=True)
+    height_center = models.FloatField(blank=True, null=True)
+    height_left = models.FloatField(blank=True, null=True)
+    height_right = models.FloatField(blank=True, null=True)
     approved = models.NullBooleanField()
 
     def __str__(self):
-        return self.proposal_item_id
+        return f'Line item ID: {self.id}.'
 
     class Meta:
         db_table = 'proposal_item'

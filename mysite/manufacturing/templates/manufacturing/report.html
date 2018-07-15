@@ -1,0 +1,54 @@
+<table>
+<thead>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Panels</th>
+      <th>Trim</th>
+      <th>L-frame Width</th>
+      <th>L-frame Height</th>
+      <th>Rail</th>
+      <th>Louver</th>
+      <th>Stile</th>
+      <th>Tilt Rod</th>
+      <th>Hinges</th>
+      <th>Magnets</th>
+      <th>Screws</th>
+      <th>Louver Qty</th>
+      <th>Rail Qty</th>
+      <th>Stile Qty</th>
+      <th>L-frame Material</th>
+      <th>Louver Material</th>
+      <th>Rail Material</th>
+      <th>Stile Material</th>
+      <th>Tilt Rod Material</th>
+      <th>Panel Material</th>
+</thead>
+<tbody>
+  {% for item in results %}
+    <tr>
+      <td>{{ item.width }}</td>
+      <td>{{ item.height }}</td>
+      <td>{{ item.panels }}</td>
+      <td>{{ item.trim }}</td>
+      <td>{{ item.LframeWidth }}</td>
+      <td>{{ item.LframeHeight }}</td>
+      <td>{{ item.rail }}</td>
+      <td>{{ item.louver }}</td>
+      <td>{{ item.stile }}</td>
+      <td>{{ item.tiltRod }}</td>
+      <td>{{ item.hinges }}</td>
+      <td>{{ item.magnets }}</td>
+      <td>{{ item.screws }}</td>
+      <td>{{ item.louverQty }}</td>
+      <td>{{ item.railQty }}</td>
+      <td>{{ item.stileQty }}</td>
+      <td>{{ item.LframeMaterial }}</td>
+      <td>{{ item.louverMaterial }}</td>
+      <td>{{ item.railMaterial }}</td>
+      <td>{{ item.stileMaterial }}</td>
+      <td>{{ item.tiltRodMaterial }}</td>
+      <td>{{ item.panelMaterial }}</td>
+    </tr>
+  {% endfor %}
+</tbody>
+</table>

@@ -5,8 +5,8 @@
     <thead>
       {% for form in formset %}
         {% if forloop.first %}
-          {% for field in form %}
-              <th>{{ field.label_tag }}</th>
+          {% for field in form.visible_fields %}
+            <th>{{ field.label_tag }}</th>
           {% endfor %}
         {% endif %}
     </thead>
