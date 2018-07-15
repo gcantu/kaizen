@@ -52,12 +52,8 @@ def ProposalItem(request, pk):
                 instance.proposal_id = pk
                 instance.save()
             formset.save_m2m()
-            return redirect('manufacturing-report')
+            return redirect(reverse('manufacturing:report', kwargs={'pk': pk})) # manufacturing is the namespace
     else:
         formset = ProposalItemFormSet(queryset=proposal_item.objects.none())
 
     return render(request, 'proposal/proposal_item.html', {'formset': formset})
-
-
-def ManufacturingReport(request):
-    return render(request, 'proposal/manufacturing_report.html')

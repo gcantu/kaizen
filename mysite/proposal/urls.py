@@ -8,5 +8,4 @@ urlpatterns = [
     path('existing_customer', views.ExistingCustomer, name='customer-existing'),
     path('<int:pk>/new', CreateProposal.as_view(), name='proposal-new'),
     path('<int:pk>/item', views.ProposalItem, name='proposal-item'),
-    path('manufacturing', views.ManufacturingReport, name='manufacturing-report'),
 ]
