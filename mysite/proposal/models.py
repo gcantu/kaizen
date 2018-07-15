@@ -75,7 +75,7 @@ class product_model(models.Model):
     product_finish = models.ManyToManyField(product_finish, through='product_price')
 
     def __str__(self):
-        return self.model_name
+        return f'Model: {self.model_name}.'
 
     class Meta:
         db_table = 'product_model'
@@ -87,7 +87,7 @@ class product_price(models.Model):
     price_per_sqft = models.IntegerField()
 
     def __str__(self):
-        return self.product_price_id
+        return f'Product Model: {self.product_model}, Price/sq.ft: ${price_per_sqft} .'
 
     class Meta:
         db_table = 'product_price'
@@ -101,7 +101,7 @@ class proposal(models.Model):
     notes = models.TextField()
 
     def __str__(self):
-        return self.proposal_id
+        return f'Proposal ID: {self.id}.'
 
     class Meta:
         db_table = 'proposal'
@@ -139,7 +139,7 @@ class proposal_item(models.Model):
     approved = models.NullBooleanField()
 
     def __str__(self):
-        return self.proposal_item_id
+        return f'Line item ID: {self.id}.'
 
     class Meta:
         db_table = 'proposal_item'
