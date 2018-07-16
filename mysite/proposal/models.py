@@ -74,8 +74,8 @@ class product_model(models.Model):
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
     product_finish = models.ManyToManyField(product_finish, through='product_price')
 
-    def __str__(self):
-        return f'Model: {self.model_name}.'
+    # def __str__(self):
+    #     return f'Model: {self.model_name}.'
 
     class Meta:
         db_table = 'product_model'
@@ -86,8 +86,8 @@ class product_price(models.Model):
     product_finish = models.ForeignKey(product_finish, models.SET_NULL, blank=True, null=True)
     price_per_sqft = models.IntegerField()
 
-    def __str__(self):
-        return f'Product Model: {self.product_model}, Price/sq.ft: ${price_per_sqft} .'
+    # def __str__(self):
+    #     return f'Product Model: {self.product_model}, Price/sq.ft: ${price_per_sqft} .'
 
     class Meta:
         db_table = 'product_price'
@@ -100,8 +100,8 @@ class proposal(models.Model):
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
     notes = models.TextField()
 
-    def __str__(self):
-        return f'Proposal ID: {self.id}.'
+    # def __str__(self):
+    #     return f'Proposal ID: {self.id}.'
 
     class Meta:
         db_table = 'proposal'
@@ -138,8 +138,8 @@ class proposal_item(models.Model):
     height_right = models.FloatField(blank=True, null=True)
     approved = models.NullBooleanField()
 
-    def __str__(self):
-        return f'Line item ID: {self.id}.'
+    # def __str__(self):
+    #     return f'Line item ID: {self.id}.'
 
     class Meta:
         db_table = 'proposal_item'

@@ -149,8 +149,8 @@ class Shutter:
         material = (Lheight / 12) * panels
         return round(material, 3)
 
-    def __str__(self):
-        return f'shutter width: {self.width()} shutter height: {self.height()} total panels {self.panels()}.'
+    # def __str__(self):
+    #     return f'shutter width: {self.width()} shutter height: {self.height()} total panels {self.panels()}.'
 
 
 def ManufacturingReport(request, pk):
