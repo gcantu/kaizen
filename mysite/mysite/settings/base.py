@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 INSTALLED_APPS = [
     'proposal.apps.ProposalConfig',
+    'manufacturing.apps.ManufacturingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,7 +62,7 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'assets'),
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
@@ -105,4 +106,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'proposal-new'
+# LOGIN_REDIRECT_URL = 'proposal-new'
+LOGIN_REDIRECT_URL = 'customer-type'
