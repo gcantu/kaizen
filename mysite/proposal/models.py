@@ -1,21 +1,26 @@
 from django.db import models
 from datetime import date
+from django.urls import reverse
 
 
 class customer(models.Model):
-    COUNTRY_CHOICES = [('MX', 'MX'), ('US', 'US')]
-    name = models.CharField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     address = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=True)
-    state = models.CharField(max_length=255, blank=True)
-    country = models.CharField(max_length=2, choices=COUNTRY_CHOICES)
     zip_code = models.CharField(max_length=5, blank=True)
     home_phone = models.CharField(max_length=25, blank=True)
     mobile_phone = models.CharField(max_length=25, blank=True)
     email = models.EmailField(max_length=254, blank=True)
 
+    def save(self, *args, **kwargs):
+        self.first_name = self.first_name.capitalize()
+        self.last_name = self.last_name.capitalize()
+        self.city = self.city.capitalize()
+        return super(customer, self).save(*args, **kwargs)
+
     def __str__(self):
-        return self.name
+        return '%s %s' % (self.first_name, self.last_name)
 
     def get_absolute_url(self):
         return reverse('customer-detail', kwargs={'pk': self.pk})
@@ -25,13 +30,15 @@ class customer(models.Model):
 
 
 class agent(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    home_phone = models.CharField(max_length=25, blank=True)
-    mobile_phone = models.CharField(max_length=25, blank=True)
-    email = models.EmailField(max_length=254, blank=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=25, blank=True)
 
     def __str__(self):
-        return self.name
+        return '%s %s' % (self.first_name, self.last_name)
+
+    def get_absolute_url(self):
+        return reverse('agent-detail', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'agent'
@@ -43,8 +50,25 @@ class product(models.Model):
     def __str__(self):
         return self.product_name
 
+    def get_absolute_url(self):
+        return reverse('product-detail', kwargs={'pk': self.pk})
+
     class Meta:
         db_table = 'product'
+
+
+class product_style(models.Model):
+    style = models.CharField(max_length=100, unique=True)
+    product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return self.style
+
+    def get_absolute_url(self):
+        return reverse('style-detail', kwargs={'pk': self.pk})
+
+    class Meta:
+        db_table = 'product_style'
 
 
 class product_type(models.Model):
@@ -54,43 +78,11 @@ class product_type(models.Model):
     def __str__(self):
         return self.product_type
 
+    def get_absolute_url(self):
+        return reverse('type-detail', kwargs={'pk': self.pk})
+
     class Meta:
         db_table = 'product_type'
-
-
-class product_finish(models.Model):
-    finish_type = models.CharField(max_length=45, unique=True)
-
-    def __str__(self):
-        return self.finish_type
-
-    class Meta:
-        db_table = 'product_finish'
-
-
-class product_model(models.Model):
-    model_name = models.CharField(max_length=3, unique=True)
-    model_description = models.TextField()
-    product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
-    product_finish = models.ManyToManyField(product_finish, through='product_price')
-
-    # def __str__(self):
-    #     return f'Model: {self.model_name}.'
-
-    class Meta:
-        db_table = 'product_model'
-
-
-class product_price(models.Model):
-    product_model = models.ForeignKey(product_model, models.SET_NULL, blank=True, null=True)
-    product_finish = models.ForeignKey(product_finish, models.SET_NULL, blank=True, null=True)
-    price_per_sqft = models.IntegerField()
-
-    # def __str__(self):
-    #     return f'Product Model: {self.product_model}, Price/sq.ft: ${price_per_sqft} .'
-
-    class Meta:
-        db_table = 'product_price'
 
 
 class proposal(models.Model):
@@ -98,48 +90,62 @@ class proposal(models.Model):
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
-    notes = models.TextField()
+    notes = models.TextField(blank=True)
 
     # def __str__(self):
     #     return f'Proposal ID: {self.id}.'
+
+    def get_absolute_url(self):
+        return reverse('proposal-detail', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'proposal'
 
 
-class proposal_item(models.Model):
-    INT_EXT_CHOICES = [('Int', 'Interior'), ('Ext', 'Exterior')]
+class line_item(models.Model):
+    TEXTURE_CHOICES = [('Smooth', 'Eco Wood (Smooth)'), ('Textured', 'Facade (Textured)')]
+    FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
+    STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
+    MOUNT_CHOICES = [('Int', 'Interior'), ('Ext', 'Exterior')]
     TRIM_CHOICES = [(0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4')]
-    TRIM_TYPE_CHOICES = [('Colonial', 'Colonial'), ('Flat', 'Flat'), ('Modern', 'Modern')]
-    HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
+    TRIM_STYLE_CHOICES = [('Deco', 'Decorative'), ('Square', 'Square (Smooth)'), ('Round', 'Round (Smooth)'), ('Z', 'Z (Primed)'), ('Other', 'Other')]
     LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
-    # LOUVER_CHOICES = [(2.5, 2.5), (3.5, 3.5), (4.5, 4.5)]
-    TILT_ROD_CHOICES = [('Aluminum', 'Aluminum'), ('Front', 'Front'), ('Side and Back', 'Side and Back')]
+    HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
+    HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
+    TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
+
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
-    product_model = models.ForeignKey(product_model, models.SET_NULL, blank=True, null=True)
+    style = models.ForeignKey(product_style, models.SET_NULL, blank=True, null=True)
     product_type = models.ForeignKey(product_type, models.SET_NULL, blank=True, null=True)
-    product_finish = models.ForeignKey(product_finish, models.SET_NULL, blank=True, null=True)
-    quantity = models.IntegerField(blank=True, null=True)
-    product_color = models.CharField(max_length=100, blank=True)
+    texture = models.CharField(max_length=10, choices=TEXTURE_CHOICES, blank=True, null=True)
+    finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
+    stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
+    color = models.CharField(max_length=100, blank=True)
     location = models.CharField(max_length=100, blank=True)
-    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
-    panels = models.IntegerField(blank=True, null=True)
-    int_ext = models.CharField(max_length=3, choices=INT_EXT_CHOICES, blank=True)
+    mount = models.CharField(max_length=3, choices=MOUNT_CHOICES, blank=True)
     trim = models.IntegerField(choices=TRIM_CHOICES, blank=True, null=True)
-    trim_type = models.CharField(max_length=25, choices=TRIM_TYPE_CHOICES, blank=True)
-    tilt_rod = models.CharField(max_length=25, choices=TILT_ROD_CHOICES, blank=True)
+    trim_style = models.CharField(max_length=10, choices=TRIM_STYLE_CHOICES, blank=True)
+    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
     hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
-    hinge_color = models.CharField(max_length=100, blank=True)
+    hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
+    panels = models.IntegerField(blank=True, null=True)
+    t_post = models.IntegerField(blank=True, null=True)
+    tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
+    separate_parts = models.NullBooleanField()
     width = models.FloatField(blank=True, null=True)
     height = models.FloatField(blank=True, null=True)
-    height_center = models.FloatField(blank=True, null=True)
     height_left = models.FloatField(blank=True, null=True)
     height_right = models.FloatField(blank=True, null=True)
-    approved = models.NullBooleanField()
+    height_center = models.FloatField(blank=True, null=True)
+    quantity = models.IntegerField(blank=True, null=True)
+    approved = models.BooleanField(default=False)
 
     # def __str__(self):
     #     return f'Line item ID: {self.id}.'
 
+    def get_absolute_url(self):
+        return reverse('line-item-detail', kwargs={'pk': self.pk})
+
     class Meta:
-        db_table = 'proposal_item'
+        db_table = 'line_item'

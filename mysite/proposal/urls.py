@@ -1,11 +1,12 @@
 from django.urls import path
-from .views import NewCustomer, CreateProposal, ProposalItem
+from .views import CreateCustomer
 from . import views
 
+app_name = 'proposal'
+
 urlpatterns = [
-    path('customer_type', views.CustomerType, name='customer-type'),
-    path('new_customer', NewCustomer.as_view(), name='customer-new'),
-    path('existing_customer', views.ExistingCustomer, name='customer-existing'),
-    path('<int:pk>/new', CreateProposal.as_view(), name='proposal-new'),
-    path('<int:pk>/item', views.ProposalItem, name='proposal-item'),
+    path('customer', CreateCustomer.as_view(), name='create-customer'),
+    path('<int:pk>/new', views.CreateProposal, name='create-proposal'),
+    path('<int:pk>/line_items', views.LineItem, name='create-line-item'),
+    path('ajax/load-styles', views.load_styles, name='ajax-load-styles'),
 ]
