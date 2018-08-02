@@ -3,10 +3,11 @@
 {% load widget_tweaks %}
 
 {% block title %}Login{% endblock %}
+{% block extrastyle %}<link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}" />{% endblock %}
 
-{% block extrastyle %}<link rel="stylesheet" type="text/css" href="{% static "css/materialize.css" %}" />{% endblock %}
-{% block extrastyle2 %}<link rel="stylesheet" type="text/css" href="{% static "css/form.css" %}" />{% endblock %}
-{% block extrahead %}<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">{% endblock %}
+{% block header %}{% endblock %}
+{% block sidebar %}{% endblock %}
+
 
 {% block content %}
 
@@ -23,36 +24,21 @@
     {% endif %}
 {% endif %}
 
-<div class="row center">
-  <div class="col s12">
-    <!-- <div class="card blue-grey lighten-5 z-depth-5"> -->
-      <form method="post" action="{% url 'login' %}">
-      {% csrf_token %}
-      <div class="card-content">
-        <div class="row">
-          <div class="input-field col s12">
-            <i class="material-icons prefix blue-grey-text text-lighten-4">account_circle</i>
-            {% render_field  form.username class="custom-form-label" %}
-            <td>{{ form.username.label_tag }}</td>
-          </div>
-          <div class="input-field col s12">
-            <i class="material-icons prefix blue-grey-text text-lighten-4">lock</i>
-            {% render_field  form.password class="custom-form-label" %}
-            <td>{{ form.password.label_tag }}</td>
-          </div>
-        </div>
-      </div>
-      <div class="card-action">
-        <input class="blue-grey lighten-4 blue-grey-text text-darken-2 btn" type="submit" value="login"/>
-      </div>
-
-      </form>
-
-    <!-- </div> -->
+<form class="form-signin" method="post" action="{% url 'login' %}">
+{% csrf_token %}
+  <h2 class="form-signin-heading">Please sign in</h2>
+  <div>
+    {% render_field  form.username class="form-control input-username" placeholder=form.username.label %}
   </div>
-</div>
-
-<!-- {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+  <div>
+    {% render_field  form.password class="form-control input-password" placeholder=form.password.label %}
+  </div>
+  <div>
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"/>
+  </div>
+</form>
 
 {% endblock %}
+
+
+{% block footer %}{% endblock %}

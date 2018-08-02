@@ -1,85 +1,112 @@
 {% load static %}{% load widget_tweaks %}<!DOCTYPE html>
 <html>
-<head>
-<title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "css/base.css" %}{% endblock %}" />
-{% block extrastyle %}{% endblock %}
-{% block extrastyle2 %}{% endblock %}
-{% block extrahead %}{% endblock %}
-{% block responsive %}
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}" />
-{% endblock %}
-{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
-</head>
-{% load i18n %}
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'css/bootstrap.min.css' %}{% endblock %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-responsive.css' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous"/>
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+    {% block responsive %}<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">{% endblock %}
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
+  </head>
+  {% load i18n %}
 
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
-  data-admin-utc-offset="{% now "Z" %}">
+  <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+  data-admin-utc-offset="{% now 'Z' %}">
 
-<!-- Container -->
-<div id="page-splash">
+    <section id="container">
 
-    {% if not is_popup %}
-    <!-- Header -->
-    <div id="header">
-        <div id="branding">
-        {% block branding %}{% endblock %}
-        </div>
-        {% block usertools %}
-        {% if has_permission %}
-        <div id="user-tools">
-            {% block welcome-msg %}
-                {% trans 'Welcome,' %}
-                <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-            {% endblock %}
-            {% block userlinks %}
-                {% if site_url %}
-                    <a href="{{ site_url }}">{% trans 'View site' %}</a> /
-                {% endif %}
-                {% if user.is_active and user.is_staff %}
-                    {% url 'django-admindocs-docroot' as docsroot %}
-                    {% if docsroot %}
-                        <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-                    {% endif %}
-                {% endif %}
-                {% if user.has_usable_password %}
-                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
-                {% endif %}
-                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
-            {% endblock %}
-        </div>
-        {% endif %}
+      {% if not is_popup %}
+        <!-- START header -->
+        {% block header %}
+        <header class="header black-bg">
+          <div class="sidebar-toggle-box">
+            <div class="fa fa-bars"></div>
+          </div>
+
+          <!--logo start-->
+          <a href="home" class="logo"><b>LOGO</b></a>
+          <!--logo end-->
+
+          <div class="top-menu">
+            <ul class="nav fa-pull-right top-menu">
+              <li><a class="logout" href="/">Logout</a></li>
+            </ul>
+          </div>
+        </header>
         {% endblock %}
-        {% block nav-global %}{% endblock %}
-    </div>
-    <!-- END Header -->
-    {% endif %}
+        <!-- END header -->
+      {% endif %}
 
-    {% block messages %}
-        {% if messages %}
-        <ul class="messagelist">{% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-        {% endfor %}</ul>
-        {% endif %}
-    {% endblock messages %}
-
-    <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
-        {% block pretitle %}{% endblock %}
-        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
-        {% block content %}
-        {% block object-tools %}{% endblock %}
-        {{ content }}
+      <!-- START sidebar -->
+      <aside>
+        {% block sidebar %}
+        <div id="sidebar">
+          <ul class="sidebar-menu" id="nav-accordion">
+            <li class="sub-menu">
+              <a href="javascript:;">
+                <i class="fas fa-file-signature"></i>
+                <span>Proposal</span>
+              </a>
+              <ul class="sub">
+                <li class="{% block li_class %}{% endblock %}"><a href="{% url 'proposal:create-customer' %}">Create New</a></li>
+                <li><a href="{% url 'proposal:create-customer' %}">Update Existing</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;">
+                <i class="fas fa-cogs"></i>
+                <span>Manufacturing Report</span>
+              </a>
+              <ul class="sub">
+                <li><a href="{% url 'proposal:create-customer' %}">Create New</a></li>
+                <li><a href="{% url 'proposal:create-customer' %}">Update Existing</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
         {% endblock %}
-        {% block sidebar %}{% endblock %}
-        <br class="clear" />
-    </div>
-    <!-- END Content -->
+      </aside>
+      <!-- END sidebar -->
 
-    {% block footer %}<div id="footer"></div>{% endblock %}
-</div>
-<!-- END Container -->
-<script type="text/javascript" src="{% static "js/materialize.js" %}"></script>
-</body>
+      <!-- START content -->
+      <section id="main-content">
+        <section class="wrapper">
+          {% block content %}
+          {{ content }}
+          {% endblock %}
+        </section>
+      </section>
+      <!-- END content -->
+
+    </section>
+
+
+    <!--common JS -->
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script class="include" type="text/javascript" src="{% static 'js/jquery.dcjqaccordion.2.7.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/common-scripts.js' %}"></script>
+
+    <script>
+      $("#id_line_item_set-0-product").change(function () {
+        var url = $("#productForm").attr("data-styles-url");  // get the url of the `load_styles` view
+        var productId = $(this).val();  // get the selected product ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+          url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-styles/)
+          data: {
+            'product': productId       // add the product id to the GET parameters
+          },
+          success: function (data) {   // `data` is the return of the `load_styles` view function
+            $("#id_line_item_set-0-style").html(data);  // replace the contents of the styles input with the data that came from the server
+          }
+        });
+
+      });
+    </script>
+
+  </body>
 </html>
