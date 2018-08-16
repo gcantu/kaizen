@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from .models import customer, proposal, product_style
+from .models import customer, proposal, product
 from .forms import ProposalFormSet, LineItemFormSet
 
 
@@ -52,9 +52,9 @@ def LineItem(request, pk):
     return render(request, 'proposal/create_line_item.html', {'formset': formset, 'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby})
 
 
-# return a list of product styles based on selected product
-def load_styles(request):
-    product_id = request.GET.get('product')
-    styles = product_style.objects.filter(product_id=product_id).order_by('style')
+# return line item
+def load_line_item(request):
+    prod_id = request.GET.get('product_var')
+    prod = product.objects.filter(id=prod_id).order_by('product_name')
 
-    return render(request, 'proposal/product_styles_dropdown.html', {'styles': styles})
+    return render(request, 'proposal/line_item_list.html', {'product': prod})

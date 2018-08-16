@@ -51,7 +51,7 @@
                 <span>Proposal</span>
               </a>
               <ul class="sub">
-                <li class="{% block li_class %}{% endblock %}"><a href="{% url 'proposal:create-customer' %}">Create New</a></li>
+                <li><a href="{% url 'proposal:create-customer' %}">Create New</a></li>
                 <li><a href="{% url 'proposal:create-customer' %}">Update Existing</a></li>
               </ul>
             </li>
@@ -89,24 +89,7 @@
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script class="include" type="text/javascript" src="{% static 'js/jquery.dcjqaccordion.2.7.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/common-scripts.js' %}"></script>
-
-    <script>
-      $("#id_line_item_set-0-product").change(function () {
-        var url = $("#productForm").attr("data-styles-url");  // get the url of the `load_styles` view
-        var productId = $(this).val();  // get the selected product ID from the HTML input
-
-        $.ajax({                       // initialize an AJAX request
-          url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-styles/)
-          data: {
-            'product': productId       // add the product id to the GET parameters
-          },
-          success: function (data) {   // `data` is the return of the `load_styles` view function
-            $("#id_line_item_set-0-style").html(data);  // replace the contents of the styles input with the data that came from the server
-          }
-        });
-
-      });
-    </script>
+    <script type="text/javascript" src="{% block extrajs %}{% endblock %}"></script>
 
   </body>
 </html>
