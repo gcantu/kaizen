@@ -2232,3 +2232,19 @@ label {
 .site-min-height {
     min-height: 900px;
 }
+
+/* KAIZEN */
+.input-username {
+  margin-bottom: 3px;
+}
+
+.input-password {
+  margin-bottom: 10px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  text-align: center;
+}
