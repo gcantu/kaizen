@@ -16,97 +16,35 @@
   <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
   data-admin-utc-offset="{% now 'Z' %}">
 
+    {% if not is_popup %}
+      {% block header %}
+        {{ header_content }}
+      {% endblock %}
+    {% endif %} <!-- END header -->
+
+    {% block sidebar %}
+      {{ sidebar_content }}
+    {% endblock %} <!-- END sidebar -->
+
     <section id="container">
-
-      {% if not is_popup %}
-        <!-- START header -->
-        {% block header %}
-        <header class="header black-bg">
-          <div class="sidebar-toggle-box">
-            <div class="fa fa-bars"></div>
-          </div>
-
-          <!--logo start-->
-          <a href="home" class="logo"><b>LOGO</b></a>
-          <!--logo end-->
-
-          <div class="top-menu">
-            <ul class="nav fa-pull-right top-menu">
-              <li><a class="logout" href="/">Logout</a></li>
-            </ul>
-          </div>
-        </header>
-        {% endblock %}
-        <!-- END header -->
-      {% endif %}
-
-      <!-- START sidebar -->
-      <aside>
-        {% block sidebar %}
-        <div id="sidebar">
-          <ul class="sidebar-menu" id="nav-accordion">
-            <li class="sub-menu">
-              <a href="javascript:;">
-                <i class="fas fa-file-signature"></i>
-                <span>Proposal</span>
-              </a>
-              <ul class="sub">
-                <li class="{% block li_class %}{% endblock %}"><a href="{% url 'proposal:create-customer' %}">Create New</a></li>
-                <li><a href="{% url 'proposal:create-customer' %}">Update Existing</a></li>
-              </ul>
-            </li>
-            <li class="sub-menu">
-              <a href="javascript:;">
-                <i class="fas fa-cogs"></i>
-                <span>Manufacturing Report</span>
-              </a>
-              <ul class="sub">
-                <li><a href="{% url 'proposal:create-customer' %}">Create New</a></li>
-                <li><a href="{% url 'proposal:create-customer' %}">Update Existing</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        {% endblock %}
-      </aside>
-      <!-- END sidebar -->
-
-      <!-- START content -->
       <section id="main-content">
         <section class="wrapper">
           {% block content %}
           {{ content }}
           {% endblock %}
         </section>
-      </section>
-      <!-- END content -->
+      </section> <!-- END content -->
+    </section> <!-- END container -->
 
-    </section>
-
+    {% block footer %}
+      {{ footer_content }}
+    {% endblock %} <!-- END footer -->
 
     <!--common JS -->
     <script type="text/javascript" src="{% static 'js/jquery-3.3.1.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script class="include" type="text/javascript" src="{% static 'js/jquery.dcjqaccordion.2.7.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/common-scripts.js' %}"></script>
-
-    <script>
-      $("#id_line_item_set-0-product").change(function () {
-        var url = $("#productForm").attr("data-styles-url");  // get the url of the `load_styles` view
-        var productId = $(this).val();  // get the selected product ID from the HTML input
-
-        $.ajax({                       // initialize an AJAX request
-          url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-styles/)
-          data: {
-            'product': productId       // add the product id to the GET parameters
-          },
-          success: function (data) {   // `data` is the return of the `load_styles` view function
-            $("#id_line_item_set-0-style").html(data);  // replace the contents of the styles input with the data that came from the server
-          }
-        });
-
-      });
-    </script>
-
+    <script type="text/javascript" src="{% block extrajs %}{% endblock %}"></script>
   </body>
 </html>

@@ -1,12 +1,11 @@
 from django.urls import path
-from .views import CreateCustomer
 from . import views
 
 app_name = 'proposal'
 
 urlpatterns = [
-    path('customer', CreateCustomer.as_view(), name='create-customer'),
-    path('<int:pk>/new', views.CreateProposal, name='create-proposal'),
-    path('<int:pk>/line_items', views.LineItem, name='create-line-item'),
-    path('ajax/load-styles', views.load_styles, name='ajax-load-styles'),
+    path('add_customer', views.addCustomer, name='add-customer'),
+    path('add_proposal/<int:pk>', views.addProposal, name='add-proposal'),
+    path('add_line_item/<int:pk>', views.addLineItem, name='add-line-item'),
+    path('add_extra_line_item/<int:pk>', views.addExtraLineItem, name='add-extra-line-item'),
 ]

@@ -1,0 +1,39 @@
+{% extends "dashboard/create_proposal.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block info %}
+  <h6>{{ customer.first_name }} {{ customer.last_name }}</h6>
+  <p>
+  <b>Address:</b> {{ customer.address }}, {{ customer.city }}, {{ customer.zip_code }}
+  <br>
+  <b>Phone:</b> {{ customer.home_phone }}
+  <br>
+  <b>Email:</b> {{ customer.email }}
+  </p>
+{% endblock %}
+
+
+{% block form %}
+  <form id="proposal-form" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.created_date.label_tag }}
+      {% render_field  form.created_date class="form-control" %}
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ form.agents.label_tag }}
+        {% render_field  form.agents class="form-control" placeholder=form.agents.label %}
+      </div>
+      <div class="form-group col-md-6">
+        {{ form.measured_by.label_tag }}
+        {% render_field  form.measured_by class="form-control" placeholder=form.measured_by.label %}
+      </div>
+    </div>
+
+    <input type="submit" value="Save"/>
+  </form>
+{% endblock %}

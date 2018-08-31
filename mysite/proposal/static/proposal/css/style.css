@@ -1,0 +1,41 @@
+
+.add-lineitem label {
+  font-weight: 700;
+}
+
+
+.lineitem-addheading {
+  cursor: pointer;
+  user-select: none;
+  background-color: #424a5d;
+}
+
+.lineitem-addheading {
+  cursor: pointer;
+  user-select: none;
+  background-color: #424a5d;
+}
+
+.form-control.dropdown {
+  -webkit-appearance: none;
+	}
+
+.card-section {
+  border: 0.5px solid #aeb2b7;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+
+input, textarea {
+  border: 0.5px solid #aeb2b7;
+  border-radius: 5px;
+}
+
+.proposal-wip {
+  margin-top: 20px;
+  padding: 10px;
+  border: 0.5px solid #aeb2b7;
+  background-color: #ffffff;
+  height: 1000px;
+}
