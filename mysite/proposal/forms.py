@@ -1,18 +1,21 @@
+from django.forms import ModelForm
+from .models import customer, proposal, line_item
 
-from django.forms import inlineformset_factory
-from .models import proposal, customer, line_item
 
+# Customer form
+class customerForm(ModelForm):
+    class Meta:
+        model = customer
+        fields = '__all__'
 
-ProposalFormSet = inlineformset_factory(
-    customer,
-    proposal,
-    fields=('created_date', 'agents', 'measured_by',),
-    extra=1
-    )
+# Proposal form
+class proposalForm(ModelForm):
+    class Meta:
+        model = proposal
+        fields = '__all__'
 
-LineItemFormSet = inlineformset_factory(
-    proposal,
-    line_item,
-    fields = ('product', 'style', 'product_type', 'texture', 'finish', 'stain', 'color', 'location', 'mount', 'trim', 'trim_style', 'louver', 'hinges', 'hinge_color', 'panels', 't_post', 'tilt_rod', 'separate_parts', 'width', 'height', 'height_left', 'height_right', 'height_center', 'quantity', 'approved'),
-    extra=1
-    )
+# Line Item form
+class lineItemForm(ModelForm):
+    class Meta:
+        model = line_item
+        fields = '__all__'
