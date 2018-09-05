@@ -2248,3 +2248,7 @@ label {
   margin: auto;
   text-align: center;
 }
+
+.form-heading {
+  background-color: #424a5d;
+}

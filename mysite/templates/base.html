@@ -27,15 +27,9 @@
       {{ sidebar_content }}
     {% endblock %} <!-- END sidebar -->
 
-    <section id="container">
-      <section id="main-content">
-        <section class="wrapper">
-          {% block content %}
-          {{ content }}
-          {% endblock %}
-        </section>
-      </section> <!-- END content -->
-    </section> <!-- END container -->
+    {% block content %}
+      {{ content }}
+    {% endblock %}
 
     {% block footer %}
       {{ footer_content }}

@@ -4,34 +4,36 @@
 
 {% block title %}Home{% endblock %}
 
-  {% block header %}
-    <header class="header black-bg d-print-none">
-      <a href="home" class="logo"><b>LOGO</b></a> <!-- END logo -->
-      <div class="top-menu">
-        <ul class="nav fa-pull-right top-menu">
-          <li><a class="logout" href="/">Logout</a></li>
-        </ul>
-      </div> <!-- END logout button -->
-    </header>
-  {% endblock %} <!-- END header -->
+{% block header %}
+  {% include "dashboard/header.html" %}
+{% endblock %} <!-- END header -->
 
-  {% block sidebar %}
-    <aside class="d-print-none">
-      <div id="sidebar">
-        <ul class="sidebar-menu" id="nav-accordion">
-          <li class="sub-menu" id="test">
-            <a href="{% url 'proposal:add-customer' %}">
-              <i class="fas fa-file-signature"></i>
-              <span>Create Proposal</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="{% url 'proposal:add-customer' %}">
-              <i class="fas fa-cogs"></i>
-              <span>Manufacturing Report</span>
-            </a>
-          </li>
-        </ul>
+{% block sidebar %}
+  {% include "dashboard/sidebar.html" %}
+{% endblock %} <!-- END sidebar -->
+
+
+{% block content %}
+<section id="container">
+  <section id="main-content">
+    <section class="wrapper">
+      <div class="row mt">
+        <div class = "col-lg-12 col-md-12 col-sm-12">
+          <div class="card textcenter mt-3">
+            <div class="card-header form-heading text-white d-print-none">
+              {% block content_header %}
+                {{ content_header }}
+              {% endblock %}
+            </div>
+            <div class="card-body">
+              {% block subcontent %}
+                {{ subcontent }}
+              {% endblock %}
+            </div>
+          </div>
+        </div>
       </div>
-    </aside>
-  {% endblock %} <!-- END sidebar -->
+    </section>
+  </section> <!-- END content -->
+</section> <!-- END container -->
+{% endblock %}
