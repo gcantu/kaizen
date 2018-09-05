@@ -92,3 +92,12 @@ def finalProposal(request, pk):
     lineitem = line_item.objects.filter(proposal_id=pk)
 
     return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem})
+
+
+from django.views.generic.edit import UpdateView
+
+
+class updateProposal(UpdateView):
+    model = proposal
+    fields = '__all__'
+    template_name_suffix = '_update'

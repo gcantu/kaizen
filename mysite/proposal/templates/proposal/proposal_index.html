@@ -3,6 +3,9 @@
   {% for p in proposals %}
     <li>
       {{ p.customer }}
+      <button class="button-style">
+        <a class="button-style" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
+      </button>
     </li>
   {% endfor %}
 </ul>
