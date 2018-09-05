@@ -4,14 +4,9 @@
 
 
 {% block info %}
-  <h6>{{ customer.first_name }} {{ customer.last_name }}</h6>
-  <p>
-  <b>Address:</b> {{ customer.address }}, {{ customer.city }}, {{ customer.zip_code }}
-  <br>
-  <b>Phone:</b> {{ customer.home_phone }}
-  <br>
-  <b>Email:</b> {{ customer.email }}
-  </p>
+  <div class="row mt">
+    {% include "proposal/customer_info.html" %}
+  </div>
 {% endblock %}
 
 

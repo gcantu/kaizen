@@ -5,7 +5,7 @@
 {% block title %}Home{% endblock %}
 
   {% block header %}
-    <header class="header black-bg">
+    <header class="header black-bg d-print-none">
       <a href="home" class="logo"><b>LOGO</b></a> <!-- END logo -->
       <div class="top-menu">
         <ul class="nav fa-pull-right top-menu">
@@ -16,7 +16,7 @@
   {% endblock %} <!-- END header -->
 
   {% block sidebar %}
-    <aside>
+    <aside class="d-print-none">
       <div id="sidebar">
         <ul class="sidebar-menu" id="nav-accordion">
           <li class="sub-menu" id="test">
