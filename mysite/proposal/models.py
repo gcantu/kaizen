@@ -57,32 +57,18 @@ class product(models.Model):
         db_table = 'product'
 
 
-class product_style(models.Model):
-    style = models.CharField(max_length=100, unique=True)
+class shutter_type(models.Model):
+    shutter_type_name = models.CharField(max_length=100, unique=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return self.style
+        return self.shutter_type_name
 
     def get_absolute_url(self):
-        return reverse('style-detail', kwargs={'pk': self.pk})
+        return reverse('shutter-type-detail', kwargs={'pk': self.pk})
 
     class Meta:
-        db_table = 'product_style'
-
-
-class product_type(models.Model):
-    product_type = models.CharField(max_length=100, unique=True)
-    product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
-
-    def __str__(self):
-        return self.product_type
-
-    def get_absolute_url(self):
-        return reverse('type-detail', kwargs={'pk': self.pk})
-
-    class Meta:
-        db_table = 'product_type'
+        db_table = 'shutter_type'
 
 
 class proposal(models.Model):
@@ -91,6 +77,7 @@ class proposal(models.Model):
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
     notes = models.TextField(blank=True)
+    pending = models.BooleanField(default=True)
 
     # def __str__(self):
     #     return f'Proposal ID: {self.id}.'
@@ -103,7 +90,6 @@ class proposal(models.Model):
 
 
 class line_item(models.Model):
-    TEXTURE_CHOICES = [('Smooth', 'Eco Wood (Smooth)'), ('Textured', 'Facade (Textured)')]
     FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
     STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
     MOUNT_CHOICES = [('Int', 'Interior'), ('Ext', 'Exterior')]
@@ -116,9 +102,7 @@ class line_item(models.Model):
 
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
-    style = models.ForeignKey(product_style, models.SET_NULL, blank=True, null=True)
-    product_type = models.ForeignKey(product_type, models.SET_NULL, blank=True, null=True)
-    texture = models.CharField(max_length=10, choices=TEXTURE_CHOICES, blank=True, null=True)
+    shutter_type = models.ForeignKey(shutter_type, models.SET_NULL, blank=True, null=True)
     finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
     stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
     color = models.CharField(max_length=100, blank=True)
@@ -139,7 +123,8 @@ class line_item(models.Model):
     height_right = models.FloatField(blank=True, null=True)
     height_center = models.FloatField(blank=True, null=True)
     quantity = models.IntegerField(blank=True, null=True)
-    approved = models.BooleanField(default=False)
+    price = models.FloatField(blank=True, null=True)
+    approved = models.BooleanField(default=True)
 
     # def __str__(self):
     #     return f'Line item ID: {self.id}.'

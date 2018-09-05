@@ -161,6 +161,19 @@
       </div>
     </div>
 
+    <div class="row mt">
+      <div class = "col-lg-12 col-md-12 col-sm-12">
+        <div class="card-section line-item-card">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              {{ form.price.label_tag }}
+              {% render_field  form.price %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <input id="loadlineitem" type="submit" value="OK"/>
 
   </form>

@@ -7,16 +7,18 @@
       <th>Finish</th>
       <th>Stain</th>
       <th>Color</th>
+      <th>Price</th>
     </tr>
 
     {% for item in lineitem %}
     <tr>
       <td>{{ item.product }}</td>
-      <td>{{ item.style }}</td>
+      <td>{{ item.shutter_type }}</td>
       <td>{{ item.location }}</td>
       <td>{{ item.finish }}</td>
       <td>{{ item.stain }}</td>
       <td>{{ item.color }}</td>
+      <td>{{ item.price }}</td>
     </tr>
     {% endfor %}
   </table>
