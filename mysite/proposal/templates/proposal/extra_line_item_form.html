@@ -54,6 +54,12 @@
       {% endfor %}
     </div>
   </div>
+
+  <div class="right-align">
+    <button class="button-style">
+      <a class="button-style" href="{% url 'proposal:final-proposal' proposal.id %}">Finish</a>
+    </button>
+  </div>
 {% endblock %}
 
 
