@@ -1,0 +1,59 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Create Proposal{% endblock %}
+
+{% block extrastyle %}<link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/style.css' %}" />{% endblock %}
+
+{% block content %}
+  <div class="row mt">
+    <div class = "col-lg-12 col-md-12 col-sm-12">
+      <div class="card textcenter mt-3">
+        <div class="form-heading card-header text-white d-print-none">
+          <i class="fas fa-file-signature"></i>Proposal
+        </div> <!-- card-header git-->
+
+        <div class="card-body">
+          <div class="card-section">
+            <div class="row mt">
+              <div class = "col-lg-8 col-md-8 col-sm-12">
+                <h2>LOGO</h2>
+                <p><b>Serving the Rio Grande Valley</b></p>
+              </div>
+
+              <div class = "col-lg-4 col-md-4 col-sm-12 right-align">
+                <p>901 Perkins Ave. Ste. A.</p>
+                <p>Mission, TX 78572</p>
+                <p><b>P:</b> (956) 583-9531</p>
+                <p><b>E:</b> www.jmblindsrgv.com</p>
+                <p><b>Toll Free:</b> 1-877-271-9894</p>
+              </div>
+            </div> <!-- END proposal header -->
+
+            <br>
+
+            <h1 class="form-title">Proposal</h1>
+
+            <h6><b>Prepared For:</b></h6>
+
+            <div id="info-block">
+              {% block info %}
+                {{ content }}
+              {% endblock %}
+            </div>
+
+            <div id="form-block">
+              {% block form %}
+                {{ content }}
+              {% endblock %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extrajs %}{% static 'dashboard/js/script.js' %}{% endblock %}

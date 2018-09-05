@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from proposal.models import proposal_item
+from proposal.models import line_item, proposal
 
 
 class Shutter:
@@ -154,7 +154,9 @@ class Shutter:
 
 
 def ManufacturingReport(request, pk):
-    line_items = proposal_item.objects.filter(proposal_id=pk)
+    proposalInfo = proposal.objects.get(customer_id=pk)
+    p_id = proposalInfo.id
+    line_items = line_item.objects.filter(proposal_id=p_id)
 
     results = []
     for item in line_items:

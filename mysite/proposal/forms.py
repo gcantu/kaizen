@@ -1,7 +1,21 @@
+from django.forms import ModelForm
+from .models import customer, proposal, line_item
 
-from django.forms import modelformset_factory
-from .models import proposal_item
 
-ProposalItemFormSet = modelformset_factory(
-    proposal_item,
-    fields=('product', 'product_type', 'product_finish', 'quantity', 'product_color', 'location', 'louver', 'panels', 'int_ext', 'trim', 'trim_type', 'tilt_rod', 'hinges', 'hinge_color', 'width', 'height', 'height_center', 'height_left', 'height_right', 'approved'), extra=2)
+# Customer form
+class customerForm(ModelForm):
+    class Meta:
+        model = customer
+        fields = '__all__'
+
+# Proposal form
+class proposalForm(ModelForm):
+    class Meta:
+        model = proposal
+        fields = '__all__'
+
+# Line Item form
+class lineItemForm(ModelForm):
+    class Meta:
+        model = line_item
+        fields = '__all__'

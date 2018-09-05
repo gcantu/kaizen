@@ -1,0 +1,13 @@
+{% extends "dashboard/create_proposal.html" %}
+
+{% block info %}
+  <div class="row mt">
+    {% include "proposal/customer_info.html" %}
+
+    {% include "proposal/proposal_info.html" %}
+  </div>
+
+  <div class="row mt">
+    {% include "proposal/line_item_info.html" %}
+  </div>
+{% endblock %}

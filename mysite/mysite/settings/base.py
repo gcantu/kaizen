@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # Application definition
 
 INSTALLED_APPS = [
+    'dashboard.apps.DashboardConfig',
     'proposal.apps.ProposalConfig',
     'manufacturing.apps.ManufacturingConfig',
     'django.contrib.admin',
@@ -106,5 +107,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# LOGIN_REDIRECT_URL = 'proposal-new'
-LOGIN_REDIRECT_URL = 'customer-type'
+LOGIN_REDIRECT_URL = 'dashboard:home'

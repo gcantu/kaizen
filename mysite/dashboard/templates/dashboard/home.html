@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Home{% endblock %}
+
+  {% block header %}
+    <header class="header black-bg d-print-none">
+      <a href="home" class="logo"><b>LOGO</b></a> <!-- END logo -->
+      <div class="top-menu">
+        <ul class="nav fa-pull-right top-menu">
+          <li><a class="logout" href="/">Logout</a></li>
+        </ul>
+      </div> <!-- END logout button -->
+    </header>
+  {% endblock %} <!-- END header -->
+
+  {% block sidebar %}
+    <aside class="d-print-none">
+      <div id="sidebar">
+        <ul class="sidebar-menu" id="nav-accordion">
+          <li class="sub-menu" id="test">
+            <a href="{% url 'proposal:add-customer' %}">
+              <i class="fas fa-file-signature"></i>
+              <span>Create Proposal</span>
+            </a>
+          </li>
+          <li class="sub-menu">
+            <a href="{% url 'proposal:add-customer' %}">
+              <i class="fas fa-cogs"></i>
+              <span>Manufacturing Report</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  {% endblock %} <!-- END sidebar -->
