@@ -80,3 +80,15 @@ def addExtraLineItem(request, pk):
             return redirect(reverse('proposal:add-extra-line-item', kwargs={'pk': pk}))
 
     return render(request, 'proposal/extra_line_item_form.html', {'form': li, 'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem})
+
+
+
+def finalProposal(request, pk):
+    p = proposal.objects.get(pk=pk)
+    p_agents = p.agents.all()
+    p_measuredby = p.measured_by.all()
+    cust_id = p.customer_id
+    cust = customer.objects.get(pk=cust_id)
+    lineitem = line_item.objects.filter(proposal_id=pk)
+
+    return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem})

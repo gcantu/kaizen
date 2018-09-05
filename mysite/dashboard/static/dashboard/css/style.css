@@ -47,3 +47,15 @@ input, textarea {
 .hidden {
   display: none;
 }
+
+.button-style {
+  width: 60px;
+  height: 25px;
+  color: #fff;
+  font-size: 12px;
+  background-color: #424a5d;
+  border: 0.5px solid #424a5d;
+  border-radius: 5px;
+  padding-top: 4px;
+  cursor: pointer;
+}
