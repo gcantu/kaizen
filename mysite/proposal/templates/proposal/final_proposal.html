@@ -44,13 +44,27 @@
 
   <div class="row mt">
     <div class = "col-lg-12 col-md-12 col-sm-12">
-      {% for item in lineitem %}
-        <div class="row mt">
-          <div class = "col-lg-12 col-md-12 col-sm-12">
-          {{ item.product }} {{ item.style }} {{ item.location }} {{ item.finish }} {{ item.stain }} {{ item.paint }}
-          </div>
-        </div>
-      {% endfor %}
+      <table>
+        <tr>
+          <th>Product</th>
+          <th>Style</th>
+          <th>Location</th>
+          <th>Finish</th>
+          <th>Stain</th>
+          <th>Color</th>
+        </tr>
+
+        {% for item in lineitem %}
+        <tr>
+          <td>{{ item.product }}</td>
+          <td>{{ item.style }}</td>
+          <td>{{ item.location }}</td>
+          <td>{{ item.finish }}</td>
+          <td>{{ item.stain }}</td>
+          <td>{{ item.color }}</td>
+        </tr>
+        {% endfor %}
+      </table>
     </div>
   </div>
 {% endblock %}

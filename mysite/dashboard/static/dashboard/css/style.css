@@ -59,3 +59,16 @@ input, textarea {
   padding-top: 4px;
   cursor: pointer;
 }
+
+th {
+  background-color: #424a5d;
+  color: #fff;
+  padding: 5px 0px 5px 0px;
+  text-align:center;
+}
+
+td {
+  border: 0.5px solid #aeb2b7;
+  padding: 10px 15px 10px 5px;
+  /* width: 150px; */
+}
