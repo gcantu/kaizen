@@ -22,12 +22,12 @@
           <div class="card textcenter mt-3">
             <div class="card-header form-heading text-white d-print-none">
               {% block content_header %}
-                {{ content_header }}
+                Pending Proposals
               {% endblock %}
             </div>
             <div class="card-body">
               {% block subcontent %}
-                {{ subcontent }}
+                {% include "proposal/proposal_index.html" %}
               {% endblock %}
             </div>
           </div>
