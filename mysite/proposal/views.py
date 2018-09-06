@@ -2,6 +2,8 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from .models import customer, proposal, agent, line_item
 from .forms import customerForm, proposalForm, lineItemForm
+from django.views.generic.edit import UpdateView
+from django.db.models import Sum
 
 
 def addCustomer(request):
@@ -21,7 +23,6 @@ def addCustomer(request):
 
 
 def addProposal(request, pk):
-    # cust = customer.objects.get(pk=pk)
     f = proposalForm()
     c = 'Proposal'
 
@@ -42,10 +43,6 @@ def addProposal(request, pk):
 
 def addLineItem(request, pk):
     p = proposal.objects.get(pk=pk)
-    # p_agents = p.agents.all()
-    # p_measuredby = p.measured_by.all()
-    # cust_id = p.customer_id
-    # cust = customer.objects.get(pk=cust_id)
     f = lineItemForm()
     c = 'Line Item'
 
@@ -57,32 +54,10 @@ def addLineItem(request, pk):
             new_li.proposal_id = pk
             new_li.save()
             # p_id = form.instance.id
-            return redirect(reverse('proposal:add-line-item', kwargs={'pk': pk}))
+            # return redirect(reverse('proposal:add-line-item', kwargs={'pk': pk}))
+            return render(request, 'proposal/line_item_options.html', {'p_id': pk})
 
     return render(request, 'proposal/create.html', {'form': f, 'current': c, 'proposal': p})
-
-
-
-# def addExtraLineItem(request, pk):
-#     p = proposal.objects.get(pk=pk)
-#     p_agents = p.agents.all()
-#     p_measuredby = p.measured_by.all()
-#     cust_id = p.customer_id
-#     cust = customer.objects.get(pk=cust_id)
-#     lineitem = line_item.objects.filter(proposal_id=pk)
-#     li = lineItemForm()
-#
-#     if request.method == 'POST':
-#         form = lineItemForm(request.POST)
-#
-#         if form.is_valid():
-#             new_li = form.save(commit=False)
-#             new_li.proposal_id = pk
-#             new_li.save()
-#             # p_id = form.instance.id
-#             return redirect(reverse('proposal:add-extra-line-item', kwargs={'pk': pk}))
-#
-#     return render(request, 'proposal/extra_line_item_form.html', {'form': li, 'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem})
 
 
 
@@ -94,10 +69,14 @@ def finalProposal(request, pk):
     cust = customer.objects.get(pk=cust_id)
     lineitem = line_item.objects.filter(proposal_id=pk)
 
-    return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem})
+    li_sum = lineitem.aggregate(Sum('price'))
+
+    total = li_sum['price__sum']
+
+    return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'total': total})
 
 
-from django.views.generic.edit import UpdateView
+
 
 
 class updateProposal(UpdateView):
