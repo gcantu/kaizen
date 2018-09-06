@@ -193,6 +193,30 @@ ul li {
 }
 
 
+/* forms */
+input[type=number] {
+  margin-top: .25rem;
+}
+
+select.form-control:not([size]):not([multiple]) {
+height: calc(2.77rem + 2px);
+}
+
+label {
+  margin-bottom: 3px;
+}
+
+.form-row {
+  margin-bottom: 10px;
+}
+
+#fraction {
+  margin-top: 22px;
+}
+
+
+
+/* other */
 .mr {
   margin-right: 10px;
 }
