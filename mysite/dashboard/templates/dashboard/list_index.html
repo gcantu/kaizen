@@ -1,0 +1,18 @@
+
+<ul>
+  {% for p in proposals %}
+    <li>
+      {{ p.customer }}
+      <button class="button-style">
+
+          {% if pending %}
+            <a class="button-style" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
+          {% else %}
+            <a class="button-style" href="{% url 'manufacturing:report' p.id %}">
+            Create Manufacturing Report</a>
+          {% endif %}
+        </a>
+      </button>
+    </li>
+  {% endfor %}
+</ul>
