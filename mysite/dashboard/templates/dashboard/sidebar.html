@@ -1,6 +1,12 @@
 <aside class="d-print-none">
   <div id="sidebar">
     <ul class="sidebar-menu" id="nav-accordion">
+      <li class="sub-menu">
+        <a href="{% url 'dashboard:home' %}">
+          <i class="fas fa-cogs"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
       <li class="sub-menu" id="test">
         <a href="{% url 'proposal:add-customer' %}">
           <i class="fas fa-file-signature"></i>
