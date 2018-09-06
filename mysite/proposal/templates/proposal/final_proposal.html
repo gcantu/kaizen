@@ -4,18 +4,46 @@
 
 {% block title %}Create Proposal{% endblock %}
 
-{% block template_header %}
-  {% include "dashboard/template_header.html" %}
+{% block cardheader %}
+  Proposal
 {% endblock %}
 
-{% block subcontent %}
-  <div class="row mt">
-    {% include "proposal/customer_info.html" %}
-
-    {% include "proposal/proposal_info.html" %}
+{% block letterhead %}
+  <div class="row">
+    <div class = "col-lg-12 col-md-12 col-sm-12 right-align">
+      <h1>Proposal</h1>
+    </div>
   </div>
+  <hr/>
+  {% include "dashboard/letterhead.html" %}
+{% endblock %}
+
+{% block cardcontent %}
+  <br>
+  <br>
+  <div class="row mt">
+    <div class = "col-lg-6 col-md-6 col-sm-12">
+      <h3>Prepared For:</h3>
+      {% include "proposal/customer_info.html" %}
+    </div>
+
+    <div class = "col-lg-6 col-md-6 col-sm-12 right-align">
+      {% include "proposal/proposal_info.html" %}
+    </div>
+  </div>
+
+  <br>
 
   <div class="row mt">
     {% include "proposal/line_item_info.html" %}
   </div>
+
+  <div class="row mt">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+      <div class="box-style">
+        <h5>Notes: </h5>
+        <br>
+        {{ proposal.notes }}
+      </div>
+    </div>
 {% endblock %}

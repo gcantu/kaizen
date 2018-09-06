@@ -1,18 +1,21 @@
 
-<ul>
-  {% for p in proposals %}
-    <li>
-      {{ p.customer }}
-      <button class="button-style">
-
-          {% if pending %}
-            <a class="button-style" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
-          {% else %}
-            <a class="button-style" href="{% url 'manufacturing:report' p.id %}">
-            Create Manufacturing Report</a>
-          {% endif %}
-        </a>
-      </button>
-    </li>
-  {% endfor %}
-</ul>
+{% for p in proposals %}
+  <div class="row mt">
+    <div class = "col-lg-5 col-md-5 col-sm-12">
+      <div class="card textcenter">
+        <div class="card-header">{{ p.customer }}</div>
+        <div class="card-body">
+          <p><b>Created date: </b>{{ p.created_date }}</p>
+          <p><b>Agents: </b>{{ p.agents.get }}</p>
+          <p><b>Measured by: </b>{{ p.measured_by.get }}</p>
+          <div class="right-align">
+            <button class="btn-theme">
+              <a class="btn-theme" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+{% endfor %}

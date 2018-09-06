@@ -19,22 +19,19 @@
     <section class="wrapper">
       <div class="row mt">
         <div class = "col-lg-12 col-md-12 col-sm-12">
-          <div class="card textcenter mt-3">
-            <div class="card-header form-heading text-white d-print-none">
-              {% block content_title %}
-                Pending Proposals
+          <div class="card">
+            <div class="card-header">
+              {% block cardheader %}
+                Proposals
               {% endblock %}
             </div>
             <div class="card-body">
-              <div class="card-section">
-                {% block template_header %}
-                  {{ template_header_content }}
-                {% endblock %}
+              {% block letterhead %}
+              {% endblock %}
 
-                {% block subcontent %}
-                  {% include "dashboard/list_index.html" %}
-                {% endblock %}
-              </div>
+              {% block cardcontent %}
+                {% include "dashboard/list_index.html" %}
+              {% endblock %}
             </div>
           </div>
         </div>

@@ -4,11 +4,11 @@
 
 {% block title %}Create Proposal{% endblock %}
 
-{% block content_title %}
+{% block cardheader %}
   {{ current }}
 {% endblock %}
 
-{% block subcontent %}
+{% block cardcontent %}
 <div id="form-block">
   {% if current == "Customer" %}
     {% include "proposal/customer_form.html" %}
@@ -16,11 +16,6 @@
     {% include "proposal/proposal_form.html" %}
   {% elif current == "Line Item" %}
     {% include "proposal/line_item_form.html" %}
-    <div class="right-align">
-      <button class="button-style">
-        <a class="button-style" href="{% url 'proposal:final-proposal' proposal.id %}">Finish</a>
-      </button>
-    </div>
   {% endif %}
 </div>
 {% endblock %}
