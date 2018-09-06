@@ -1,54 +1,64 @@
-<table>
-<thead>
-      <th>Width</th>
-      <th>Height</th>
-      <th>Panels</th>
-      <th>Trim</th>
-      <th>L-frame Width</th>
-      <th>L-frame Height</th>
-      <th>Rail</th>
-      <th>Louver</th>
-      <th>Stile</th>
-      <th>Tilt Rod</th>
-      <th>Hinges</th>
-      <th>Magnets</th>
-      <th>Screws</th>
-      <th>Louver Qty</th>
-      <th>Rail Qty</th>
-      <th>Stile Qty</th>
-      <th>L-frame Material</th>
-      <th>Louver Material</th>
-      <th>Rail Material</th>
-      <th>Stile Material</th>
-      <th>Tilt Rod Material</th>
-      <th>Panel Material</th>
-</thead>
-<tbody>
-  {% for item in results %}
-    <tr>
-      <td>{{ item.width }}</td>
-      <td>{{ item.height }}</td>
-      <td>{{ item.panels }}</td>
-      <td>{{ item.trim }}</td>
-      <td>{{ item.LframeWidth }}</td>
-      <td>{{ item.LframeHeight }}</td>
-      <td>{{ item.rail }}</td>
-      <td>{{ item.louver }}</td>
-      <td>{{ item.stile }}</td>
-      <td>{{ item.tiltRod }}</td>
-      <td>{{ item.hinges }}</td>
-      <td>{{ item.magnets }}</td>
-      <td>{{ item.screws }}</td>
-      <td>{{ item.louverQty }}</td>
-      <td>{{ item.railQty }}</td>
-      <td>{{ item.stileQty }}</td>
-      <td>{{ item.LframeMaterial }}</td>
-      <td>{{ item.louverMaterial }}</td>
-      <td>{{ item.railMaterial }}</td>
-      <td>{{ item.stileMaterial }}</td>
-      <td>{{ item.tiltRodMaterial }}</td>
-      <td>{{ item.panelMaterial }}</td>
-    </tr>
-  {% endfor %}
-</tbody>
-</table>
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Create Proposal{% endblock %}
+
+{% block template_header %}
+  {% include "dashboard/template_header.html" %}
+{% endblock %}
+
+{% block subcontent %}
+  <div class="row mt">
+    {% include "proposal/customer_info.html" %}
+
+    {% include "proposal/proposal_info.html" %}
+  </div>
+
+  <div class="row mt">
+    <table>
+      <thead>
+        <tr>
+          <th colspan=1></th>
+          <th colspan=1></th>
+          <th colspan=2>L-Frame</th>
+          <th colspan=2>Louver</th>
+          <th colspan=2>Rail</th>
+          <th colspan=2>Stile</th>
+          <th colspan=1>Trim</th>
+        </tr>
+        <tr>
+          <th colspan=1>Product Type</th>
+          <th colspan=1>Location</th>
+          <th colspan=1>Width</th>
+          <th colspan=1>Height</th>
+          <th colspan=1>Qty</th>
+          <th colspan=1>Measurement</th>
+          <th colspan=1>Qty</th>
+          <th colspan=1>Measurement</th>
+          <th colspan=1>Qty</th>
+          <th colspan=1>Measurement</th>
+          <th colspan=1>Trim</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in results %}
+          <tr>
+            <td>{{ item.prod_type }}</td>
+            <td>{{ item.location }}</td>
+            <td>{{ item.LframeWidth }}</td>
+            <td>{{ item.LframeHeight }}</td>
+            <td>{{ item.louverQty }}</td>
+            <td>{{ item.louver }}</td>
+            <td>{{ item.railQty }}</td>
+            <td>{{ item.rail }}</td>
+            <td>{{ item.stileQty }}</td>
+            <td>{{ item.stile }}</td>
+            <td>{{ item.trim }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

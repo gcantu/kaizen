@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from proposal.models import line_item, proposal
+from proposal.models import line_item, proposal, customer
 
 
 class Shutter:
@@ -8,6 +8,8 @@ class Shutter:
         if 'height' in kwargs: self._height = kwargs['height']
         if 'panels' in kwargs: self._panels = kwargs['panels']
         if 'trim' in kwargs: self._trim = kwargs['trim']
+        if 'prod_type' in kwargs: self._prod_type = kwargs['prod_type']
+        if 'location' in kwargs: self._location = kwargs['location']
 
     def width(self):
         return self._width
@@ -23,6 +25,12 @@ class Shutter:
 
     def trim(self):
         return self._trim
+
+    def prod_type(self):
+        return self._prod_type
+
+    def location(self):
+        return self._location
 
     def LframeWidth(self):
         width = self.width()
@@ -153,10 +161,14 @@ class Shutter:
     #     return f'shutter width: {self.width()} shutter height: {self.height()} total panels {self.panels()}.'
 
 
+
 def ManufacturingReport(request, pk):
-    proposalInfo = proposal.objects.get(customer_id=pk)
-    p_id = proposalInfo.id
+    p = proposal.objects.get(customer_id=pk)
+    p_agents = p.agents.all()
+    p_measuredby = p.measured_by.all()
+    p_id = p.id
     line_items = line_item.objects.filter(proposal_id=p_id)
+    cust = customer.objects.get(pk=pk)
 
     results = []
     for item in line_items:
@@ -164,12 +176,10 @@ def ManufacturingReport(request, pk):
         h = item.height
         p = item.panels
         t = item.trim
+        pt = item.shutter_type
+        l = item.location
 
-        shutter_instance = Shutter(width=w, height=h, panels=p, trim=t)
+        shutter_instance = Shutter(width=w, height=h, panels=p, trim=t, prod_type=pt, location=l)
         results.append(shutter_instance)
 
-    return render(request, 'manufacturing/report.html', {'results': results})
-
-
-# def ManufacturingReport(request, pk):
-    # return render(request, 'manufacturing/report.html')
+    return render(request, 'manufacturing/report.html', {'results': results, 'customer': cust, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': line_items})
