@@ -1,6 +1,14 @@
-{% extends "dashboard/create_proposal.html" %}
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
 
-{% block info %}
+{% block title %}Create Proposal{% endblock %}
+
+{% block template_header %}
+  {% include "dashboard/template_header.html" %}
+{% endblock %}
+
+{% block subcontent %}
   <div class="row mt">
     {% include "proposal/customer_info.html" %}
 

@@ -21,14 +21,20 @@
         <div class = "col-lg-12 col-md-12 col-sm-12">
           <div class="card textcenter mt-3">
             <div class="card-header form-heading text-white d-print-none">
-              {% block content_header %}
+              {% block content_title %}
                 Pending Proposals
               {% endblock %}
             </div>
             <div class="card-body">
-              {% block subcontent %}
-                {% include "proposal/proposal_index.html" %}
-              {% endblock %}
+              <div class="card-section">
+                {% block template_header %}
+                  {{ template_header_content }}
+                {% endblock %}
+
+                {% block subcontent %}
+                  {% include "proposal/proposal_index.html" %}
+                {% endblock %}
+              </div>
             </div>
           </div>
         </div>

@@ -1,0 +1,26 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Create Proposal{% endblock %}
+
+{% block content_title %}
+  {{ current }}
+{% endblock %}
+
+{% block subcontent %}
+<div id="form-block">
+  {% if current == "Customer" %}
+    {% include "proposal/customer_form.html" %}
+  {% elif current == "Proposal" %}
+    {% include "proposal/proposal_form.html" %}
+  {% elif current == "Line Item" %}
+    {% include "proposal/line_item_form.html" %}
+    <div class="right-align">
+      <button class="button-style">
+        <a class="button-style" href="{% url 'proposal:final-proposal' proposal.id %}">Finish</a>
+      </button>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
