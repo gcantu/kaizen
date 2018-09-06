@@ -242,3 +242,7 @@ hr {
   padding-left: 10px;
   text-align: right;
 }
+
+.hidden {
+  display:none;
+}
