@@ -6,8 +6,23 @@
         <div class="card-header">{{ p.customer }}</div>
         <div class="card-body">
           <p><b>Created date: </b>{{ p.created_date }}</p>
-          <p><b>Agents: </b>{{ p.agents.get }}</p>
-          <p><b>Measured by: </b>{{ p.measured_by.get }}</p>
+            <p><b>Agents: </b>
+              {% for a in p.agents.all %}
+                {{ a }}
+                {% if forloop.last %}
+                {% else %},&nbsp;
+                {% endif %}
+              {% endfor %}
+            </p>
+
+            <p><b>Measured by: </b>
+              {% for m in p.measured_by.all %}
+                {{ m }}
+                {% if forloop.last %}
+                {% else %},&nbsp;
+                {% endif %}
+              {% endfor %}
+            </p>
           <div class="right-align">
             <button class="btn-theme">
               <a class="btn-theme" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
