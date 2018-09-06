@@ -2252,3 +2252,78 @@ label {
 .form-heading {
   background-color: #424a5d;
 }
+
+#form-block {
+  padding-top: 15px;
+}
+
+
+.mt {
+  margin-top: 15px;
+}
+
+.card-section {
+  border: 0.5px solid #aeb2b7;
+  padding: 0 15px 15px 15px;
+  margin-bottom: 10px;
+}
+
+.line-item-card{
+  padding: 15px 15px 15px 15px !important;
+}
+
+.form-title {
+  text-align: center;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+.right-align {
+  text-align: right;
+  font-size: 10px;
+}
+
+.add-lineitem label {
+  font-weight: 700;
+}
+
+.form-control.dropdown {
+  -webkit-appearance: none;
+	}
+
+
+input, textarea {
+  border: 0.5px solid #aeb2b7;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.button-style {
+  width: 60px;
+  height: 25px;
+  color: #fff;
+  font-size: 12px;
+  background-color: #424a5d;
+  border: 0.5px solid #424a5d;
+  border-radius: 5px;
+  padding-top: 4px;
+  cursor: pointer;
+}
+
+th {
+  background-color: #424a5d;
+  color: #fff;
+  padding: 5px 0px 5px 0px;
+  text-align:center;
+}
+
+td {
+  border: 0.5px solid #aeb2b7;
+  padding: 10px 15px 10px 5px;
+  /* width: 150px; */
+}
