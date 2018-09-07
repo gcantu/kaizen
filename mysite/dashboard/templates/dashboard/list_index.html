@@ -26,7 +26,10 @@
           <div class="right-align">
             {% if pending %}
               <button class="btn-theme">
-                <a class="btn-theme" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
+                <a class="btn-theme" href="{% url 'proposal:proposal-edit-lineitems' p.id %}">Update</a>
+              </button>
+              <button class="btn-theme">
+                <a class="btn-theme" href="{% url 'proposal:final-proposal' p.id %}">Print</a>
               </button>
             {% else %}
               <button class="btn-theme">
