@@ -158,8 +158,16 @@ th {
 
 td {
   border: 0.5px solid #aeb2b7;
-  padding: 10px 15px 10px 5px;
+  padding: 3px 15px 3px 5px;
   /* width: 150px; */
+}
+
+#manufacturing-table th {
+  border: 0.5px solid #aeb2b7;
+}
+
+#manufacturing-table td {
+  padding: 3px 5px 3px 5px;
 }
 
 /* buttons */
