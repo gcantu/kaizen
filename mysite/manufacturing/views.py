@@ -6,6 +6,8 @@ class Shutter:
     def __init__(self, **kwargs):
         if 'width' in kwargs: self._width = kwargs['width']
         if 'height' in kwargs: self._height = kwargs['height']
+        if 'width_fraction' in kwargs: self._width_fraction = kwargs['width_fraction']
+        if 'height_fraction' in kwargs: self._height_fraction = kwargs['height_fraction']
         if 'panels' in kwargs: self._panels = kwargs['panels']
         if 'trim' in kwargs: self._trim = kwargs['trim']
         if 'prod_type' in kwargs: self._prod_type = kwargs['prod_type']
@@ -20,6 +22,12 @@ class Shutter:
     def height(self):
         return self._height
 
+    def width_fraction(self):
+        return self._width_fraction
+
+    def height_fraction(self):
+        return self._height_fraction
+
     def panels(self):
         return self._panels
 
@@ -32,13 +40,25 @@ class Shutter:
     def location(self):
         return self._location
 
-    def LframeWidth(self):
+    def totalWidth(self):
         width = self.width()
+        width_f = self.width_fraction()
+        total = width + width_f
+        return(total)
+
+    def totalHeight(self):
+        height = self.height()
+        height_f = self.height_fraction()
+        total = height + height_f
+        return(total)
+
+    def LframeWidth(self):
+        width = self.totalWidth()
         Lwidth = width - 0.375 # -3/8
         return round(Lwidth, 3)
 
     def LframeHeight(self):
-        height = self.height()
+        height = self.totalHeight()
         Lheight = height - 0.25 # -1/4
         return round(Lheight, 3)
 
@@ -163,23 +183,25 @@ class Shutter:
 
 
 def ManufacturingReport(request, pk):
-    p = proposal.objects.get(customer_id=pk)
+    p = proposal.objects.get(id=pk)
     p_agents = p.agents.all()
     p_measuredby = p.measured_by.all()
-    p_id = p.id
-    line_items = line_item.objects.filter(proposal_id=p_id)
-    cust = customer.objects.get(pk=pk)
+    cust_id = p.customer_id
+    cust = customer.objects.get(pk=cust_id)
+    line_items = line_item.objects.filter(proposal_id=pk)
 
     results = []
     for item in line_items:
         w = item.width
         h = item.height
+        w_f = item.width_fraction
+        h_f = item.height_fraction
         p = item.panels
         t = item.trim
         pt = item.shutter_type
         l = item.location
 
-        shutter_instance = Shutter(width=w, height=h, panels=p, trim=t, prod_type=pt, location=l)
+        shutter_instance = Shutter(width=w, height=h, width_fraction=w_f, height_fraction=h_f, panels=p, trim=t, prod_type=pt, location=l)
         results.append(shutter_instance)
 
     return render(request, 'manufacturing/report.html', {'results': results, 'customer': cust, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': line_items})
