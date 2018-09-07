@@ -4,6 +4,7 @@ from .models import customer, proposal, agent, line_item
 from .forms import customerForm, proposalForm, lineItemForm
 from django.views.generic.edit import UpdateView
 from django.db.models import Sum
+from .forms import proposalLineItemFormSet
 
 
 def addCustomer(request):
@@ -77,9 +78,10 @@ def finalProposal(request, pk):
 
 
 
-
-
-class updateProposal(UpdateView):
+class EditProposalLineItemView(UpdateView):
     model = proposal
-    fields = '__all__'
-    template_name_suffix = '_update'
+    form_class = proposalLineItemFormSet
+    template_name_suffix = '_edit'
+
+    def get_success_url(self):
+        return reverse('dashboard:home')
