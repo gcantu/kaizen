@@ -24,9 +24,16 @@
               {% endfor %}
             </p>
           <div class="right-align">
-            <button class="btn-theme">
-              <a class="btn-theme" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
-            </button>
+            {% if pending %}
+              <button class="btn-theme">
+                <a class="btn-theme" href="{% url 'proposal:update-proposal' p.id %}">Update</a>
+              </button>
+            {% else %}
+              <button class="btn-theme">
+                <a class="btn-theme" href="{% url 'manufacturing:report' p.id %}">Create</a>
+              </button>
+            {% endif %}
+
           </div>
         </div>
       </div>
