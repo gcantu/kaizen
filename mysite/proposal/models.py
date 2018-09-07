@@ -99,7 +99,7 @@ class line_item(models.Model):
     HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
     HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
     TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
-    FRACTION_CHOICES = [(.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
+    FRACTION_CHOICES = [(0, ''), (.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
 
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
@@ -123,11 +123,11 @@ class line_item(models.Model):
     height_left = models.FloatField(blank=True, null=True)
     height_right = models.FloatField(blank=True, null=True)
     height_center = models.FloatField(blank=True, null=True)
-    width_fraction = models.FloatField(choices=FRACTION_CHOICES, blank=True, null=True)
-    height_fraction = models.FloatField(choices=FRACTION_CHOICES, blank=True, null=True)
-    height_left_fraction = models.FloatField(choices=FRACTION_CHOICES, blank=True, null=True)
-    height_right_fraction = models.FloatField(choices=FRACTION_CHOICES, blank=True, null=True)
-    height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, blank=True, null=True)
+    width_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_left_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_right_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     quantity = models.IntegerField(blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     approved = models.BooleanField(default=True)
