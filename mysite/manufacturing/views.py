@@ -22,6 +22,8 @@ class Shutter:
         if 'trim' in kwargs: self._trim = kwargs['trim']
         if 'prod_type' in kwargs: self._prod_type = kwargs['prod_type']
         if 'location' in kwargs: self._location = kwargs['location']
+        if 'hinges' in kwargs: self._hinges = kwargs['hinges']
+        if 'hinge_color' in kwargs: self._hinge_color = kwargs['hinge_color']
 
     def w(self): # width whole number
         return self._w
@@ -46,6 +48,12 @@ class Shutter:
 
     def location(self):
         return self._location
+
+    def hinges(self):
+        return self._hinges
+
+    def hinge_color(self):
+        return self._hinge_color
 
     def totalWidth(self): # whole number + fraction width
         width = self.w()
@@ -96,7 +104,7 @@ class Shutter:
         Trod = stile - 9.875 # 9 7/8
         return round(Trod, 4)
 
-    def hinges(self):
+    def totalHinges(self):
         Lheight = self.LframeH()
         panels = self.panels()
 
@@ -114,7 +122,7 @@ class Shutter:
         return magnets
 
     def screws(self):
-        hinges = self.hinges()
+        hinges = self.totalHinges()
         screws = hinges * 6
         return screws
 
@@ -228,10 +236,10 @@ class Shutter:
 
 
 def ManufacturingReport(request, pk):
-    p = proposal.objects.get(id=pk)
-    p_agents = p.agents.all()
-    p_measuredby = p.measured_by.all()
-    cust_id = p.customer_id
+    prop = proposal.objects.get(id=pk)
+    p_agents = prop.agents.all()
+    p_measuredby = prop.measured_by.all()
+    cust_id = prop.customer_id
     cust = customer.objects.get(pk=cust_id)
     line_items = line_item.objects.filter(proposal_id=pk)
 
@@ -245,8 +253,33 @@ def ManufacturingReport(request, pk):
         t = item.trim
         pt = item.shutter_type
         l = item.location
+        hi = item.hinges
+        hc = item.hinge_color
 
-        shutter_instance = Shutter(w=w, h=h, w_f=w_f, h_f=h_f, panels=p, trim=t, prod_type=pt, location=l)
+        shutter_instance = Shutter(w=w, h=h, w_f=w_f, h_f=h_f, panels=p, trim=t, prod_type=pt, location=l, hinges=hi, hinge_color=hc)
         results.append(shutter_instance)
 
-    return render(request, 'manufacturing/report.html', {'results': results, 'customer': cust, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': line_items})
+
+    lf_m = round(sum(i.LframeMaterial() for i in results))
+    l_m = round(sum(i.louverMaterial() for i in results))
+    r_m = round(sum(i.railMaterial() for i in results))
+    s_m = round(sum(i.stileMaterial() for i in results))
+    tr_m = round(sum(i.tiltRodMaterial() for i in results))
+    p_m = round(sum(i.panelMaterial() for i in results))
+    h_m = round(sum(i.totalHinges() for i in results))
+    m_m = round(sum(i.magnets() for i in results))
+    sc_m = round(sum(i.screws() for i in results))
+
+    materials = {
+        'totalLframeMaterial':lf_m,
+        'totalLouverMaterial':l_m,
+        'totalRailMaterial':r_m,
+        'totalStileMaterial':s_m,
+        'totalTiltRodMaterial':tr_m,
+        'totalPanelMaterial':p_m,
+        'totalHinges':h_m,
+        'totalMagnets':m_m,
+        'totalScrews':sc_m
+    }
+
+    return render(request, 'manufacturing/report.html', {'proposal': prop, 'results': results, 'customer': cust, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': line_items, 'materials': materials})
