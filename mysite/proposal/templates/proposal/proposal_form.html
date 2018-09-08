@@ -3,18 +3,18 @@
 <form id="proposal-form" method="post">
   {% csrf_token %}
   <div class="form-row">
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-2">
       {{ form.created_date.label_tag }}
       {% render_field  form.created_date class="form-control" %}
     </div>
   </div>
 
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
       {{ form.agents.label_tag }}
       {% render_field  form.agents class="form-control" placeholder=form.agents.label %}
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
       {{ form.measured_by.label_tag }}
       {% render_field  form.measured_by class="form-control" placeholder=form.measured_by.label %}
     </div>
