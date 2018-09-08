@@ -54,15 +54,18 @@ def addLineItem(request, pk):
             new_li = form.save(commit=False)
             new_li.proposal_id = pk
             new_li.save()
-            # p_id = form.instance.id
-            # return redirect(reverse('proposal:add-line-item', kwargs={'pk': pk}))
-            return render(request, 'proposal/line_item_options.html', {'p_id': pk})
+            return redirect(reverse('proposal:line-item-options', kwargs={'pk': pk}))
 
     return render(request, 'proposal/create.html', {'form': f, 'current': c, 'proposal': p})
 
 
 
-def finalProposal(request, pk):
+def lineItemOptions(request, pk):
+    return render(request, 'proposal/line_item_options.html', {'p_id': pk})
+
+
+
+def finalProposal(request, pk, var):
     p = proposal.objects.get(pk=pk)
     p_agents = p.agents.all()
     p_measuredby = p.measured_by.all()
@@ -71,17 +74,34 @@ def finalProposal(request, pk):
     lineitem = line_item.objects.filter(proposal_id=pk)
 
     li_sum = lineitem.aggregate(Sum('price'))
-
     total = li_sum['price__sum']
 
-    return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'total': total})
+    form = proposalForm(request.POST or None, instance=p)
+
+    if form.is_valid():
+        form.save()
+
+    if (var == 1):
+        return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'total': total, 'form': form, 'var': var})
+
+    else:
+        return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'total': total, 'var': var})
+
+
+
+class EditProposalView(UpdateView):
+    model = proposal
+    template_name_suffix = '_edit'
+
+    def get_success_url(self):
+        return redirect(reverse('proposal:final-proposal', kwargs={'pk': self.pk}))
 
 
 
 class EditProposalLineItemView(UpdateView):
     model = proposal
     form_class = proposalLineItemFormSet
-    template_name_suffix = '_edit'
+    template_name_suffix = '_lineitem_edit'
 
     def get_success_url(self):
         return reverse('dashboard:home')
