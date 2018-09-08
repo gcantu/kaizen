@@ -65,6 +65,10 @@ function showField(i, o, f){ // function to render hidden fields in line item fo
 };
 
 
+// make notes textarea smaller
+document.getElementById("id_notes").rows = "5";
+
+
 
 
 }); // Document is ready
