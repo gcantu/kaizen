@@ -13,7 +13,7 @@ $('#id_finish').on('change', function() {
 $('#id_mount').on('change', function() {
   var selectedItem = $(this).val();
   var option = "Ext"
-  var fieldId = "#trim-field"
+  var fieldId = ".trim-field"
 
   showField(selectedItem, option, fieldId);
 });
