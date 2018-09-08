@@ -19,6 +19,38 @@ $('#id_mount').on('change', function() {
 });
 
 
+$('#id_shutter_type').on('change', function() { // hide/unhide height-center field
+  var selectedItem = $(this).val();
+
+  if (selectedItem > 2 && selectedItem < 6) {
+    val = 10
+  } else {
+    val = 5
+  }
+
+  var option = 10
+  var fieldId = "#height-center-field"
+
+  showField(val, option, fieldId);
+});
+
+
+$('#id_shutter_type').on('change', function() { // hide/unhide height-left and height-right fields
+  var selectedItem = $(this).val();
+
+  if (selectedItem > 3 && selectedItem < 6) {
+    val = 10
+  } else {
+    val = 5
+  }
+
+  var option = 10
+  var fieldId = "#height-left-right-field"
+
+  showField(val, option, fieldId);
+});
+
+
 // FUNCTIONS
 function showField(i, o, f){ // function to render hidden fields in line item form
   var i = i;
