@@ -1,0 +1,41 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block title %}Edit Line Items{% endblock %}
+
+{% block cardheader %}
+  Edit Line Items
+{% endblock %}
+
+{% block letterhead %}
+  <div class="row">
+    <div class = "col-lg-12 col-md-12 col-sm-12 right-align">
+      <h1>Proposal</h1>
+    </div>
+  </div>
+  <hr/>
+  {% include "dashboard/letterhead.html" %}
+{% endblock %}
+
+{% block cardcontent %}
+  <p>Editing proposal for {{ proposal.customer }}</p>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.management_form }}
+    {% for form in form %}
+
+        <ul>
+        {{ form.as_ul }}
+        </ul>
+
+    {% endfor %}
+
+    <input type="submit" value="Save" />
+</form>
+
+
+
+{% endblock %}
