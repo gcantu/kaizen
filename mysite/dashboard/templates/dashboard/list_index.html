@@ -1,46 +1,51 @@
 
-{% for p in proposals %}
+
   <div class="row mt">
-    <div class = "col-lg-5 col-md-5 col-sm-12">
+    <div class = "col-lg-12 col-md-12 col-sm-12">
       <div class="card textcenter">
-        <div class="card-header">{{ p.customer }}</div>
-        <div class="card-body">
-          <p><b>Created date: </b>{{ p.created_date }}</p>
-            <p><b>Agents: </b>
-              {% for a in p.agents.all %}
-                {{ a }}
-                {% if forloop.last %}
-                {% else %},&nbsp;
-                {% endif %}
-              {% endfor %}
-            </p>
-
-            <p><b>Measured by: </b>
-              {% for m in p.measured_by.all %}
-                {{ m }}
-                {% if forloop.last %}
-                {% else %},&nbsp;
-                {% endif %}
-              {% endfor %}
-            </p>
-          <div class="right-align">
-            {% if pending %}
-              <button class="btn-theme">
-                <a class="btn-theme" href="{% url 'proposal:proposal-edit-lineitems' p.id %}">Update</a>
-              </button>
-              <button class="btn-theme">
-                <a class="btn-theme" href="{% url 'proposal:final-proposal' p.id %}">Print</a>
-              </button>
-            {% else %}
-              <button class="btn-theme">
-                <a class="btn-theme" href="{% url 'manufacturing:report' p.id %}">Create</a>
-              </button>
-            {% endif %}
-
-          </div>
-        </div>
+        <table>
+          <thead>
+            <th>Created Date</th>
+            <th>Customer</th>
+            <th>Agents</th>
+            <th>Measured By</th>
+            <th colspan=2></th>
+          </thead>
+          <tbody>
+            {% for p in proposals %}
+              <tr>
+                <td>{{ p.created_date }}</td>
+                <td>{{ p.customer }}</td>
+                <td>
+                  {% for a in p.agents.all %}
+                    {{ a }}
+                    {% if forloop.last %}
+                    {% else %},&nbsp;
+                    {% endif %}
+                  {% endfor %}
+                </td>
+                <td>
+                  {% for m in p.measured_by.all %}
+                    {{ m }}
+                    {% if forloop.last %}
+                    {% else %},&nbsp;
+                    {% endif %}
+                  {% endfor %}
+                </td>
+                <td>
+                  <button class="btn-theme">
+                    <a class="btn-theme" href="{% url 'proposal:proposal-edit-lineitems' p.id %}">Edit</a>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn-theme">
+                    <a class="btn-theme" href="{% url 'proposal:final-proposal' p.id %}">View</a>
+                  </button>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  <br>
-{% endfor %}
