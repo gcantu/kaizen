@@ -175,6 +175,7 @@ td {
   color: #fff;
   background-color: #424a5d;
   border: 0.5px solid #424a5d;
+  min-width: 50px;
 }
 .btn-theme:hover,
 .btn-theme:focus,
@@ -206,10 +207,6 @@ input[type=number] {
   margin-top: .25rem;
 }
 
-select.form-control:not([size]):not([multiple]) {
-height: calc(2.77rem + 2px);
-}
-
 label {
   margin-bottom: 3px;
 }
@@ -222,6 +219,9 @@ label {
   margin-top: 22px;
 }
 
+.custom-select, .form-control {
+  height: 30px;
+}
 
 
 /* other */

@@ -1,10 +1,7 @@
 {% load widget_tweaks %}
 
-
-
 <form method="post">
   {% csrf_token %}
-
   <div class="row">
     <div class = "col-lg-6 col-md-6 col-sm-12">
       <div class="card-section">
@@ -18,7 +15,6 @@
             {% render_field  form.shutter_type class="custom-select my-1 mr-sm-2" %}
           </div>
         </div>
-
 
         <div class="form-row">
           <div class="col-4">
@@ -45,7 +41,82 @@
 
       <div class="card-section">
         <div class="form-row">
+          <div class="col-4">
+            {{ form.mount.label_tag }}
+            {% render_field  form.mount class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div id="trim-field" class="col-3 hidden trim-field">
+            {{ form.trim.label_tag }}
+            {% render_field  form.trim class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div id="trim-field" class="col-5 hidden trim-field">
+            {{ form.trim_style.label_tag }}
+            {% render_field  form.trim_style class="custom-select my-1 mr-sm-2" %}
+          </div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col-3">
+            {{ form.height_left.label_tag }}
+            {% render_field  form.height_left class="form-control" %}
+          </div>
+          <div id="fraction" class="col-2">
+            {% render_field  form.height_left_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div class="col-1">
+          </div>
+          <div class="col-3">
+            {{ form.height_right.label_tag }}
+            {% render_field  form.height_right class="form-control" %}
+          </div>
+          <div id="fraction" class="col-2">
+            {% render_field  form.height_right_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-3">
+            {{ form.height_center.label_tag }}
+            {% render_field  form.height_center class="form-control" %}
+          </div>
+          <div id="fraction" class="col-2">
+            {% render_field  form.height_center_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class = "col-lg-6 col-md-6 col-sm-12">
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col-4">
+          {{ form.separate_parts.label_tag }}
+          {% render_field  form.separate_parts class="custom-select my-1 mr-sm-2" %}
+          </div>
           <div class="col">
+            {{ form.louver.label_tag }}
+            {% render_field  form.louver class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div class="col">
+            {{ form.panels.label_tag }}
+            {% render_field  form.panels class="form-control" %}
+          </div>
+          <div class="col">
+            {{ form.t_post.label_tag }}
+            {% render_field  form.t_post class="form-control" %}
+          </div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col">
+            {{ form.tilt_rod.label_tag }}
+            {% render_field  form.tilt_rod class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div class="col-4">
             {{ form.hinges.label_tag }}
             {% render_field  form.hinges class="custom-select my-1 mr-sm-2" %}
           </div>
@@ -73,88 +144,6 @@
           </div>
           <div id="fraction" class="col-2">
             {% render_field  form.height_fraction class="custom-select my-1 mr-sm-2" %}
-          </div>
-        </div>
-      </div>
-
-      <div class="card-section">
-        <div class="form-row">
-          <div class="col-3">
-            {{ form.height_left.label_tag }}
-            {% render_field  form.height_left class="form-control" %}
-          </div>
-          <div id="fraction" class="col-2">
-            {% render_field  form.height_left_fraction class="custom-select my-1 mr-sm-2" %}
-          </div>
-          <div class="col-1">
-          </div>
-          <div class="col-3">
-            {{ form.height_right.label_tag }}
-            {% render_field  form.height_right class="form-control" %}
-          </div>
-          <div id="fraction" class="col-2">
-            {% render_field  form.height_right_fraction class="custom-select my-1 mr-sm-2" %}
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col-3">
-            {{ form.height_center.label_tag }}
-            {% render_field  form.height_center class="form-control" %}
-          </div>
-          <div id="fraction" class="col-2">
-            {% render_field  form.height_center_fraction class="custom-select my-1 mr-sm-2" %}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class = "col-lg-6 col-md-6 col-sm-12">
-      <div class="card-section">
-        <div class="form-row">
-          <div class="col-4">
-          {{ form.separate_parts.label_tag }}
-          {% render_field  form.separate_parts class="custom-select my-1 mr-sm-2" %}
-          </div>
-          <div class="col">
-            {{ form.mount.label_tag }}
-            {% render_field  form.mount class="custom-select my-1 mr-sm-2" %}
-          </div>
-        </div>
-
-        <div id="trim-field" class="form-row hidden">
-          <div class="col-4">
-            {{ form.trim.label_tag }}
-            {% render_field  form.trim class="custom-select my-1 mr-sm-2" %}
-          </div>
-          <div class="col">
-            {{ form.trim_style.label_tag }}
-            {% render_field  form.trim_style class="custom-select my-1 mr-sm-2" %}
-          </div>
-        </div>
-      </div>
-
-      <div class="card-section">
-        <div class="form-row">
-          <div class="col-4">
-            {{ form.louver.label_tag }}
-            {% render_field  form.louver class="custom-select my-1 mr-sm-2" %}
-          </div>
-          <div class="col">
-            {{ form.panels.label_tag }}
-            {% render_field  form.panels class="form-control" %}
-          </div>
-        </div>
-      </div>
-
-      <div class="card-section">
-        <div class="form-row">
-          <div class="col-4">
-            {{ form.t_post.label_tag }}
-            {% render_field  form.t_post class="form-control" %}
-          </div>
-          <div class="col">
-            {{ form.tilt_rod.label_tag }}
-            {% render_field  form.tilt_rod class="custom-select my-1 mr-sm-2" %}
           </div>
         </div>
       </div>
