@@ -177,14 +177,24 @@ td {
   border: 0.5px solid #424a5d;
   min-width: 50px;
 }
-.btn-theme:hover,
-.btn-theme:focus,
-.btn-theme:active,
-.btn-theme.active,
+.btn-theme:hover, .btn-theme02:hover,
+.btn-theme:focus, .btn-theme02:focus,
+.btn-theme:active, .btn-theme02:active,
+.btn-theme.active, .btn-theme02.active,
+.btn-theme02 a:hover,
 .open .dropdown-toggle.btn-theme {
   color: #fff;
   background-color: #48bcb4;
   border-color: #48bcb4;
+}
+
+.btn-theme02, .btn-theme02 a {
+  color: #fff;
+  background-color: #F6C042;
+  border: 0.5px solid #F6C042;
+  min-width: 50px;
+  max-height: 25px;
+  font-size: 13px;
 }
 
 
@@ -258,7 +268,7 @@ hr {
 .box-style {
   border: 0.5px solid #aeb2b7;
   margin-top: 15px;
-  padding-left: 10px;
+  padding: 0 8px 0 10px;
 }
 
 .total-style {
