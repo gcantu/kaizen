@@ -1,6 +1,10 @@
 
 @media print {
 
+  .noprint {
+    display: none;
+  }
+
   #main-content, .wrapper {
     margin:0;
   }
