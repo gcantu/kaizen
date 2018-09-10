@@ -30,7 +30,26 @@
               {% endblock %}
 
               {% block cardcontent %}
-                {% include "dashboard/list_index.html" %}
+                <div class="row mt">
+                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
+                    <button class="btn-theme btn-lg noprint">
+                      <a href="{% url 'dashboard:list-index' 'All' %}">Total: {{ p_all }}</a>
+                    </button>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
+                    <button class="btn-theme btn-lg noprint">
+                      <a href="{% url 'dashboard:list-index' 'Approved' %}">Approved: {{ p_approved }}</a>
+                    </button>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
+                    <button class="btn-theme btn-lg noprint">
+                      <a href="{% url 'dashboard:list-index' 'Pending' %}">Pending: {{ p_pending }}</a>
+                    </button>
+                  </div>
+                </div>
+                <br>
+                {% block listcontent %}
+                {% endblock %}
               {% endblock %}
             </div>
           </div>
