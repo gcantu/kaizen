@@ -1,28 +1,26 @@
 
-<div>
-  <b>Date:</b> {{ proposal.created_date }}
-</div>
-<div id="proposalId" value="{{ proposal.id }}">
-  <b>Proposal ID:</b> {{ proposal.id }}
-</div>
+<p>
+  <div>
+    <b>Date:</b> {{ proposal.created_date }}
+  </div>
+  <div id="proposalId" value="{{ proposal.id }}">
+    <b>Proposal ID:</b> {{ proposal.id }}
+  </div>
 
-<br>
-<br>
+  <b>Agents: </b>
+  {% for agent in agents %}
+    {{ agent.first_name }} {{ agent.last_name }}
+    {% if forloop.last %}
+    {% else %},&nbsp;
+    {% endif %}
+  {% endfor %}
 
-<b>Agents: </b>
-{% for agent in agents %}
-  {{ agent.first_name }} {{ agent.last_name }}
-  {% if forloop.last %}
-  {% else %},&nbsp;
-  {% endif %}
-{% endfor %}
-
-<br>
-
-<b>Measured by: </b>
-{% for agent in measuredby %}
-  {{ agent.first_name }} {{ agent.last_name }}
-  {% if forloop.last %}
-  {% else %},&nbsp;
-  {% endif %}
-{% endfor %}
+  <br>
+  <b>Measured by: </b>
+  {% for agent in measuredby %}
+    {{ agent.first_name }} {{ agent.last_name }}
+    {% if forloop.last %}
+    {% else %},&nbsp;
+    {% endif %}
+  {% endfor %}
+</p>
