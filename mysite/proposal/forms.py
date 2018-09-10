@@ -27,6 +27,6 @@ from django.forms.models import inlineformset_factory
 proposalLineItemFormSet = inlineformset_factory(
     proposal,
     line_item,
-    fields=('product', 'shutter_type', 'finish', 'stain', 'color', 'location', 'mount', 'trim', 'trim_style', 'louver', 'hinges', 'hinge_color', 'panels', 't_post', 'tilt_rod', 'separate_parts', 'width', 'width_fraction', 'height', 'height_fraction', 'height_left', 'height_left_fraction', 'height_right', 'height_right_fraction', 'height_center',    'height_center_fraction', 'quantity', 'price', 'approved',),
+    fields=('product', 'shutter_type', 'finish', 'stain', 'color', 'location', 'mount', 'trim', 'trim_style', 'louver', 'hinges', 'hinge_color', 'panels', 't_post', 'tilt_rod', 'separate_parts', 'width', 'width_fraction', 'height', 'height_fraction', 'height_left', 'height_left_fraction', 'height_right', 'height_right_fraction', 'height_center', 'height_center_fraction', 'quantity', 'price', 'approved', 'proposal',),
     extra=0
 )
