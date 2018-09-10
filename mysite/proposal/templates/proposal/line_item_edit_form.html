@@ -1,0 +1,20 @@
+{% load widget_tweaks %}
+
+
+<form id="line-item-form" method="post">
+  {% csrf_token %}
+  {{ form.management_form }}
+  {% for form in form %}
+    {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+    {% endfor %}
+
+    {% for field in form.visible_fields %}
+      <div class="fieldWrapper">
+          {{ field.errors }}
+          {{ field.label_tag }} {{ field }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+  <input class="btn-theme right-float" type="submit" value="OK"/>
+</form>

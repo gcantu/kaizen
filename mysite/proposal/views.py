@@ -101,6 +101,10 @@ def editForm(request, pk, var):
         data = proposal.objects.get(pk=pk)
         form = proposalForm(request.POST or None, instance=data)
         c = 'Proposal'
+    elif (var == 3):
+          data = proposal.objects.get(pk=pk)
+          form = proposalLineItemFormSet(request.POST or None, instance=data)
+          c = 'Line Item Edit'
 
     if form.is_valid():
         form.save()

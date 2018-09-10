@@ -66,5 +66,8 @@
       <div class="total-style">
         <h5>Grand Total: ${{ total }}</h5>
       </div>
+      <button class="btn-theme02 noprint right-float">
+        <a  href="{% url 'proposal:edit-form' proposal.id 3 %}">Edit</a>
+      </button>
     </div>
 {% endblock %}
