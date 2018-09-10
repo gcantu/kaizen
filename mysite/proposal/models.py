@@ -72,12 +72,13 @@ class shutter_type(models.Model):
 
 
 class proposal(models.Model):
+    STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
     created_date = models.DateField(default=date.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
     notes = models.TextField(blank=True)
-    pending = models.BooleanField(default=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
 
     # def __str__(self):
     #     return f'Proposal ID: {self.id}.'
