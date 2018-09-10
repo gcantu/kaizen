@@ -22,13 +22,20 @@
   <br>
   <br>
   <div class="row mt">
-    <div class = "col-lg-6 col-md-6 col-sm-12">
+    <div class="col-lg-4 col-md-4 col-sm-12">
       <h3>Prepared For:</h3>
       {% include "proposal/customer_info.html" %}
+      <button class="btn-theme02 noprint">
+        <a href="{% url 'proposal:edit-form' proposal.id 1 %}">Edit</a>
+      </button>
     </div>
-
-    <div class = "col-lg-6 col-md-6 col-sm-12 right-align">
+    <div class="col-lg-2 col-md-2 col-sm-12">
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 right-align">
       {% include "proposal/proposal_info.html" %}
+      <button class="btn-theme02 noprint">
+        <a  href="{% url 'proposal:edit-form' proposal.id 2 %}">Edit</a>
+      </button>
     </div>
   </div>
 

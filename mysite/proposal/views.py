@@ -89,6 +89,26 @@ def finalProposal(request, pk, var):
 
 
 
+def editForm(request, pk, var):
+    p = proposal.objects.get(pk=pk)
+    cust_id = p.customer_id
+
+    if (var == 1):
+        data = customer.objects.get(pk=cust_id)
+        form = customerForm(request.POST or None, instance=data)
+        c = 'Customer'
+    elif (var == 2):
+        data = proposal.objects.get(pk=pk)
+        form = proposalForm(request.POST or None, instance=data)
+        c = 'Proposal'
+
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk, 'var': 2}))
+
+    return render(request, 'proposal/create.html', {'form': form, 'current': c})
+
+
 class EditProposalView(UpdateView):
     model = proposal
     template_name_suffix = '_edit'
