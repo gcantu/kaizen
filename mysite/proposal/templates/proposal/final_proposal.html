@@ -47,22 +47,20 @@
 
   <div class="row mt">
     <div class="col-lg-8 col-md-8 col-sm-12">
-      <div class="box-style">
-        <h5>Notes: </h5>
-        {% if var == 1 %}
-          <form action="{% url 'proposal:final-proposal' proposal.id 2 %}" method="post">
-            {% csrf_token %}
-            <div class="form-row">
-              <div class="col-11">
-                {% render_field form.notes class="form-control" %}
-                <input class="btn-theme right-float notes-btn" type="submit" value="OK"/>
-              </div>
-            </div>
-          </form>
-        {% else %}
+      {% if var == 1 %}
+        <div class="box-style">
+          <h5>Notes: </h5>
+          {% include "proposal/notes_form.html" %}
+        </div>
+      {% else %}
+        <div class="box-style">
+          <h5>Notes: </h5>
           {{ proposal.notes }}
-        {% endif %}
-      </div>
+        </div>
+        <button class="btn-theme02 noprint right-float">
+          <a  href="{% url 'proposal:final-proposal' proposal.id 1 %}">Edit</a>
+        </button>
+      {% endif %}
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="total-style">
