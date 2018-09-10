@@ -81,6 +81,9 @@
       <button class="btn-theme btn-lg noprint right-float">
         <a onclick="javascript:print();">Print</a>
       </button>
+      <button class="btn-theme btn-lg noprint right-float">
+        <a href="{% url 'proposal:approve' proposal.id %}">Approve</a>
+      </button>
     </div>
   </div>
 {% endblock %}

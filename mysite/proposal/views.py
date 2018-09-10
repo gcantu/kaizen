@@ -111,3 +111,11 @@ def editForm(request, pk, var):
         return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk, 'var': 2}))
 
     return render(request, 'proposal/create.html', {'form': form, 'current': c})
+
+
+def approveProposal(request,pk):
+    p = proposal.objects.get(pk=pk)
+    p.status = 'Approved'
+    p.save()
+
+    return redirect(reverse('dashboard:home'))

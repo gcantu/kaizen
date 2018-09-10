@@ -10,4 +10,5 @@ urlpatterns = [
     path('options/<int:pk>', views.lineItemOptions, name='line-item-options'),
     path('final-proposal/<int:pk>/<int:var>', views.finalProposal, name='final-proposal'),
     path('edit/<int:pk>/<int:var>', views.editForm, name='edit-form'),
+    path('approve/<int:pk>', views.approveProposal, name='approve'),
 ]
