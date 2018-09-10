@@ -2,6 +2,8 @@
 
 <form id="proposal-form" method="post">
   {% csrf_token %}
+  {{ form.customer.as_hidden }}
+  {{ form.notes.as_hidden }}
   <div class="form-row">
     <div class="form-group col-md-2">
       {{ form.created_date.label_tag }}
