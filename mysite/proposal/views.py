@@ -111,21 +111,3 @@ def editForm(request, pk, var):
         return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk, 'var': 2}))
 
     return render(request, 'proposal/create.html', {'form': form, 'current': c})
-
-
-class EditProposalView(UpdateView):
-    model = proposal
-    template_name_suffix = '_edit'
-
-    def get_success_url(self):
-        return redirect(reverse('proposal:final-proposal', kwargs={'pk': self.pk}))
-
-
-
-class EditProposalLineItemView(UpdateView):
-    model = proposal
-    form_class = proposalLineItemFormSet
-    template_name_suffix = '_lineitem_edit'
-
-    def get_success_url(self):
-        return reverse('dashboard:home')

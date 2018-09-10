@@ -9,6 +9,5 @@ urlpatterns = [
     path('add_line_item/<int:pk>', views.addLineItem, name='add-line-item'),
     path('options/<int:pk>', views.lineItemOptions, name='line-item-options'),
     path('final-proposal/<int:pk>/<int:var>', views.finalProposal, name='final-proposal'),
-    path('edit-lineitems/<int:pk>', views.EditProposalLineItemView.as_view(), name='proposal-edit-lineitems'),
     path('edit/<int:pk>/<int:var>', views.editForm, name='edit-form'),
 ]

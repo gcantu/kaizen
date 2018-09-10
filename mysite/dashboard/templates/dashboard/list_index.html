@@ -9,7 +9,7 @@
             <th>Customer</th>
             <th>Agents</th>
             <th>Measured By</th>
-            <th colspan=2></th>
+            <th></th>
           </thead>
           <tbody>
             {% for p in proposals %}
@@ -31,11 +31,6 @@
                     {% else %},&nbsp;
                     {% endif %}
                   {% endfor %}
-                </td>
-                <td>
-                  <button class="btn-theme">
-                    <a class="btn-theme" href="{% url 'proposal:proposal-edit-lineitems' p.id %}">Edit</a>
-                  </button>
                 </td>
                 <td>
                   <button class="btn-theme">
