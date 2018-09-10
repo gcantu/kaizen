@@ -197,12 +197,17 @@ td {
   font-size: 13px;
 }
 
+.btn-theme a {
+  color: #fff;
+}
+
 
 .btn-lg, .btn-group-lg > .btn {
   padding: 3px 10px 3px 10px;
   /* font-size: 13px; */
   line-height: 1.5;
   border-radius: 0;
+  margin-left: 10px;
 }
 
 
