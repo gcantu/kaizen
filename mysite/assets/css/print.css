@@ -1,6 +1,10 @@
 
 @media print {
 
+  .noprint {
+    display: none;
+  }
+
   #main-content, .wrapper {
     margin:0;
   }
@@ -9,7 +13,20 @@
     border: none;
   }
 
+  .card-header {
+    display: none;
+  }
+
   .card-section {
     color: #000;
   }
+
+  th {
+    color: #424a5d;
+  }
+
+  td {
+    border: 0.5px solid #aeb2b7;
+  }
+
 }

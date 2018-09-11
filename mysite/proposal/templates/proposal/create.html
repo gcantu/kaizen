@@ -1,0 +1,23 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Create Proposal{% endblock %}
+
+{% block cardheader %}
+  {{ current }}
+{% endblock %}
+
+{% block cardcontent %}
+<div id="form-block">
+  {% if current == "Customer" %}
+    {% include "proposal/customer_form.html" %}
+  {% elif current == "Proposal" %}
+    {% include "proposal/proposal_form.html" %}
+  {% elif current == "Line Item" %}
+    {% include "proposal/line_item_form.html" %}
+  {% elif current == "Line Item Edit" %}
+    {% include "proposal/line_item_edit_form.html" %}
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,27 +1,26 @@
-<div class = "col-lg-4 col-md-4 col-sm-12 right-align">
-  <p><b>Date:</b> {{ proposal.created_date }}</p>
 
-  <p id="proposalId" value="{{ proposal.id }}">
+<p>
+  <div>
+    <b>Date:</b> {{ proposal.created_date }}
+  </div>
+  <div id="proposalId" value="{{ proposal.id }}">
     <b>Proposal ID:</b> {{ proposal.id }}
-  </p>
+  </div>
+
+  <b>Agents: </b>
+  {% for agent in agents %}
+    {{ agent.first_name }} {{ agent.last_name }}
+    {% if forloop.last %}
+    {% else %},&nbsp;
+    {% endif %}
+  {% endfor %}
 
   <br>
-
-  <p>
-    <b>Agents:</b>
-    <br>
-    {% for agent in agents %}
+  <b>Measured by: </b>
+  {% for agent in measuredby %}
     {{ agent.first_name }} {{ agent.last_name }}
-    <br>
-    {% endfor %}
-    <br>
-
-    <b>Measured by:</b>
-    <br>
-    {% for agent in measuredby %}
-    {{ agent.first_name }} {{ agent.last_name }}
-    <br>
-    {% endfor %}
-    <br>
-  </p>
-</div>
+    {% if forloop.last %}
+    {% else %},&nbsp;
+    {% endif %}
+  {% endfor %}
+</p>

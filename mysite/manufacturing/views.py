@@ -1,22 +1,41 @@
 from django.shortcuts import render
-from proposal.models import line_item, proposal
+from proposal.models import line_item, proposal, customer
+
+
+def asFraction(n):
+    number = int(n)
+    dec = round(n % 1, 4)
+    ratio = dec.as_integer_ratio()
+    frac = '{}/{}'.format(ratio[0], ratio[1])
+    final = '{} {}'.format(number, frac)
+
+    return final
 
 
 class Shutter:
     def __init__(self, **kwargs):
-        if 'width' in kwargs: self._width = kwargs['width']
-        if 'height' in kwargs: self._height = kwargs['height']
+        if 'w' in kwargs: self._w = kwargs['w']
+        if 'h' in kwargs: self._h = kwargs['h']
+        if 'w_f' in kwargs: self._w_f = kwargs['w_f']
+        if 'h_f' in kwargs: self._h_f= kwargs['h_f']
         if 'panels' in kwargs: self._panels = kwargs['panels']
         if 'trim' in kwargs: self._trim = kwargs['trim']
+        if 'prod_type' in kwargs: self._prod_type = kwargs['prod_type']
+        if 'location' in kwargs: self._location = kwargs['location']
+        if 'hinges' in kwargs: self._hinges = kwargs['hinges']
+        if 'hinge_color' in kwargs: self._hinge_color = kwargs['hinge_color']
 
-    def width(self):
-        return self._width
-		# if w: self._width = w
-		# try: return self._width
-		# except AttributeError: return None
+    def w(self): # width whole number
+        return self._w
 
-    def height(self):
-        return self._height
+    def h(self): # height whole number
+        return self._h
+
+    def w_f(self): # width fraction
+        return self._w_f
+
+    def h_f(self): # height fraction
+        return self._h_f
 
     def panels(self):
         return self._panels
@@ -24,19 +43,43 @@ class Shutter:
     def trim(self):
         return self._trim
 
-    def LframeWidth(self):
-        width = self.width()
+    def prod_type(self):
+        return self._prod_type
+
+    def location(self):
+        return self._location
+
+    def hinges(self):
+        return self._hinges
+
+    def hinge_color(self):
+        return self._hinge_color
+
+    def totalWidth(self): # whole number + fraction width
+        width = self.w()
+        width_f = self.w_f()
+        total = width + width_f
+        return(total)
+
+    def totalHeight(self): # whole number + fraction height
+        height = self.h()
+        height_f = self.h_f()
+        total = height + height_f
+        return(total)
+
+    def LframeW(self): # L frame width
+        width = self.totalWidth()
         Lwidth = width - 0.375 # -3/8
-        return round(Lwidth, 3)
+        return round(Lwidth, 4)
 
-    def LframeHeight(self):
-        height = self.height()
+    def LframeH(self): # L frame height
+        height = self.totalHeight()
         Lheight = height - 0.25 # -1/4
-        return round(Lheight, 3)
+        return round(Lheight, 4)
 
-    def rail(self):
+    def r(self): # rail
         panels = self.panels()
-        Lwidth = self.LframeWidth()
+        Lwidth = self.LframeW()
 
         if panels == 1:
             rail = Lwidth - 5.6875 # 5 11/16
@@ -44,25 +87,25 @@ class Shutter:
             rail = ((Lwidth - 1.25) - 8.625) / 2
         else: # 4 panels
             rail = (((Lwidth / 2) - 1.75) - 8.625) / 2 # 1 1/4, 8 5/8
-        return round(rail, 3)
+        return round(rail, 4)
 
-    def louver(self):
-        rail = self.rail()
+    def l(self): # louver
+        rail = self.r()
         louver = rail - 0.0625 # 1/16
-        return round(louver, 3)
+        return round(louver, 4)
 
-    def stile(self):
-        Lheight = self.LframeHeight()
+    def s(self): # stile
+        Lheight = self.LframeH()
         stile = Lheight - 1.75 # 1 3/4
-        return round(stile, 3)
+        return round(stile, 4)
 
-    def tiltRod(self):
-        stile = self.stile()
+    def tr(self):
+        stile = self.s()
         Trod = stile - 9.875 # 9 7/8
-        return round(Trod, 3)
+        return round(Trod, 4)
 
-    def hinges(self):
-        Lheight = self.LframeHeight()
+    def totalHinges(self):
+        Lheight = self.LframeH()
         panels = self.panels()
 
         if Lheight < 60:
@@ -79,13 +122,13 @@ class Shutter:
         return magnets
 
     def screws(self):
-        hinges = self.hinges()
+        hinges = self.totalHinges()
         screws = hinges * 6
         return screws
 
     def louverQty(self):
         panels = self.panels()
-        stile = self.stile()
+        stile = self.s()
 
         if panels == 1:
             qty = (stile - 6) / 3
@@ -114,62 +157,129 @@ class Shutter:
         return stileQty
 
     def LframeMaterial(self):
-        Lwidth = self.LframeWidth()
-        Lheight = self.LframeHeight()
+        Lwidth = self.LframeW()
+        Lheight = self.LframeH()
         material = ((Lwidth + Lheight) / 12) * 2
-        return round(material, 3)
+        return round(material, 4)
 
     def louverMaterial(self):
-        louver = self.louver()
+        louver = self.l()
         louverQty = self.louverQty()
         material = (louver / 12) * louverQty
-        return round(material, 3)
+        return round(material, 4)
 
     def railMaterial(self):
-        rail = self.rail()
+        rail = self.r()
         railQty = self.railQty()
         material = (rail / 12) * railQty
-        return round(material, 3)
+        return round(material, 4)
 
     def stileMaterial(self):
-        stile = self.stile()
+        stile = self.s()
         stileQty = self.stileQty()
         material = (stile / 12) * stileQty
-        return round(material, 3)
+        return round(material, 4)
 
     def tiltRodMaterial(self):
-        Lwidth = self.LframeWidth()
-        Lheight = self.LframeHeight()
+        Lwidth = self.LframeW()
+        Lheight = self.LframeH()
         material = (Lwidth / 12) * (Lheight / 12)
-        return round(material, 3)
+        return round(material, 4)
 
     def panelMaterial(self):
         panels = self.panels()
-        Lheight = self.LframeHeight()
+        Lheight = self.LframeH()
         material = (Lheight / 12) * panels
-        return round(material, 3)
+        return round(material, 4)
 
-    # def __str__(self):
-    #     return f'shutter width: {self.width()} shutter height: {self.height()} total panels {self.panels()}.'
+    # formatted fractions for manufacturing report display
+    def width(self):
+        prev = self.totalWidth()
+        new = asFraction(prev)
+        return new
+
+    def height(self):
+        prev = self.totalHeight()
+        new = asFraction(prev)
+        return new
+
+    def LframeWidth(self):
+        prev = self.LframeW()
+        new = asFraction(prev)
+        return new
+
+    def LframeHeight(self):
+        prev = self.LframeH()
+        new = asFraction(prev)
+        return new
+
+    def rail(self):
+        prev = self.r()
+        new = asFraction(prev)
+        return new
+
+    def louver(self):
+        prev = self.l()
+        new = asFraction(prev)
+        return new
+
+    def stile(self):
+        prev = self.s()
+        new = asFraction(prev)
+        return new
+
+    def tiltRod(self):
+        prev = self.tr()
+        new = asFraction(prev)
+        return new
+
 
 
 def ManufacturingReport(request, pk):
-    proposalInfo = proposal.objects.get(customer_id=pk)
-    p_id = proposalInfo.id
-    line_items = line_item.objects.filter(proposal_id=p_id)
+    prop = proposal.objects.get(id=pk)
+    p_agents = prop.agents.all()
+    p_measuredby = prop.measured_by.all()
+    cust_id = prop.customer_id
+    cust = customer.objects.get(pk=cust_id)
+    line_items = line_item.objects.filter(proposal_id=pk)
 
     results = []
     for item in line_items:
         w = item.width
         h = item.height
+        w_f = item.width_fraction
+        h_f = item.height_fraction
         p = item.panels
         t = item.trim
+        pt = item.shutter_type
+        l = item.location
+        hi = item.hinges
+        hc = item.hinge_color
 
-        shutter_instance = Shutter(width=w, height=h, panels=p, trim=t)
+        shutter_instance = Shutter(w=w, h=h, w_f=w_f, h_f=h_f, panels=p, trim=t, prod_type=pt, location=l, hinges=hi, hinge_color=hc)
         results.append(shutter_instance)
 
-    return render(request, 'manufacturing/report.html', {'results': results})
 
+    lf_m = round(sum(i.LframeMaterial() for i in results))
+    l_m = round(sum(i.louverMaterial() for i in results))
+    r_m = round(sum(i.railMaterial() for i in results))
+    s_m = round(sum(i.stileMaterial() for i in results))
+    tr_m = round(sum(i.tiltRodMaterial() for i in results))
+    p_m = round(sum(i.panelMaterial() for i in results))
+    h_m = round(sum(i.totalHinges() for i in results))
+    m_m = round(sum(i.magnets() for i in results))
+    sc_m = round(sum(i.screws() for i in results))
 
-# def ManufacturingReport(request, pk):
-    # return render(request, 'manufacturing/report.html')
+    materials = {
+        'totalLframeMaterial':lf_m,
+        'totalLouverMaterial':l_m,
+        'totalRailMaterial':r_m,
+        'totalStileMaterial':s_m,
+        'totalTiltRodMaterial':tr_m,
+        'totalPanelMaterial':p_m,
+        'totalHinges':h_m,
+        'totalMagnets':m_m,
+        'totalScrews':sc_m
+    }
+
+    return render(request, 'manufacturing/report.html', {'proposal': prop, 'results': results, 'customer': cust, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': line_items, 'materials': materials})

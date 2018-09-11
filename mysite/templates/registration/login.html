@@ -19,18 +19,20 @@
     {% endif %}
 {% endif %}
 
-<form class="form-signin" method="post" action="{% url 'login' %}">
-{% csrf_token %}
-  <h2 class="form-signin-heading">Please sign in</h2>
-  <div>
-    {% render_field  form.username class="form-control input-username" placeholder=form.username.label %}
-  </div>
-  <div>
-    {% render_field  form.password class="form-control input-password" placeholder=form.password.label %}
-  </div>
-  <div>
-    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"/>
-  </div>
-</form>
+<div style="padding-top:50px;">
+  <form class="form-signin" method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+    <h2>Please sign in</h2>
+    <div>
+      {% render_field  form.username class="form-control input-username" placeholder=form.username.label %}
+    </div>
+    <div>
+      {% render_field  form.password class="form-control input-password" placeholder=form.password.label %}
+    </div>
+    <div>
+      <input class="btn btn-lg btn-block btn-theme" type="submit" value="Sign in"/>
+    </div>
+  </form>
+</div>
 
 {% endblock %}

@@ -1,119 +1,74 @@
-/*---LEFT BAR ACCORDION----*/
 $(function() {
-    $('#nav-accordion').dcAccordion({
-        eventType: 'click',
-        autoClose: true,
-        saveState: true,
-        disableLink: true,
-        speed: 'slow',
-        showCount: false,
-        autoExpand: true,
-//        cookie: 'dcjq-accordion-1',
-        classExpand: 'dcjq-current-parent'
-    });
+
+// EVENTS
+$('#id_finish').on('change', function() {
+  var selectedItem = $(this).val();
+  var option = "Stain"
+  var fieldId = "#stain-field"
+
+  showField(selectedItem, option, fieldId);
 });
 
-var Script = function () {
+
+$('#id_mount').on('change', function() {
+  var selectedItem = $(this).val();
+  var option = "Ext"
+  var fieldId = ".trim-field"
+
+  showField(selectedItem, option, fieldId);
+});
 
 
-//    sidebar dropdown menu auto scrolling
+$('#id_shutter_type').on('change', function() { // hide/unhide height-center field
+  var selectedItem = $(this).val();
 
-    // jQuery('#sidebar .sub-menu > a').click(function () {
-    //     var o = ($(this).offset());
-    //     diff = 250 - o.top;
-    //     if(diff>0)
-    //         $("#sidebar").scrollTo("-="+Math.abs(diff),500);
-    //     else
-    //         $("#sidebar").scrollTo("+="+Math.abs(diff),500);
-    // });
+  if (selectedItem > 2 && selectedItem < 6) {
+    val = 10
+  } else {
+    val = 5
+  }
 
+  var option = 10
+  var fieldId = "#height-center-field"
 
-
-//    sidebar toggle
-
-    $(function() {
-        function responsiveView() {
-            var wSize = $(window).width();
-            if (wSize <= 768) {
-                $('aside').addClass('sidebar-closed');
-                $('#sidebar > ul').hide();
-            }
-
-            if (wSize > 768) {
-                $('aside').removeClass('sidebar-closed');
-                $('#sidebar > ul').show();
-            }
-        }
-        $(window).on('load', responsiveView);
-        $(window).on('resize', responsiveView);
-    });
-
-    $('.fa-bars').click(function () {
-        if ($('#sidebar > ul').is(":visible") === true) {
-            $('#main-content').css({
-                'margin-left': '0px'
-            });
-            $('#sidebar').css({
-                'margin-left': '-210px'
-            });
-            $('#sidebar > ul').hide();
-            $("#container").addClass("sidebar-closed");
-        } else {
-            $('#main-content').css({
-                'margin-left': '210px'
-            });
-            $('#sidebar > ul').show();
-            $('#sidebar').css({
-                'margin-left': '0'
-            });
-            $("#container").removeClass("sidebar-closed");
-        }
-    });
-
-// custom scrollbar
-    // $("#sidebar").niceScroll({styler:"fb",cursorcolor:"#4ECDC4", cursorwidth: '3', cursorborderradius: '10px', background: '#404040', spacebarenabled:false, cursorborder: ''});
-    //
-    // $("html").niceScroll({styler:"fb",cursorcolor:"#4ECDC4", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
-
-// widget tools
-
-    // jQuery('.panel .tools .fa-chevron-down').click(function () {
-    //     var el = jQuery(this).parents(".panel").children(".panel-body");
-    //     if (jQuery(this).hasClass("fa-chevron-down")) {
-    //         jQuery(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
-    //         el.slideUp(200);
-    //     } else {
-    //         jQuery(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-    //         el.slideDown(200);
-    //     }
-    // });
-    //
-    // jQuery('.panel .tools .fa-times').click(function () {
-    //     jQuery(this).parents(".panel").parent().remove();
-    // });
+  showField(val, option, fieldId);
+});
 
 
-//    tool tips
+$('#id_shutter_type').on('change', function() { // hide/unhide height-left and height-right fields
+  var selectedItem = $(this).val();
 
-    // $('.tooltips').tooltip();
+  if (selectedItem > 3 && selectedItem < 6) {
+    val = 10
+  } else {
+    val = 5
+  }
 
-//    popovers
+  var option = 10
+  var fieldId = "#height-left-right-field"
 
-    // $('.popovers').popover();
+  showField(val, option, fieldId);
+});
+
+
+// FUNCTIONS
+function showField(i, o, f){ // function to render hidden fields in line item form
+  var i = i;
+  var o = o;
+  var f = f;
+
+  if (i == o) {
+    $(f).removeClass("hidden");
+  } else {
+    $(f).addClass("hidden");
+  }
+};
+
+
+// make notes textarea smaller
+document.getElementById("id_notes").rows = "5";
 
 
 
-// custom bar chart
 
-    // if ($(".custom-bar-chart")) {
-    //     $(".bar").each(function () {
-    //         var i = $(this).find(".value").html();
-    //         $(this).find(".value").html("");
-    //         $(this).find(".value").animate({
-    //             height: i
-    //         }, 2000)
-    //     })
-    // }
-
-
-}();
+}); // Document is ready

@@ -57,40 +57,28 @@ class product(models.Model):
         db_table = 'product'
 
 
-class product_style(models.Model):
-    style = models.CharField(max_length=100, unique=True)
+class shutter_type(models.Model):
+    shutter_type_name = models.CharField(max_length=100, unique=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return self.style
+        return self.shutter_type_name
 
     def get_absolute_url(self):
-        return reverse('style-detail', kwargs={'pk': self.pk})
+        return reverse('shutter-type-detail', kwargs={'pk': self.pk})
 
     class Meta:
-        db_table = 'product_style'
-
-
-class product_type(models.Model):
-    product_type = models.CharField(max_length=100, unique=True)
-    product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
-
-    def __str__(self):
-        return self.product_type
-
-    def get_absolute_url(self):
-        return reverse('type-detail', kwargs={'pk': self.pk})
-
-    class Meta:
-        db_table = 'product_type'
+        db_table = 'shutter_type'
 
 
 class proposal(models.Model):
+    STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
     created_date = models.DateField(default=date.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
     notes = models.TextField(blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
 
     # def __str__(self):
     #     return f'Proposal ID: {self.id}.'
@@ -103,7 +91,6 @@ class proposal(models.Model):
 
 
 class line_item(models.Model):
-    TEXTURE_CHOICES = [('Smooth', 'Eco Wood (Smooth)'), ('Textured', 'Facade (Textured)')]
     FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
     STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
     MOUNT_CHOICES = [('Int', 'Interior'), ('Ext', 'Exterior')]
@@ -113,12 +100,11 @@ class line_item(models.Model):
     HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
     HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
     TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
+    FRACTION_CHOICES = [(0, ''), (.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
 
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
-    style = models.ForeignKey(product_style, models.SET_NULL, blank=True, null=True)
-    product_type = models.ForeignKey(product_type, models.SET_NULL, blank=True, null=True)
-    texture = models.CharField(max_length=10, choices=TEXTURE_CHOICES, blank=True, null=True)
+    shutter_type = models.ForeignKey(shutter_type, models.SET_NULL, blank=True, null=True)
     finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
     stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
     color = models.CharField(max_length=100, blank=True)
@@ -138,11 +124,14 @@ class line_item(models.Model):
     height_left = models.FloatField(blank=True, null=True)
     height_right = models.FloatField(blank=True, null=True)
     height_center = models.FloatField(blank=True, null=True)
+    width_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_left_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_right_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     quantity = models.IntegerField(blank=True, null=True)
-    approved = models.BooleanField(default=False)
-
-    # def __str__(self):
-    #     return f'Line item ID: {self.id}.'
+    price = models.FloatField(blank=True, null=True)
+    approved = models.BooleanField(default=True)
 
     def get_absolute_url(self):
         return reverse('line-item-detail', kwargs={'pk': self.pk})
