@@ -38,9 +38,17 @@
                 </td>
                 <td>{{ p.status }}</td>
                 <td>
-                  <button class="btn-theme">
-                    <a class="btn-theme" href="{% url 'proposal:final-proposal' p.id 2 %}">View</a>
-                  </button>
+                  {% if type == 'home' %}
+                    <button class="btn-theme">
+                      <a class="btn-theme" href="{% url 'proposal:final-proposal' p.id 2 %}">View</a>
+                    </button>
+                  {% elif type == 'report' %}
+                    <button class="btn-theme">
+                      <a class="btn-theme" href="{% url 'manufacturing:report' p.id %}">Create</a>
+                    </button>
+                  {% endif %}
+
+
                 </td>
               </tr>
             {% endfor %}
