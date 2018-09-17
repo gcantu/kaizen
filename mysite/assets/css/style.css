@@ -281,6 +281,23 @@ label {
   margin-top: 10px;
 }
 
+/* footer
+--------------------------------------------------------------*/
+
+#footer {
+  background-color: #424a5d;
+  color: #888888;
+  padding: 20px 0 20px 0;
+  position: absolute;
+  bottom:0;
+  width:100%;
+}
+
+.footer-text {
+  padding: 0 15px;
+  text-align: right;
+}
+
 /* other */
 .mr {
   margin-right: 10px;
