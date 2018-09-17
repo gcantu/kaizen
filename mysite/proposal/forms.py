@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import customer, proposal, line_item
+from django.forms.models import inlineformset_factory
 
 
 # Customer form
@@ -20,9 +21,6 @@ class lineItemForm(ModelForm):
         model = line_item
         fields = '__all__'
 
-
-
-from django.forms.models import inlineformset_factory
 
 proposalLineItemFormSet = inlineformset_factory(
     proposal,
