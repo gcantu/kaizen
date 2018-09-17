@@ -6,32 +6,18 @@
 
 {% block logolink %}{% url 'dashboard:home' %}{% endblock %}
 
-{% block sidebar %}
-<aside class="d-print-none">
-  <div id="sidebar">
-    <ul class="sidebar-menu">
-      <li class="sub-menu">
-        <a href="{% url 'dashboard:home' %}">
-          <i class="fas fa-cogs active"></i>
-          <span>Proposals</span>
-        </a>
-      </li>
-      <li class="sub-menu" id="test">
-        <a href="{% url 'proposal:add-customer' %}">
-          <i class="fas fa-file-signature"></i>
-          <span>Create New Proposal</span>
-        </a>
-      </li>
-      <li class="sub-menu">
-        <a href="{% url 'dashboard:home' %}">
-          <i class="fas fa-cogs"></i>
-          <span>Create Manufacturing Report</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</aside>
-{% endblock %} <!-- END sidebar -->
+{% block navbar %}
+<div class="row main-nav justify-content-end noprint">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'dashboard:home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'proposal:add-customer' %}">New Proposal</a>
+    </li>
+  </ul>
+</div>
+{% endblock %} <!-- END navigation bar -->
 
 
 {% block content %}

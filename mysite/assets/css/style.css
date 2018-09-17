@@ -95,6 +95,26 @@ a.logout {
 }
 
 
+
+/* navs
+--------------------------------------------------------------*/
+
+.main-nav {
+  background-color: #424a5d;
+}
+
+.main-nav a {
+  color: #f2f2f2;
+  font-weight: 400;
+  letter-spacing: .5px;
+}
+
+.main-nav ul {
+  padding: 0 10px;
+}
+
+
+
 /* clearings
 --------------------------------------------------------------*/
 .clearfix {
