@@ -22,8 +22,6 @@ class Shutter:
         if 'trim' in kwargs: self._trim = kwargs['trim']
         if 'prod_type' in kwargs: self._prod_type = kwargs['prod_type']
         if 'location' in kwargs: self._location = kwargs['location']
-        if 'hinges' in kwargs: self._hinges = kwargs['hinges']
-        if 'hinge_color' in kwargs: self._hinge_color = kwargs['hinge_color']
 
     def w(self): # width whole number
         return self._w
@@ -48,12 +46,6 @@ class Shutter:
 
     def location(self):
         return self._location
-
-    def hinges(self):
-        return self._hinges
-
-    def hinge_color(self):
-        return self._hinge_color
 
     def totalWidth(self): # whole number + fraction width
         width = self.w()
@@ -253,10 +245,8 @@ def ManufacturingReport(request, pk):
         t = item.trim
         pt = item.shutter_type
         l = item.location
-        hi = item.hinges
-        hc = item.hinge_color
 
-        shutter_instance = Shutter(w=w, h=h, w_f=w_f, h_f=h_f, panels=p, trim=t, prod_type=pt, location=l, hinges=hi, hinge_color=hc)
+        shutter_instance = Shutter(w=w, h=h, w_f=w_f, h_f=h_f, panels=p, trim=t, prod_type=pt, location=l)
         results.append(shutter_instance)
 
 

@@ -72,16 +72,26 @@ class shutter_type(models.Model):
 
 
 class proposal(models.Model):
+    FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
+    STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
+    LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
+    HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
+    HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
+    TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
     created_date = models.DateField(default=date.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
+    finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
+    stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
+    color = models.CharField(max_length=100, blank=True)
+    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
+    hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
+    hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
+    tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
     notes = models.TextField(blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
-
-    # def __str__(self):
-    #     return f'Proposal ID: {self.id}.'
 
     def get_absolute_url(self):
         return reverse('proposal-detail', kwargs={'pk': self.pk})
@@ -91,32 +101,19 @@ class proposal(models.Model):
 
 
 class line_item(models.Model):
-    FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
-    STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
     MOUNT_CHOICES = [('Int', 'Interior'), ('Ext', 'Exterior')]
     TRIM_CHOICES = [(0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4')]
     TRIM_STYLE_CHOICES = [('Deco', 'Decorative'), ('Square', 'Square (Smooth)'), ('Round', 'Round (Smooth)'), ('Z', 'Z (Primed)'), ('Other', 'Other')]
-    LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
-    HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
-    HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
-    TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
     FRACTION_CHOICES = [(0, ''), (.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
 
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
     shutter_type = models.ForeignKey(shutter_type, models.SET_NULL, blank=True, null=True)
-    finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
-    stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
-    color = models.CharField(max_length=100, blank=True)
     location = models.CharField(max_length=100, blank=True)
     mount = models.CharField(max_length=3, choices=MOUNT_CHOICES, blank=True)
     trim = models.IntegerField(choices=TRIM_CHOICES, blank=True, null=True)
     trim_style = models.CharField(max_length=10, choices=TRIM_STYLE_CHOICES, blank=True)
-    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
-    hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
-    hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
     panels = models.IntegerField(blank=True, null=True)
-    tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
     width = models.IntegerField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
     height_left = models.IntegerField(blank=True, null=True)
