@@ -236,6 +236,12 @@ span {
     width: 100%;
 }
 
+.report-section {
+  border: 0.5px solid #aeb2b7;
+  margin: 15px 0;
+  padding: 0 8px 0 10px;
+}
+
 /* cards */
 .card-header {
   background-color: #424a5d;
@@ -305,6 +311,10 @@ td {
 
 .m-table td {
   padding: 3px 5px 3px 5px;
+}
+
+.table-total-row {
+  border-top: 1px solid #aeb2b7;
 }
 
 /* buttons */
@@ -436,6 +446,10 @@ label {
 
 .mt {
 	margin-top: 10px;
+}
+
+.pl {
+	padding-left: 10px;
 }
 
 .textcenter {

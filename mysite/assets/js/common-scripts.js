@@ -9,6 +9,15 @@ $('#id_finish').on('change', function() {
   showField(selectedItem, option, fieldId);
 });
 
+$('#main-edit-button').on('click', function() { // add/remove tax from proposal
+   $(".edit-button").removeClass("hidden");
+});
+
+
+$('#tax-button').on('click', function() { // add/remove tax from proposal
+   $("table[id=total-table]").toggle();
+});
+
 
 $('#id_mount').on('change', function() {
   var selectedItem = $(this).val();
