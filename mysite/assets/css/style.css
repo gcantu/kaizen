@@ -11,20 +11,14 @@ body {
     font-size:13px;
 }
 
-/* header */
-.header, .footer {
-    min-height: 40px;
-    padding: 0 15px;
+/* header
+--------------------------------------------------------------*/
+header {
+    display: block;
 }
 
-.header {
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 1002;
-    background: #F6C042;
-    border-bottom: 1px solid #F6C042;
-    color: #fff;
+.header-wrap {
+	padding-top: 15px;
 }
 
 a.logo {
@@ -54,6 +48,36 @@ a.logout {
   max-height: 60px;
   height: auto;
   width: auto;
+}
+
+#header-text{
+	float: left;
+  padding-right: 30px;
+}
+
+#header-text p {
+	margin-bottom: 0;
+}
+
+#header-title {
+	margin-bottom: 0;
+  letter-spacing: 1px;
+}
+
+#header-title a {
+	color: #666666;
+	font-size: 34px;
+}
+
+#header-title a:hover {
+	color: #80abc8;
+}
+
+
+/* clearings
+--------------------------------------------------------------*/
+.clearfix {
+	display: block;
 }
 
 
@@ -106,10 +130,11 @@ span {
 }
 
 
-/* content */
-#container {
-    width: 100%;
-    height: 100%;
+/* Content
+--------------------------------------------------------------*/
+.container {
+    max-width: 100%;
+    background-color: #fff;
 }
 
 #main-content {
