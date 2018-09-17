@@ -5,11 +5,45 @@
 {% block title %}Home{% endblock %}
 
 {% block header %}
-  {% include "dashboard/header.html" %}
+<header class="header d-print-none">
+  <a href="home" class="logo">
+    <div id="header-logo">
+      <img src="{% static 'img/shutterize_logo.png' %}" alt="Shutterize Software">
+    </div>
+  </a>
+  <div>
+    <ul class="nav fa-pull-right">
+      <li><a class="logout" href="/">Logout</a></li>
+    </ul>
+  </div>
+</header>
 {% endblock %} <!-- END header -->
 
 {% block sidebar %}
-  {% include "dashboard/sidebar.html" %}
+<aside class="d-print-none">
+  <div id="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sub-menu">
+        <a href="{% url 'dashboard:home' %}">
+          <i class="fas fa-cogs active"></i>
+          <span>Proposals</span>
+        </a>
+      </li>
+      <li class="sub-menu" id="test">
+        <a href="{% url 'proposal:add-customer' %}">
+          <i class="fas fa-file-signature"></i>
+          <span>Create New Proposal</span>
+        </a>
+      </li>
+      <li class="sub-menu">
+        <a href="{% url 'dashboard:manufacturing-list' %}">
+          <i class="fas fa-cogs"></i>
+          <span>Create Manufacturing Report</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
 {% endblock %} <!-- END sidebar -->
 
 
