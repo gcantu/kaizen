@@ -2,6 +2,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Qty</th>
       <th>Product</th>
       <th>Type</th>
@@ -18,6 +19,7 @@
   {% for item in lineitem %}
   <tbody>
     <tr>
+      <td>{{ forloop.counter }}</td>
       <td>{{ item.quantity }}</td>
       <td>{{ item.product }}</td>
       <td>{{ item.shutter_type }}</td>
