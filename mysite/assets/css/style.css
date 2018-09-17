@@ -183,6 +183,10 @@ td {
   padding: 3px 5px 3px 5px;
 }
 
+#line-item-detail-table {
+  margin-bottom: 10px;
+}
+
 /* buttons */
 .btn-theme {
   color: #fff;
