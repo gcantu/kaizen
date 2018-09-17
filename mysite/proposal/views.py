@@ -73,8 +73,8 @@ def finalProposal(request, pk, var):
     cust = customer.objects.get(pk=cust_id)
     lineitem = line_item.objects.filter(proposal_id=pk)
 
-    li_sum = lineitem.aggregate(Sum('price'))
-    total = li_sum['price__sum']
+    li_sum = lineitem.aggregate(Sum('price_per_sq_ft'))
+    total = li_sum['price_per_sq_ft__sum']
 
     form = proposalForm(request.POST or None, instance=p)
 
