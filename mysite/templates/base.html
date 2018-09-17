@@ -10,11 +10,9 @@
   </head>
 
   <body>
-    {% if not is_popup %}
-      {% block header %}
-        {{ header_content }}
-      {% endblock %}
-    {% endif %} <!-- END header -->
+    {% block header %}
+      {{ header_content }}
+    {% endblock %} <!-- END header -->
 
     {% block sidebar %}
       {{ sidebar_content }}
