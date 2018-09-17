@@ -9,7 +9,6 @@ from .forms import proposalLineItemFormSet
 
 def addCustomer(request):
     f = customerForm()
-    c = 'Customer'
 
     if request.method == 'POST':
         form = customerForm(request.POST)
@@ -19,13 +18,12 @@ def addCustomer(request):
             cust_id = form.instance.id
             return redirect(reverse('proposal:add-proposal', kwargs={'pk': cust_id}))
 
-    return render(request, 'proposal/create.html', {'form': f, 'current': c})
+    return render(request, 'proposal/form_customer.html', {'form': f})
 
 
 
 def addProposal(request, pk):
     f = proposalForm()
-    c = 'Proposal'
 
     if request.method == 'POST':
         form = proposalForm(request.POST)
@@ -38,14 +36,13 @@ def addProposal(request, pk):
             p_id = form.instance.id
             return redirect(reverse('proposal:add-line-item', kwargs={'pk': p_id}))
 
-    return render(request, 'proposal/create.html', {'form': f, 'current': c})
+    return render(request, 'proposal/form_proposal.html', {'form': f})
 
 
 
 def addLineItem(request, pk):
     p = proposal.objects.get(pk=pk)
     f = lineItemForm()
-    c = 'Line Item'
 
     if request.method == 'POST':
         form = lineItemForm(request.POST)
@@ -56,12 +53,47 @@ def addLineItem(request, pk):
             new_li.save()
             return redirect(reverse('proposal:line-item-options', kwargs={'pk': pk}))
 
-    return render(request, 'proposal/create.html', {'form': f, 'current': c, 'proposal': p})
+    return render(request, 'proposal/form_line_item.html', {'form': f, 'proposal': p})
 
 
 
 def lineItemOptions(request, pk):
     return render(request, 'proposal/line_item_options.html', {'p_id': pk})
+
+
+# EDIT FORMS ------------------------------------------------------------------
+def editCustomer(request, pk):
+    p = proposal.objects.get(customer_id=pk)
+    data = customer.objects.get(pk=pk)
+    form = customerForm(request.POST or None, instance=data)
+
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('proposal:final-proposal', kwargs={'pk': p.id}))
+
+    return render(request, 'proposal/form_customer.html', {'form': form})
+
+
+def editProposal(request, pk):
+    data = proposal.objects.get(pk=pk)
+    form = proposalForm(request.POST or None, instance=data)
+
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk}))
+
+    return render(request, 'proposal/form_proposal.html', {'form': form})
+
+
+def editLineItem(request, pk):
+    data = proposal.objects.get(pk=pk)
+    form = proposalLineItemFormSet(request.POST or None, instance=data)
+
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk}))
+
+    return render(request, 'proposal/form_line_item_edit.html', {'form': form})
 
 
 
@@ -80,28 +112,7 @@ def finalProposal(request, pk):
 
 
 
-def editForm(request, pk, var):
-    p = proposal.objects.get(pk=pk)
-    cust_id = p.customer_id
 
-    if (var == 1):
-        data = customer.objects.get(pk=cust_id)
-        form = customerForm(request.POST or None, instance=data)
-        c = 'Customer'
-    elif (var == 2):
-        data = proposal.objects.get(pk=pk)
-        form = proposalForm(request.POST or None, instance=data)
-        c = 'Proposal'
-    elif (var == 3):
-          data = proposal.objects.get(pk=pk)
-          form = proposalLineItemFormSet(request.POST or None, instance=data)
-          c = 'Line Item Edit'
-
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk, 'var': 2}))
-
-    return render(request, 'proposal/create.html', {'form': form, 'current': c})
 
 
 def approveProposal(request,pk):

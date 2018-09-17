@@ -116,6 +116,24 @@ a.logout {
 	border: 1px solid #ced4da;
 }
 
+.form-block {
+  padding: 10px 10px 10px 10px;
+  background-color: #ccdde9;
+  color: #666666;
+	margin: auto;
+	max-width: 500px;
+}
+
+.form-edit-block {
+  padding: 10px 10px 10px 10px;
+  background-color: #ccdde9;
+  color: #666666;
+	margin: auto;
+	max-width: 1250px;
+}
+
+
+
 
 /* navs
 --------------------------------------------------------------*/
@@ -345,6 +363,12 @@ ul li {
 
 
 /* forms */
+.form {
+  padding: 10px 10px 38px 10px;
+  background-color: #ffffff;
+  color: #666666;
+}
+
 input[type=number] {
   margin-top: .25rem;
 }
@@ -381,6 +405,11 @@ label {
 
 .notes-btn {
   margin-top: 10px;
+}
+
+#proposal-form .form-control.big-field {
+  height: 100px;
+  border-radius: 0;
 }
 
 /* footer

@@ -1,6 +1,14 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
 {% load widget_tweaks %}
 
-<form id="customer-form" method="post">
+{% block title %}New Proposal{% endblock %}
+
+{% block contentclass %}form-block{% endblock %}
+
+{% block content %}
+<p>Customer Entry Form</p>
+<form id="customer-form" method="post" class="form">
   {% csrf_token %}
 
   <div class="form-row">
@@ -40,3 +48,4 @@
 
   <input class="btn-theme right-float" type="submit" value="OK"/>
 </form>
+{% endblock %}

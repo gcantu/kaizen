@@ -35,7 +35,7 @@
     <h3>Prepared For:</h3>
     {% include "proposal/detail_customer.html" %}
     <button class="btn-theme02 noprint">
-      <a href="{% url 'proposal:edit-form' proposal.id 1 %}">Edit</a>
+      <a href="{% url 'proposal:edit-customer' customer.id %}">Edit</a>
     </button>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-12">
@@ -43,7 +43,7 @@
   <div class="col-lg-6 col-md-6 col-sm-12 right-align">
     {% include "proposal/detail_proposal.html" %}
     <button class="btn-theme02 noprint">
-      <a  href="{% url 'proposal:edit-form' proposal.id 2 %}">Edit</a>
+      <a  href="{% url 'proposal:edit-proposal' proposal.id %}">Edit</a>
     </button>
   </div>
 </div>
@@ -63,7 +63,7 @@
       {{ proposal.notes }}
     </div>
     <button class="btn-theme02 noprint right-float">
-      <a  href="{% url 'proposal:edit-form' proposal.id 2 %}">Edit</a>
+      <a  href="{% url 'proposal:edit-proposal' proposal.id %}">Edit</a>
     </button>
   </div>
   <div class="col-lg-4 col-md-4 col-sm-12">
@@ -71,7 +71,7 @@
       <h5>Grand Total: ${{ total }}</h5>
     </div>
     <button class="btn-theme02 noprint right-float">
-      <a  href="{% url 'proposal:edit-form' proposal.id 3 %}">Edit</a>
+      <a  href="{% url 'proposal:edit-line-item' proposal.id %}">Edit</a>
     </button>
   </div>
 </div>
