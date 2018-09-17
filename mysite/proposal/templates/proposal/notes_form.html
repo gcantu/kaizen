@@ -1,0 +1,16 @@
+{% load widget_tweaks %}
+
+<form action="{% url 'proposal:final-proposal' proposal.id 2 %}" method="post">
+  {% csrf_token %}
+  {{ form.customer.as_hidden }}
+  {{ form.created_date.as_hidden }}
+  {{ form.agents.as_hidden }}
+  {{ form.measured_by.as_hidden }}
+  {{ form.pending.as_hidden }}
+  <div class="form-row">
+    <div class="col-11">
+      {% render_field  form.notes class="form-control" %}
+    </div>
+  </div>
+  <input class="btn-theme right-float notes-btn" type="submit" value="OK"/>
+</form>

@@ -1,54 +1,124 @@
-<table>
-<thead>
-      <th>Width</th>
-      <th>Height</th>
-      <th>Panels</th>
-      <th>Trim</th>
-      <th>L-frame Width</th>
-      <th>L-frame Height</th>
-      <th>Rail</th>
-      <th>Louver</th>
-      <th>Stile</th>
-      <th>Tilt Rod</th>
-      <th>Hinges</th>
-      <th>Magnets</th>
-      <th>Screws</th>
-      <th>Louver Qty</th>
-      <th>Rail Qty</th>
-      <th>Stile Qty</th>
-      <th>L-frame Material</th>
-      <th>Louver Material</th>
-      <th>Rail Material</th>
-      <th>Stile Material</th>
-      <th>Tilt Rod Material</th>
-      <th>Panel Material</th>
-</thead>
-<tbody>
-  {% for item in results %}
-    <tr>
-      <td>{{ item.width }}</td>
-      <td>{{ item.height }}</td>
-      <td>{{ item.panels }}</td>
-      <td>{{ item.trim }}</td>
-      <td>{{ item.LframeWidth }}</td>
-      <td>{{ item.LframeHeight }}</td>
-      <td>{{ item.rail }}</td>
-      <td>{{ item.louver }}</td>
-      <td>{{ item.stile }}</td>
-      <td>{{ item.tiltRod }}</td>
-      <td>{{ item.hinges }}</td>
-      <td>{{ item.magnets }}</td>
-      <td>{{ item.screws }}</td>
-      <td>{{ item.louverQty }}</td>
-      <td>{{ item.railQty }}</td>
-      <td>{{ item.stileQty }}</td>
-      <td>{{ item.LframeMaterial }}</td>
-      <td>{{ item.louverMaterial }}</td>
-      <td>{{ item.railMaterial }}</td>
-      <td>{{ item.stileMaterial }}</td>
-      <td>{{ item.tiltRodMaterial }}</td>
-      <td>{{ item.panelMaterial }}</td>
-    </tr>
-  {% endfor %}
-</tbody>
-</table>
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Create Proposal{% endblock %}
+
+{% block cardheader %}
+  Create Proposal
+{% endblock %}
+
+{% block letterhead %}
+  <div class="row">
+    <div class = "col-lg-12 col-md-12 col-sm-12 right-align">
+      <h1>Manufacturing Report</h1>
+    </div>
+  </div>
+  <hr/>
+  {% include "dashboard/letterhead.html" %}
+{% endblock %}
+
+{% block cardcontent %}
+  <br>
+  <br>
+  <div class="row mt">
+    <div class = "col-lg-6 col-md-6 col-sm-12">
+      <h3>Prepared For:</h3>
+      {% include "proposal/customer_info.html" %}
+    </div>
+
+    <div class = "col-lg-6 col-md-6 col-sm-12 right-align">
+      {% include "proposal/proposal_info.html" %}
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row mt">
+    <div class = "col-lg-12 col-md-12 col-sm-12">
+      <table id="manufacturing-table" class="textcenter">
+        <thead>
+          <tr>
+            <th colspan=3></th>
+            <th colspan=2>L-Frame</th>
+            <th colspan=2>Louver</th>
+            <th colspan=2>Rail</th>
+            <th colspan=2>Stile</th>
+            <th colspan=2></th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Product Type</th>
+            <th>Location</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Qty</th>
+            <th>Measure</th>
+            <th>Qty</th>
+            <th>Measure</th>
+            <th>Qty</th>
+            <th>Measure</th>
+            <th>Trim</th>
+            <th>Panels</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in results %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.prod_type }}</td>
+              <td>{{ item.location }}</td>
+              <td>{{ item.LframeWidth }}</td>
+              <td>{{ item.LframeHeight }}</td>
+              <td>{{ item.louverQty }}</td>
+              <td>{{ item.louver }}</td>
+              <td>{{ item.railQty }}</td>
+              <td>{{ item.rail }}</td>
+              <td>{{ item.stileQty }}</td>
+              <td>{{ item.stile }}</td>
+              <td>{{ item.trim }}</td>
+              <td>{{ item.panels }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row mt">
+    <div class = "col-lg-8 col-md-8 col-sm-12">
+      <table id="manufacturing-table" class="textcenter">
+        <thead>
+          <th colspan=9>Materials needed:</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>L frame</td>
+            <td>Louver</td>
+            <td>Rail</td>
+            <td>Stile</td>
+            <td>Tilt Rod</td>
+            <td>Panels</td>
+            <td>Hinges</td>
+            <td>Magnets</td>
+            <td>Screws</td>
+          </tr>
+          <tr>
+            <td>{{ materials.totalLframeMaterial }} ft.</td>
+            <td>{{ materials.totalLouverMaterial }} ft.</td>
+            <td>{{ materials.totalRailMaterial }} ft.</td>
+            <td>{{ materials.totalStileMaterial }} ft.</td>
+            <td>{{ materials.totalTiltRodMaterial }} ft.</td>
+            <td>{{ materials.totalPanelMaterial }} ft.</td>
+            <td>{{ materials.totalHinges }}</td>
+            <td>{{ materials.totalMagnets }}</td>
+            <td>{{ materials.totalScrews }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

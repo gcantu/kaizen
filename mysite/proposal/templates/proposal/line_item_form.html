@@ -1,157 +1,116 @@
-{% extends "dashboard/create_proposal.html" %}
-{% load static %}
 {% load widget_tweaks %}
 
-
-{% block info %}
-  <div class="row mt">
-    {% include "proposal/customer_info.html" %}
-
-    {% include "proposal/proposal_info.html" %}
-  </div>
-{% endblock %}
-
-
-{% block form %}
-  <form method="post">
-    {% csrf_token %}
-
-    <div class="row mt">
-      <div class = "col-lg-6 col-md-6 col-sm-12">
-        <div class="card-section line-item-card">
-            <div class="form-group">
-              {{ form.product.label_tag }}
-              {% render_field  form.product %}
-            </div>
-
-            <div class="form-group">
-              {{ form.style.label_tag }}
-              {% render_field  form.style %}
-            </div>
-
-            <div class="form-group">
-              {{ form.separate_parts.label_tag }}
-              {% render_field  form.separate_parts %}
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                {{ form.finish.label_tag }}
-                {% render_field  form.finish %}
-              </div>
-              <div class="form-group col-md-4">
-                {{ form.stain.label_tag }}
-                {% render_field  form.stain %}
-              </div>
-            </div>
-
-            <div class="form-group">
-              {{ form.color.label_tag }}
-              {% render_field  form.color %}
-            </div>
-
-            <div class="form-group">
-              {{ form.location.label_tag }}
-              {% render_field  form.location %}
-            </div>
+<form id="line-item-form" method="post">
+  {% csrf_token %}
+  <div class="row">
+    <div class = "col-lg-6 col-md-6 col-sm-12">
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col-4">
+            {{ form.product.label_tag }}
+            {% render_field  form.product class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div class="col">
+            {{ form.shutter_type.label_tag }}
+            {% render_field  form.shutter_type class="custom-select my-1 mr-sm-2" %}
+          </div>
         </div>
 
-        <div class="card-section line-item-card">
-          <div class="form-group">
-            {{ form.hinges.label_tag }}
-            {% render_field  form.hinges %}
-          </div>
-
-          <div class="form-group">
-            {{ form.hinge_color.label_tag }}
-            {% render_field  form.hinge_color %}
+        <div class="form-row">
+          <div class="col">
+            {{ form.location.label_tag }}
+            {% render_field  form.location class="form-control" %}
           </div>
         </div>
       </div>
 
-      <div class = "col-lg-6 col-md-6 col-sm-12">
-        <div class="card-section line-item-card">
-          <div class="form-group">
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col-4">
             {{ form.mount.label_tag }}
-            {% render_field  form.mount %}
+            {% render_field  form.mount class="custom-select my-1 mr-sm-2" %}
           </div>
-
-          <div class="form-group">
+          <div id="trim-field" class="col-3 hidden trim-field">
             {{ form.trim.label_tag }}
-            {% render_field  form.trim %}
+            {% render_field  form.trim class="custom-select my-1 mr-sm-2" %}
           </div>
-
-          <div class="form-group">
+          <div id="trim-field" class="col-5 hidden trim-field">
             {{ form.trim_style.label_tag }}
-            {% render_field  form.trim_style %}
+            {% render_field  form.trim_style class="custom-select my-1 mr-sm-2" %}
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="card-section line-item-card">
-          <div class="form-group">
-            {{ form.louver.label_tag }}
-            {% render_field  form.louver %}
-          </div>
-
-          <div class="form-group">
+    <div class = "col-lg-6 col-md-6 col-sm-12">
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col">
             {{ form.panels.label_tag }}
-            {% render_field  form.panels %}
+            {% render_field  form.panels class="form-control" %}
           </div>
         </div>
+      </div>
 
-        <div class="card-section line-item-card">
-          <div class="form-group">
-            {{ form.t_post.label_tag }}
-            {% render_field  form.t_post %}
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col-3">
+            {{ form.width.label_tag }}
+            {% render_field  form.width class="form-control" %}
           </div>
+          <div id="fraction" class="col-3">
+            {% render_field  form.width_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div class="col-3">
+            {{ form.height.label_tag }}
+            {% render_field  form.height class="form-control" %}
+          </div>
+          <div id="fraction" class="col-3">
+            {% render_field  form.height_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+        </div>
+        <div id="height-center-field" class="form-row hidden">
+          <div class="col-6">
+          </div>
+          <div class="col-3">
+            {{ form.height_center.label_tag }}
+            {% render_field  form.height_center class="form-control" %}
+          </div>
+          <div id="fraction" class="col-3">
+            {% render_field  form.height_center_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+        </div>
+      </div>
 
-          <div class="form-group">
-            {{ form.tilt_rod.label_tag }}
-            {% render_field  form.tilt_rod %}
+      <div id="height-left-right-field" class="card-section hidden">
+        <div class="form-row">
+          <div class="col-3">
+            {{ form.height_left.label_tag }}
+            {% render_field  form.height_left class="form-control" %}
+          </div>
+          <div id="fraction" class="col-3">
+            {% render_field  form.height_left_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+          <div class="col-3">
+            {{ form.height_right.label_tag }}
+            {% render_field  form.height_right class="form-control" %}
+          </div>
+          <div id="fraction" class="col-3">
+            {% render_field  form.height_right_fraction class="custom-select my-1 mr-sm-2" %}
+          </div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="form-row">
+          <div class="col-3">
+            {{ form.price_per_sq_ft.label_tag }}
+            {% render_field  form.price_per_sq_ft class="form-control" %}
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row mt">
-      <div class = "col-lg-12 col-md-12 col-sm-12">
-        <div class="card-section line-item-card">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              {{ form.width.label_tag }}
-              {% render_field  form.width %}
-            </div>
-            <div class="form-group col-md-6">
-              {{ form.height.label_tag }}
-              {% render_field  form.height %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt">
-      <div class = "col-lg-12 col-md-12 col-sm-12">
-        <div class="card-section line-item-card">
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              {{ form.height_center.label_tag }}
-              {% render_field  form.height_center %}
-            </div>
-            <div class="form-group col-md-4">
-              {{ form.height_left.label_tag }}
-              {% render_field  form.height_left %}
-            </div>
-            <div class="form-group col-md-4">
-              {{ form.height_right.label_tag }}
-              {% render_field  form.height_right %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <input id="loadlineitem" type="submit" value="OK"/>
-
-  </form>
-{% endblock %}
+  <input class="btn-theme right-float" type="submit" value="OK"/>
+</form>
