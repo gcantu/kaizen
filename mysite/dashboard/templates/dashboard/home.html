@@ -36,7 +36,7 @@
         </a>
       </li>
       <li class="sub-menu">
-        <a href="{% url 'dashboard:manufacturing-list' %}">
+        <a href="{% url 'dashboard:home' %}">
           <i class="fas fa-cogs"></i>
           <span>Create Manufacturing Report</span>
         </a>
@@ -64,26 +64,7 @@
               {% endblock %}
 
               {% block cardcontent %}
-                <div class="row mt">
-                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
-                    <button class="btn-theme btn-lg noprint">
-                      <a href="{% url 'dashboard:list-index' 'All' type %}">Total: {{ p_all }}</a>
-                    </button>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
-                    <button class="btn-theme btn-lg noprint">
-                      <a href="{% url 'dashboard:list-index' 'Approved' type %}">Approved: {{ p_approved }}</a>
-                    </button>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
-                    <button class="btn-theme btn-lg noprint">
-                      <a href="{% url 'dashboard:list-index' 'Pending' type %}">Pending: {{ p_pending }}</a>
-                    </button>
-                  </div>
-                </div>
-                <br>
-                {% block listcontent %}
-                {% endblock %}
+                {% include "dashboard/list_index.html" %}
               {% endblock %}
             </div>
           </div>
