@@ -65,7 +65,7 @@ def lineItemOptions(request, pk):
 
 
 
-def finalProposal(request, pk, var):
+def finalProposal(request, pk):
     p = proposal.objects.get(pk=pk)
     p_agents = p.agents.all()
     p_measuredby = p.measured_by.all()
@@ -76,16 +76,7 @@ def finalProposal(request, pk, var):
     li_sum = lineitem.aggregate(Sum('price_per_sq_ft'))
     total = li_sum['price_per_sq_ft__sum']
 
-    form = proposalForm(request.POST or None, instance=p)
-
-    if form.is_valid():
-        form.save()
-
-    if (var == 1):
-        return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'total': total, 'form': form, 'var': var})
-
-    else:
-        return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'total': total, 'var': var})
+    return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'total': total})
 
 
 
