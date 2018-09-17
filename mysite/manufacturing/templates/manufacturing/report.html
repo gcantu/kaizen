@@ -42,7 +42,7 @@
 
 <div class="row mt">
   <div class = "col-lg-12 col-md-12 col-sm-12">
-    <table id="manufacturing-table" class="textcenter">
+    <table id="manufacturing-table" class="textcenter m-table">
       <thead>
         <tr>
           <th colspan=3></th>
@@ -97,7 +97,7 @@
 
 <div class="row mt">
   <div class = "col-lg-8 col-md-8 col-sm-12">
-    <table id="manufacturing-table" class="textcenter">
+    <table id="manufacturing-materials-table" class="textcenter m-table">
       <thead>
         <th colspan=9>Materials needed:</th>
       </thead>
@@ -123,6 +123,36 @@
           <td>{{ materials.totalHinges }}</td>
           <td>{{ materials.totalMagnets }}</td>
           <td>{{ materials.totalScrews }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row mt">
+  <div class = "col-lg-8 col-md-8 col-sm-12">
+    <table id="manufacturing-details-table" class="textcenter m-table">
+      <thead>
+        <th colspan=7>Order Details:</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Finish</td>
+          <td>Stain</td>
+          <td>Color</td>
+          <td>Louver</td>
+          <td>Tilt Rod</td>
+          <td>Hinges</td>
+          <td>Hinge Color</td>
+        </tr>
+        <tr>
+          <td>{{ proposal.finish }}</td>
+          <td>{{ proposal.stain }}</td>
+          <td>{{ proposal.color }}</td>
+          <td>{{ proposal.get_louver_display }}</td>
+          <td>{{ proposal.tilt_rod }}</td>
+          <td>{{ proposal.hinges }}</td>
+          <td>{{ proposal.hinge_color }}</td>
         </tr>
       </tbody>
     </table>
