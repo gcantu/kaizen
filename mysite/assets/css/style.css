@@ -107,6 +107,14 @@ a.logout {
   padding: 10px 10px 10px 10px;
 }
 
+.report-block {
+  padding: 30px;
+  background-color: #ffffff;
+  color: #666666;
+	margin: auto;
+	max-width: 900px;
+	border: 1px solid #ced4da;
+}
 
 
 /* navs
