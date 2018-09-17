@@ -2,14 +2,35 @@
 /* font */
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
-body {
-    color: #424a5d;
-	  background: #ececee;
-    font-family: 'Source Sans Pro', sans-serif;
-    padding: 0px !important;
-    margin: 0px !important;
-    font-size:13px;
+/* body
+--------------------------------------------------------------*/
+
+body,
+button,
+input,
+select,
+textarea {
+	color: #888888;
+	line-height: 1.5;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+  font-size: 13px;
 }
+
+html, body {
+	margin: 0;
+	padding: 0;
+  height: 100%;
+}
+
+#page {
+	background-color: #ffffff;
+	margin: 0 auto;
+	max-width: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
 
 /* header
 --------------------------------------------------------------*/
