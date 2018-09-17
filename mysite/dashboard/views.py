@@ -1,5 +1,10 @@
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from proposal.models import proposal
+
+
+def Login(request):
+    return redirect(reverse('login'))
 
 
 def Home(request):
