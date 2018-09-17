@@ -232,13 +232,23 @@ span {
 }
 
 
-/* signin form */
+/* login
+--------------------------------------------------------------*/
 
-.form-signin {
+.login-block {
+  padding: 10px 10px 10px 10px;
+  background-color: #ffffff;
+  color: #666666;
+	margin: auto;
+	max-width: 80%;
+}
+
+#login-form {
   max-width: 330px;
-  padding: 15px;
+  padding: 50px;
   margin: auto;
   text-align: center;
+	border: 1px solid #ced4da;
 }
 
 .input-username {
