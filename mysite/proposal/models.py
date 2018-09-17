@@ -116,9 +116,7 @@ class line_item(models.Model):
     hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
     hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
     panels = models.IntegerField(blank=True, null=True)
-    t_post = models.IntegerField(blank=True, null=True)
     tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
-    separate_parts = models.NullBooleanField()
     width = models.FloatField(blank=True, null=True)
     height = models.FloatField(blank=True, null=True)
     height_left = models.FloatField(blank=True, null=True)
@@ -129,9 +127,7 @@ class line_item(models.Model):
     height_left_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_right_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
-    quantity = models.IntegerField(blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
-    approved = models.BooleanField(default=True)
 
     def get_absolute_url(self):
         return reverse('line-item-detail', kwargs={'pk': self.pk})
