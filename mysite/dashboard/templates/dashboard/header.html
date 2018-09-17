@@ -1,5 +1,11 @@
+{% load static %}
+
 <header class="header d-print-none">
-  <a href="home" class="logo"><b>LOGO</b></a> <!-- END logo -->
+  <a href="home" class="logo">
+    <div id="header-logo">
+      <img src="{% static 'img/shutterize_logo.png' %}" alt="Shutterize Software">
+    </div>
+  </a> <!-- END logo -->
   <div>
     <ul class="nav fa-pull-right">
       <li><a class="logout" href="/">Logout</a></li>

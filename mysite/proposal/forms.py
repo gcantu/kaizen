@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import customer, proposal, line_item
+from django.forms.models import inlineformset_factory
 
 
 # Customer form
@@ -21,12 +22,9 @@ class lineItemForm(ModelForm):
         fields = '__all__'
 
 
-
-from django.forms.models import inlineformset_factory
-
 proposalLineItemFormSet = inlineformset_factory(
     proposal,
     line_item,
-    fields=('product', 'shutter_type', 'finish', 'stain', 'color', 'location', 'mount', 'trim', 'trim_style', 'louver', 'hinges', 'hinge_color', 'panels', 't_post', 'tilt_rod', 'separate_parts', 'width', 'width_fraction', 'height', 'height_fraction', 'height_left', 'height_left_fraction', 'height_right', 'height_right_fraction', 'height_center', 'height_center_fraction', 'quantity', 'price', 'approved', 'proposal',),
+    fields=('product', 'shutter_type', 'location', 'mount', 'trim', 'trim_style', 'panels', 'width', 'width_fraction', 'height', 'height_fraction', 'height_left', 'height_left_fraction', 'height_right', 'height_right_fraction', 'height_center', 'height_center_fraction', 'price_per_sq_ft', 'proposal',),
     extra=0
 )
