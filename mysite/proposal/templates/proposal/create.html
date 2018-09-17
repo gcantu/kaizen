@@ -4,11 +4,8 @@
 
 {% block title %}Create Proposal{% endblock %}
 
-{% block cardheader %}
-  {{ current }}
-{% endblock %}
 
-{% block cardcontent %}
+{% block content %}
 <div id="form-block">
   {% if current == "Customer" %}
     {% include "proposal/form_customer.html" %}

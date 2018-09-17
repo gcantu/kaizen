@@ -95,6 +95,19 @@ a.logout {
 }
 
 
+/* content
+--------------------------------------------------------------*/
+
+#content {
+   padding-bottom:60px; /* Height of the footer */
+	 height: 100%;
+}
+
+#content-wrapper {
+  padding: 10px 10px 10px 10px;
+}
+
+
 
 /* navs
 --------------------------------------------------------------*/

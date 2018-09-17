@@ -28,13 +28,21 @@
         </div>
       </header>  <!-- END header -->
 
-      {% block navbar %}
-      {{ navbar_content }}
-      {% endblock %} <!-- END navbar -->
 
-      {% block content %}
-        {{ content }}
-      {% endblock %}
+      <div id="content">
+        {% block navbar %}
+        {{ nav_content }}
+        {% endblock %}
+
+        <div id="content-wrapper">
+          <div class="{% block contentclass %}{% endblock %}">
+          {% block content %}
+          {{ content }}
+          {% endblock %}
+          </div>
+        </div>
+      </div> <!-- END content -->
+
 
       <footer id="footer">
         <div class="footer-text">
