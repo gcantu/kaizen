@@ -1,3 +1,36 @@
+@media print {
+
+  .noprint {
+    display: none;
+  }
+
+  #main-content, .wrapper {
+    margin:0;
+  }
+
+  .card, .card-header {
+    border: none;
+  }
+
+  .card-header {
+    display: none;
+  }
+
+  .card-section {
+    color: #000;
+  }
+
+  th {
+    color: #424a5d;
+  }
+
+  td {
+    border: 0.5px solid #aeb2b7;
+  }
+
+}
+
+
 @media (min-width: 980px) {
     /*-----*/
     .custom-bar-chart {
@@ -75,7 +108,7 @@
         background: transparent !important ;
     }
     #sidebar > ul > li > ul.sub > li > a:hover {
-        
+
     }
 
 
@@ -289,7 +322,3 @@
     }
 
 }
-
-
-
-
