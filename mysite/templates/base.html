@@ -10,9 +10,18 @@
   </head>
 
   <body>
-    {% block header %}
-      {{ header_content }}
-    {% endblock %} <!-- END header -->
+    <header class="header d-print-none">
+      <a href="home" class="logo">
+        <div id="header-logo">
+          <img src="{% static 'img/shutterize_logo.png' %}" alt="Shutterize Software">
+        </div>
+      </a>
+      <div>
+        <ul class="nav fa-pull-right">
+          <li><a class="logout" href="/">Logout</a></li>
+        </ul>
+      </div>
+    </header>
 
     {% block sidebar %}
       {{ sidebar_content }}
