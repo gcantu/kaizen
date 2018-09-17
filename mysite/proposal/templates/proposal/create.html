@@ -11,13 +11,13 @@
 {% block cardcontent %}
 <div id="form-block">
   {% if current == "Customer" %}
-    {% include "proposal/customer_form.html" %}
+    {% include "proposal/form_customer.html" %}
   {% elif current == "Proposal" %}
-    {% include "proposal/proposal_form.html" %}
+    {% include "proposal/form_proposal.html" %}
   {% elif current == "Line Item" %}
-    {% include "proposal/line_item_form.html" %}
+    {% include "proposal/form_line_item.html" %}
   {% elif current == "Line Item Edit" %}
-    {% include "proposal/line_item_edit_form.html" %}
+    {% include "proposal/form_line_item_edit.html" %}
   {% endif %}
 </div>
 {% endblock %}
