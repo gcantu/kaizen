@@ -134,6 +134,11 @@ a.logout {
   padding: 0 10px;
 }
 
+.menu {
+	max-width: 900px;
+	margin: auto;
+	padding-top: 10px;
+}
 
 
 /* clearings
@@ -388,6 +393,10 @@ label {
 /* other */
 .mr {
   margin-right: 10px;
+}
+
+.mt {
+	margin-top: 10px;
 }
 
 .textcenter {

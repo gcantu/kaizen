@@ -34,6 +34,10 @@
         {{ nav_content }}
         {% endblock %}
 
+        {% block menu %}
+        {{ menu_content }}
+        {% endblock %}
+
         <div id="content-wrapper">
           <div class="{% block contentclass %}{% endblock %}">
           {% block content %}

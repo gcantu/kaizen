@@ -6,8 +6,17 @@
 
 {% block contentclass %}report-block{% endblock %}
 
-{% block cardheader %}
-  Proposal
+{% block menu %}
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 textcenter mt menu">
+    <button class="btn-theme02 noprint">
+      <a onclick="javascript:print();">Print</a>
+    </button>
+    <button class="btn-theme02 noprint">
+      <a href="{% url 'manufacturing:report' proposal.id %}">Create Manufacturing Report</a>
+    </button>
+  </div>
+</div>
 {% endblock %}
 
 {% block content %}
