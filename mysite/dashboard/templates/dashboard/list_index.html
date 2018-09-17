@@ -1,4 +1,3 @@
-{% load static %}
 {% load widget_tweaks %}
 
 <div class="row mt">
@@ -11,7 +10,7 @@
           <th>Agents</th>
           <th>Measured By</th>
           <th>Status</th>
-          <th colspan=2></th>
+          <th></th>
         </thead>
         <tbody>
           {% for p in proposals %}
@@ -38,11 +37,6 @@
               <td>
                 <button class="btn-theme">
                   <a class="btn-theme" href="{% url 'proposal:final-proposal' p.id 2 %}">View</a>
-                </button>
-              </td>
-              <td>
-                <button class="btn-theme">
-                  <a class="btn-theme" href="{% url 'manufacturing:report' p.id %}">Create</a>
                 </button>
               </td>
             </tr>
