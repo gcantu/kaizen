@@ -4,58 +4,22 @@
 
 {% block title %}Home{% endblock %}
 
-{% block header %}
-  {% include "dashboard/header.html" %}
-{% endblock %} <!-- END header -->
+{% block logolink %}{% url 'dashboard:home' %}{% endblock %}
 
-{% block sidebar %}
-  {% include "dashboard/sidebar.html" %}
-{% endblock %} <!-- END sidebar -->
+{% block navbar %}
+<div class="row main-menu justify-content-end noprint">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'dashboard:home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'proposal:add-customer' %}">New Proposal</a>
+    </li>
+  </ul>
+</div>
+{% endblock %} <!-- END navigation bar -->
 
 
 {% block content %}
-<section id="container">
-  <section id="main-content">
-    <section class="wrapper">
-      <div class="row mt">
-        <div class = "col-lg-12 col-md-12 col-sm-12">
-          <div class="card">
-            <div class="card-header">
-              {% block cardheader %}
-                Proposals
-              {% endblock %}
-            </div>
-            <div class="card-body">
-              {% block letterhead %}
-              {% endblock %}
-
-              {% block cardcontent %}
-                <div class="row mt">
-                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
-                    <button class="btn-theme btn-lg noprint">
-                      <a href="{% url 'dashboard:list-index' 'All' type %}">Total: {{ p_all }}</a>
-                    </button>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
-                    <button class="btn-theme btn-lg noprint">
-                      <a href="{% url 'dashboard:list-index' 'Approved' type %}">Approved: {{ p_approved }}</a>
-                    </button>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 textcenter">
-                    <button class="btn-theme btn-lg noprint">
-                      <a href="{% url 'dashboard:list-index' 'Pending' type %}">Pending: {{ p_pending }}</a>
-                    </button>
-                  </div>
-                </div>
-                <br>
-                {% block listcontent %}
-                {% endblock %}
-              {% endblock %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </section> <!-- END content -->
-</section> <!-- END container -->
-{% endblock %}
+  {% include "dashboard/list_index.html" %}
+{% endblock %} <!-- END content -->

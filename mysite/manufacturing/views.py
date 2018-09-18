@@ -5,11 +5,15 @@ from proposal.models import line_item, proposal, customer
 def asFraction(n):
     number = int(n)
     dec = round(n % 1, 4)
-    ratio = dec.as_integer_ratio()
-    frac = '{}/{}'.format(ratio[0], ratio[1])
-    final = '{} {}'.format(number, frac)
 
-    return final
+    if (dec == 0):
+        return number
+    else:
+        ratio = dec.as_integer_ratio()
+        frac = '{}/{}'.format(ratio[0], ratio[1])
+        final = '{} {}'.format(number, frac)
+
+        return final
 
 
 class Shutter:

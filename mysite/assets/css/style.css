@@ -1,48 +1,82 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Content
+		1.1 Body
+		1.2 Header
+		1.3 Footer
+2.0 Navigation
+		2.1 Links
+		2.2 Main Menu
+		2.3 Content Menu
+3.0 Tables
+4.0 Forms
+5.0 Reports
+6.0 Buttons
+7.0 Clearings
+8.0 Others
+9.0 Responsive Structure
+--------------------------------------------------------------*/
 
-/* font */
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+/*--------------------------------------------------------------
+1.0 Content
+--------------------------------------------------------------*/
 
-body {
-    color: #424a5d;
-	  background: #ececee;
-    font-family: 'Source Sans Pro', sans-serif;
-    padding: 0px !important;
-    margin: 0px !important;
-    font-size:13px;
+/* 1.1 Body
+--------------------------------------------------------------*/
+body,
+button,
+input,
+select,
+textarea {
+	color: #888888;
+	line-height: 1.5;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+  font-size: 13px;
 }
 
-/* header */
-.header, .footer {
-    min-height: 40px;
-    padding: 0 15px;
+html, body {
+	margin: 0;
+	padding: 0;
+  height: 100%;
 }
 
-.header {
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 1002;
-    background: #F6C042;
-    border-bottom: 1px solid #F6C042;
-    color: #fff;
+#page {
+	background-color: #ffffff;
+	margin: 0 auto;
+	max-width: 100%;
+  min-height: 100%;
+  position: relative;
 }
 
-a.logo {
-    font-size: 20px;
-    color: #e4e4e4;
-    float: left;
-    margin-top: 15px;
+.container {
+    max-width: 100%;
+    background-color: #fff;
 }
 
-a.logout {
-    color: #e4e4e4;
-    font-size: 15px;
+#content {
+   padding-bottom:60px; /* Height of the footer */
+	 height: 100%;
 }
 
-.nav {
-  padding-top: 5px;
+.wrapper {
+  padding: 20px;
 }
 
+.small-wrapper {
+  max-width: 350px;
+  padding: 50px;
+  margin: auto;
+  text-align: center;
+	border: 1px solid #ced4da;
+}
+
+/* 1.2 Header
+--------------------------------------------------------------*/
+.header-wrapper {
+	padding-top: 15px;
+}
 
 #header-logo {
 	float: left;
@@ -56,108 +90,80 @@ a.logout {
   width: auto;
 }
 
-
-/* sidebar */
-#sidebar {
-    width: 220px;
-    height: 90%;
-    position: fixed;
-    background: #343b4a;
-    margin-top: 70px;
+#header-title {
+	margin-bottom: 0;
+  letter-spacing: 1px;
 }
 
-ul.sidebar-menu {
-    margin-top: 20px;
-    padding: 0 20px 0 10px;
+#header-title a {
+	color: #666666;
+	font-size: 34px;
 }
 
-ul.sidebar-menu li a{
-    color: #d3d3d3; /* aeb2b7 */
-    text-decoration: none;
-    display: block;
-    padding: 10px 0 10px 10px;
-    font-size: 13px;
-    outline: none;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+#header-title a:hover {
+	color: #80abc8;
 }
 
-li.sub-menu {
-    /* background-color: #ececee; */
-    margin: 15px 0 15px 0;
-    /* color: #fff; */
+#header-text{
+	float: left;
+  padding-right: 30px;
 }
 
-ul.sidebar-menu li a:hover {
-    background: #424a5d;
-    color: #fff;
+#header-text p {
+	margin-bottom: 0;
 }
 
-ul.sidebar-menu li a:active {
-    background: #424a5d;
-    color: #fff;
-}
-
-span {
-  margin-left: 5px;
-}
-
-
-/* content */
-#container {
-    width: 100%;
-    height: 100%;
-}
-
-#main-content {
-    margin-left: 220px;
-}
-
-.wrapper {
-    display: inline-block;
-    margin-top: 90px;
-    padding-left: 30px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-top: 0px;
-    width: 100%;
-}
-
-/* cards */
-.card-header {
+/* 1.3 Footer
+--------------------------------------------------------------*/
+#footer {
   background-color: #424a5d;
-  color: #fff;
-  font-size: 15px;
+  color: #f2f2f2;
+  position: absolute;
+  bottom: 0;
+  width:100%;
 }
 
-.card-section {
-  border: 0.5px solid #aeb2b7;
-  padding: 15px 15px 0 15px;
-  margin-bottom: 15px;
+/*--------------------------------------------------------------
+2.0 Navigation
+--------------------------------------------------------------*/
+
+/* 2.1 Links
+--------------------------------------------------------------*/
+a {
+  color: #888888;
 }
 
-
-/* signin form */
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-  text-align: center;
+a:focus, a:active, a:hover {
+	text-decoration: none;
+  color: #80abc8;
 }
 
-.input-username {
-  margin-bottom: 3px;
+/* 2.2 Main Menu
+--------------------------------------------------------------*/
+.main-menu {
+  background-color: #424a5d;
 }
 
-.input-password {
-  margin-bottom: 10px;
+.main-menu a {
+  color: #f2f2f2;
+  font-weight: 400;
+  letter-spacing: .5px;
 }
 
-/* tables */
+.main-menu ul {
+  padding: 0 10px;
+}
+
+/* 2.3 Content Menu
+--------------------------------------------------------------*/
+.content-menu {
+	max-width: 900px;
+	margin: auto;
+	padding-top: 10px;
+}
+
+/* 3.0 Tables
+--------------------------------------------------------------*/
 table {
   width: 100%;
 }
@@ -172,99 +178,76 @@ th {
 td {
   border: 0.5px solid #aeb2b7;
   padding: 3px 15px 3px 5px;
-  /* width: 150px; */
+  text-align:center;
 }
 
-#manufacturing-table th {
+.m-table th {
   border: 0.5px solid #aeb2b7;
 }
 
-#manufacturing-table td {
+.m-table td {
   padding: 3px 5px 3px 5px;
 }
 
-/* buttons */
-.btn-theme {
-  color: #fff;
-  background-color: #424a5d;
-  border: 0.5px solid #424a5d;
-  min-width: 50px;
-}
-.btn-theme:hover, .btn-theme02:hover,
-.btn-theme:focus, .btn-theme02:focus,
-.btn-theme:active, .btn-theme02:active,
-.btn-theme.active, .btn-theme02.active,
-.btn-theme02 a:hover,
-.open .dropdown-toggle.btn-theme {
-  color: #fff;
-  background-color: #48bcb4;
-  border-color: #48bcb4;
+#total-table td {
+  border: none;
 }
 
-.btn-theme02, .btn-theme02 a {
-  color: #fff;
-  background-color: #F6C042;
-  border: 0.5px solid #F6C042;
-  min-width: 50px;
-  max-height: 25px;
+.table-total-row {
+  border-top: 1px solid #aeb2b7;
+}
+
+/* 4.0 Forms
+--------------------------------------------------------------*/
+.form-wrapper {
+  padding: 10px;
+  background-color: #ccdde9;
+  color: #666666;
+	margin: auto;
+	max-width: 650px;
+}
+
+.edit-form-wrapper {
+	max-width: 1250px;
+}
+
+.form {
+  padding: 10px 10px 38px 10px;
+  background-color: #ffffff;
+  color: #666666;
+}
+
+.form-section {
+  border: 0.5px solid #aeb2b7;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.form-control, .custom-select {
   font-size: 13px;
-}
-
-.btn-theme a {
-  color: #fff;
-}
-
-
-.btn-lg, .btn-group-lg > .btn {
-  padding: 3px 10px 3px 10px;
-  /* font-size: 13px; */
-  line-height: 1.5;
   border-radius: 0;
-  margin-left: 10px;
-}
-
-
-/* lists */
-ul li {
-    list-style: none;
-}
-
-.right-align {
-  text-align: right;
-}
-
-.right-float {
-  float: right;
-}
-
-
-/* forms */
-input[type=number] {
-  margin-top: .25rem;
+  height: 30px;
 }
 
 label {
   margin-bottom: 3px;
 }
 
-.form-row {
-  margin-bottom: 10px;
-}
-
-#fraction {
+.no-label {
   margin-top: 22px;
 }
 
-#line-item-form .custom-select {
-  height: 30px;
+
+.form-check-delete {
+  margin-left: 40px;
+	padding: 15px;
+	border: 0.5px solid #ad0817;
+	background-color: #ad0817;
+	color: #f2f2f2;
 }
 
-#line-item-form .form-control {
-  height: 30px;
-}
-
-.form-control {
-  font-size: 13px;
+.big-field {
+  height: 100px;
 }
 
 .notes-form-field {
@@ -273,17 +256,85 @@ label {
   border: 0.5px solid #aeb2b7;
 }
 
-.notes-btn {
-  margin-top: 10px;
+.input-username {
+  margin-bottom: 3px;
 }
 
-/* other */
-.mr {
-  margin-right: 10px;
+.input-password {
+  margin-bottom: 10px;
 }
 
-.textcenter {
-  text-align: center;
+/* 5.0 Reports
+--------------------------------------------------------------*/
+.report-wrapper {
+  padding: 30px;
+  background-color: #ffffff;
+  color: #666666;
+	margin: auto;
+	max-width: 900px;
+	border: 1px solid #ced4da;
+}
+
+.report-section {
+  border: 0.5px solid #aeb2b7;
+  margin: 15px 0;
+  padding: 0 8px 0 10px;
+}
+
+/* 6.0 Buttons
+--------------------------------------------------------------*/
+.btn {
+  color: #fff;
+  min-width: 50px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 0;
+  font-size: 14px;
+}
+
+.btn a {
+  color: #fff;
+  padding: 5px 15px;
+}
+
+.btn-theme {
+  background-color: #424a5d;
+  border: 0.5px solid #424a5d;
+}
+
+.btn-theme02 {
+  background-color: #F6C042;
+  border: 0.5px solid #F6C042;
+}
+
+.btn:hover, .btn:focus,
+.btn:active, .btn.active,
+.btn a:hover {
+  color: #fff;
+  background-color: #888888;
+  border-color: #888888;
+  cursor: pointer;
+}
+
+.btn-lg {
+  padding: 3px 10px 3px 10px;
+  border-radius: 0;
+}
+
+/* 7.0 Clearings
+--------------------------------------------------------------*/
+.clearfix {
+	display: block;
+}
+
+/* 8.0 Others
+--------------------------------------------------------------*/
+.mt {
+	margin-top: 10px;
+}
+
+.pl {
+	padding-left: 10px;
 }
 
 hr {
@@ -291,19 +342,41 @@ hr {
   margin-top: 5px;
 }
 
-.box-style {
-  border: 0.5px solid #aeb2b7;
-  margin-top: 15px;
-  padding: 0 8px 0 10px;
+.ra {
+  text-align: right;
 }
 
-.total-style {
-  border-top: 0.5px solid #aeb2b7;
-  margin-top: 15px;
-  padding-left: 10px;
-  text-align: right;
+.rf {
+  float: right;
+}
+
+.textcenter {
+  text-align: center;
 }
 
 .hidden {
   display:none;
+}
+
+/* 9.0 Responsive Structure
+--------------------------------------------------------------*/
+@media print {
+
+  .noprint {
+    display: none;
+  }
+
+  .wrapper {
+    margin:0;
+  }
+
+  th {
+    border: 0.5px solid #aeb2b7;
+    color: #666666;
+  }
+
+  td {
+    border: 0.5px solid #aeb2b7;
+  }
+
 }
