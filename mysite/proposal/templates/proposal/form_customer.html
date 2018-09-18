@@ -4,7 +4,7 @@
 
 {% block title %}New Proposal{% endblock %}
 
-{% block contentclass %}form-block{% endblock %}
+{% block contentclass %}form-wrapper{% endblock %}
 
 {% block content %}
 <p>Customer Entry Form</p>
@@ -46,6 +46,6 @@
     {% render_field  form.email class="form-control" placeholder=form.email.label %}
   </div>
 
-  <input class="btn-theme right-float" type="submit" value="OK"/>
+  <input class="btn btn-theme rf" type="submit" value="OK"/>
 </form>
 {% endblock %}

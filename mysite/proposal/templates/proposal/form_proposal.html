@@ -4,7 +4,7 @@
 
 {% block title %}New Proposal{% endblock %}
 
-{% block contentclass %}form-block{% endblock %}
+{% block contentclass %}form-wrapper{% endblock %}
 
 {% block content %}
 <p>Proposal Details Entry Form</p>
@@ -30,37 +30,42 @@
     </div>
   </div>
 
-  <div class="form-row">
-    <div class="col-4">
-      {{ form.finish.label_tag }}
-      {% render_field  form.finish class="custom-select mr-sm-2" %}
-    </div>
-    <div id="stain-field" class="col hidden">
-      {{ form.stain.label_tag }}
-      {% render_field  form.stain class="custom-select mr-sm-2" %}
-    </div>
-    <div class="col-4">
-      {{ form.color.label_tag }}
-      {% render_field  form.color class="form-control" %}
+
+  <div class="form-section">
+    <div class="form-row">
+      <div class="col-4">
+        {{ form.finish.label_tag }}
+        {% render_field  form.finish class="custom-select mr-sm-2" %}
+      </div>
+      <div id="stain-field" class="col hidden">
+        {{ form.stain.label_tag }}
+        {% render_field  form.stain class="custom-select mr-sm-2" %}
+      </div>
+      <div class="col-4">
+        {{ form.color.label_tag }}
+        {% render_field  form.color class="form-control" %}
+      </div>
     </div>
   </div>
 
-  <div class="form-row">
-    <div class="col">
-      {{ form.louver.label_tag }}
-      {% render_field  form.louver class="custom-select mr-sm-2" %}
-    </div>
-    <div class="col">
-      {{ form.tilt_rod.label_tag }}
-      {% render_field  form.tilt_rod class="custom-select mr-sm-2" %}
-    </div>
-    <div class="col-4">
-      {{ form.hinges.label_tag }}
-      {% render_field  form.hinges class="custom-select mr-sm-2" %}
-    </div>
-    <div class="col">
-      {{ form.hinge_color.label_tag }}
-      {% render_field  form.hinge_color class="custom-select mr-sm-2" %}
+  <div class="form-section">
+    <div class="form-row">
+      <div class="col-6 col-md-3">
+        {{ form.louver.label_tag }}
+        {% render_field  form.louver class="custom-select mr-sm-2" %}
+      </div>
+      <div class="col-6 col-md-3">
+        {{ form.tilt_rod.label_tag }}
+        {% render_field  form.tilt_rod class="custom-select mr-sm-2" %}
+      </div>
+      <div class="col-6 col-md-3">
+        {{ form.hinges.label_tag }}
+        {% render_field  form.hinges class="custom-select mr-sm-2" %}
+      </div>
+      <div class="col-6 col-md-3">
+        {{ form.hinge_color.label_tag }}
+        {% render_field  form.hinge_color class="custom-select mr-sm-2" %}
+      </div>
     </div>
   </div>
 
@@ -71,6 +76,6 @@
    </div>
  </div>
 
-  <input class="btn-theme right-float" type="submit" value="OK"/>
+  <input class="btn btn-theme rf" type="submit" value="OK"/>
 </form>
 {% endblock %}

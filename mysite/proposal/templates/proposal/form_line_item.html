@@ -4,7 +4,7 @@
 
 {% block title %}New Proposal{% endblock %}
 
-{% block contentclass %}form-block{% endblock %}
+{% block contentclass %}form-wrapper{% endblock %}
 
 {% block content %}
 <p>Line Item Entry Form</p>
@@ -24,7 +24,9 @@
             {% render_field  form.shutter_type class="custom-select mr-sm-2" %}
           </div>
         </div>
+      </div>
 
+      <div class="form-section">
         <div class="form-row">
           <div class="col-4">
             {{ form.mount.label_tag }}
@@ -47,14 +49,14 @@
             {{ form.width.label_tag }}
             {% render_field  form.width class="form-control" %}
           </div>
-          <div id="fraction" class="col-3">
+          <div class="col-3 no-label">
             {% render_field  form.width_fraction class="custom-select mr-sm-2" %}
           </div>
           <div class="col-3">
             {{ form.height.label_tag }}
             {% render_field  form.height class="form-control" %}
           </div>
-          <div id="fraction" class="col-3">
+          <div class="col-3 no-label">
             {% render_field  form.height_fraction class="custom-select mr-sm-2" %}
           </div>
         </div>
@@ -65,7 +67,7 @@
             {{ form.height_center.label_tag }}
             {% render_field  form.height_center class="form-control" %}
           </div>
-          <div id="fraction" class="col-3">
+          <div class="col-3 no-label">
             {% render_field  form.height_center_fraction class="custom-select mr-sm-2" %}
           </div>
         </div>
@@ -77,14 +79,14 @@
             {{ form.height_left.label_tag }}
             {% render_field  form.height_left class="form-control" %}
           </div>
-          <div id="fraction" class="col-3">
+          <div class="col-3 no-label">
             {% render_field  form.height_left_fraction class="custom-select mr-sm-2" %}
           </div>
           <div class="col-3">
             {{ form.height_right.label_tag }}
             {% render_field  form.height_right class="form-control" %}
           </div>
-          <div id="fraction" class="col-3">
+          <div class="col-3 no-label">
             {% render_field  form.height_right_fraction class="custom-select mr-sm-2" %}
           </div>
         </div>
@@ -106,6 +108,6 @@
     </div>
   </div>
 
-  <input class="btn-theme right-float" type="submit" value="OK"/>
+  <input class="btn btn-theme rf" type="submit" value="OK"/>
 </form>
 {% endblock %}

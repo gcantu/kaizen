@@ -1,48 +1,43 @@
 {% load widget_tweaks %}
 
-<div class="row mt">
-  <div class = "col-lg-12 col-md-12 col-sm-12">
-    <div class="card textcenter">
-      <table>
-        <thead>
-          <th>Created Date</th>
-          <th>Customer</th>
-          <th>Agents</th>
-          <th>Measured By</th>
-          <th>Status</th>
-          <th></th>
-        </thead>
-        <tbody>
-          {% for p in proposals %}
-            <tr>
-              <td>{{ p.created_date }}</td>
-              <td>{{ p.customer }}</td>
-              <td>
-                {% for a in p.agents.all %}
-                  {{ a }}
-                  {% if forloop.last %}
-                  {% else %},&nbsp;
-                  {% endif %}
-                {% endfor %}
-              </td>
-              <td>
-                {% for m in p.measured_by.all %}
-                  {{ m }}
-                  {% if forloop.last %}
-                  {% else %},&nbsp;
-                  {% endif %}
-                {% endfor %}
-              </td>
-              <td>{{ p.status }}</td>
-              <td>
-                <button class="btn-theme">
-                  <a class="btn-theme" href="{% url 'proposal:final-proposal' p.id %}">View</a>
-                </button>
-              </td>
-            </tr>
+
+<table class="textcenter">
+  <thead>
+    <th>Created Date</th>
+    <th>Customer</th>
+    <th>Agents</th>
+    <th>Measured By</th>
+    <th>Status</th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for p in proposals %}
+      <tr>
+        <td>{{ p.created_date }}</td>
+        <td>{{ p.customer }}</td>
+        <td>
+          {% for a in p.agents.all %}
+            {{ a }}
+            {% if forloop.last %}
+            {% else %},&nbsp;
+            {% endif %}
           {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+        </td>
+        <td>
+          {% for m in p.measured_by.all %}
+            {{ m }}
+            {% if forloop.last %}
+            {% else %},&nbsp;
+            {% endif %}
+          {% endfor %}
+        </td>
+        <td>{{ p.status }}</td>
+        <td>
+          <button class="btn btn-theme">
+            <a class="btn btn-theme" href="{% url 'proposal:final-proposal' p.id %}">View</a>
+          </button>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

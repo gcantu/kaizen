@@ -4,17 +4,19 @@
 
 {% block title %}New Proposal{% endblock %}
 
+{% block contentclass %}small-wrapper{% endblock %}
+
 {% block content %}
-<div class="options-box">
-  <div class="row">
-    <div class = "col-lg-6 col-md-6 col-sm-12 textcenter">
-      <button class="btn-theme btn-lg">
-        <a class="btn-theme" href="{% url 'proposal:add-line-item' p_id %}">Add Another</a>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <button class="btn btn-theme02">
+        <a href="{% url 'proposal:add-line-item' p_id %}">Add Another</a>
       </button>
     </div>
-    <div class = "col-lg-6 col-md-6 col-sm-12">
-      <button class="btn-theme btn-lg">
-        <a class="btn-theme" href="{% url 'proposal:add-proposal' p_id %}">Continue</a>
+    <div class="col-6">
+      <button class="btn btn-theme02">
+        <a href="{% url 'proposal:add-proposal' p_id %}">Continue</a>
       </button>
     </div>
   </div>

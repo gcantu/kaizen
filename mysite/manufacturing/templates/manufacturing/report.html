@@ -4,12 +4,12 @@
 
 {% block title %}Create Proposal{% endblock %}
 
-{% block contentclass %}report-block{% endblock %}
+{% block contentclass %}report-wrapper{% endblock %}
 
 {% block menu %}
-<div class="row menu">
-  <div class="col-lg-12 col-md-12 col-sm-12 right-align mt">
-    <button class="btn-theme02 noprint">
+<div class="row content-menu">
+  <div class="col-lg-12 col-md-12 col-sm-12 ra mt">
+    <button class="btn btn-theme02 noprint">
       <a onclick="javascript:print();">Print</a>
     </button>
   </div>
@@ -18,7 +18,7 @@
 
 {% block content %}
 <div class="row">
-  <div class = "col-lg-12 col-md-12 col-sm-12 right-align">
+  <div class = "col-lg-12 col-md-12 col-sm-12 ra">
     <h1>Manufacturing Report</h1>
   </div>
 </div>
@@ -33,7 +33,7 @@
     {% include "proposal/detail_customer.html" %}
   </div>
 
-  <div class = "col-lg-6 col-md-6 col-sm-12 right-align">
+  <div class = "col-lg-6 col-md-6 col-sm-12 ra">
     {% include "proposal/detail_proposal.html" %}
   </div>
 </div>

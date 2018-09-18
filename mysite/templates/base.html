@@ -4,7 +4,6 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'css/bootstrap.min.css' %}{% endblock %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-responsive.css' %}"/>
     {% block responsive %}<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">{% endblock %}
     {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
   </head>
@@ -12,8 +11,8 @@
   <body>
     <div id="page">
       <header class="noprint">
-        <div class="container header">
-          <div class="header-wrap clearfix">
+        <div class="container">
+          <div class="header-wrapper clearfix">
             <div id="header-logo">
               <img src="{% static 'img/shutterize_logo.png' %}" alt="Shutterize Software">
             </div>
@@ -38,7 +37,7 @@
         {{ menu_content }}
         {% endblock %}
 
-        <div id="content-wrapper">
+        <div class="wrapper">
           <div class="{% block contentclass %}{% endblock %}">
           {% block content %}
           {{ content }}
@@ -49,7 +48,7 @@
 
 
       <footer id="footer">
-        <div class="footer-text">
+        <div class="wrapper ra">
         Shutterize. ®
         </div>
       </footer> <!-- END footer -->
