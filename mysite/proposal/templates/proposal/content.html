@@ -1,0 +1,35 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}New Order{% endblock %}
+
+{% block content %}
+<div class="section-wrapper form">
+  {% if form_name == 'customer' %}
+    {% include 'proposal/form_customer.html' %}
+  {% elif form_name == 'proposal' %}
+    {% include 'proposal/form_proposal.html' %}
+  {% else %}
+    {% include 'proposal/form_line_item.html' %}
+  {% endif %}
+</div>
+
+{% if form_name != 'customer' %}
+<div class="section-wrapper">
+  <div class="inner-wrapper">
+    <p>Order Summary</p>
+    {% include 'proposal/detail_line_item.html' %}
+    <br>
+    {% if form_name == 'line_item' %}
+    <button class="btn btn-theme rf">
+      <a href="{% url 'proposal:add-proposal' proposal_id %}">Next</a>
+    </button>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+
+
+{% endblock %}

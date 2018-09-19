@@ -10,6 +10,7 @@
       <th>Trim Style</th>
       <th>Price Per Sq. Ft.</th>
       <th>Total Price</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -24,6 +25,11 @@
       <td>{{ item.trim_style }}</td>
       <td>$ {{ item.price_per_sq_ft }}</td>
       <td>$ {{ item.total_price }}</td>
+      <td class="hidden line-item-table-buttons">
+        <button class="btn btn-theme02">
+          <a href="{% url 'proposal:edit-line-item' item.id %}">Edit</a>
+        </button>
+      </td>
     </tr>
   </tbody>
   {% endfor %}

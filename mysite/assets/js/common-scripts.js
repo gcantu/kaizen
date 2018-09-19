@@ -14,6 +14,11 @@ $('#main-edit-button').on('click', function() { // add/remove tax from proposal
 });
 
 
+$('#line-item-edit-button').on('click', function() { // add/remove tax from proposal
+   $(".line-item-table-buttons").removeClass("hidden");
+});
+
+
 $('#tax-button').on('click', function() { // add/remove tax from proposal
    $("table[id=total-table]").toggle();
 });

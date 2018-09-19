@@ -4,7 +4,6 @@ from .models import customer, proposal, agent, line_item
 from .forms import customerForm, proposalForm, lineItemForm
 from django.views.generic.edit import UpdateView
 from django.db.models import Sum
-from .forms import proposalLineItemFormSet
 
 
 # CREATE FORMS ----------------------------------------------------------------
@@ -21,12 +20,13 @@ def addCustomer(request):
             p.save()
             return redirect(reverse('proposal:add-line-item', kwargs={'pk': p.id}))
 
-    return render(request, 'proposal/form_customer.html', {'form': f})
+    return render(request, 'proposal/content.html', {'form': f, 'form_name': 'customer'})
 
 
 # LINE ITEM
 def addLineItem(request, pk):
     f = lineItemForm(initial={'proposal': pk})
+    lineitem = line_item.objects.filter(proposal_id=pk)
 
     if request.method == 'POST':
         form = lineItemForm(request.POST)
@@ -44,27 +44,39 @@ def addLineItem(request, pk):
             item.total_price = round(total_price)
             item.save()
 
-            return redirect(reverse('proposal:line-item-options', kwargs={'pk': pk}))
+            return redirect(reverse('proposal:add-line-item', kwargs={'pk': pk}))
 
-    return render(request, 'proposal/form_line_item.html', {'form': f})
+    return render(request, 'proposal/content.html', {'form': f, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'line_item'})
 
 
 # PROPOSAL
 def addProposal(request, pk):
     p = proposal.objects.get(pk=pk)
     form = proposalForm(request.POST or None, instance=p)
+    lineitem = line_item.objects.filter(proposal_id=pk)
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk}))
+        return redirect(reverse('proposal:order-summary', kwargs={'pk': pk}))
 
-    return render(request, 'proposal/form_proposal.html', {'form': form})
+    return render(request, 'proposal/content.html', {'form': form, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'proposal'})
 
 
-# OPTION FOR CREATING ANOTHER LINE ITEM
-def lineItemOptions(request, pk):
-    return render(request, 'proposal/line_item_options.html', {'p_id': pk})
+# ORDER SUMMARY
+def orderSummary(request, pk):
+    p = proposal.objects.get(pk=pk)
+    p_agents = p.agents.all()
+    p_measuredby = p.measured_by.all()
+    cust_id = p.customer_id
+    cust = customer.objects.get(pk=cust_id)
+    lineitem = line_item.objects.filter(proposal_id=pk)
 
+    li_sum = lineitem.aggregate(Sum('total_price'))
+    subtotal = li_sum['total_price__sum']
+    tax = round(subtotal*.0825, 2)
+    total = subtotal+tax
+
+    return render(request, 'proposal/order_summary.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'subtotal': subtotal, 'tax': tax, 'total': total})
 
 
 # EDIT FORMS ------------------------------------------------------------------
@@ -75,31 +87,33 @@ def editCustomer(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:final-proposal', kwargs={'pk': p.id}))
+        return redirect(reverse('proposal:order-summary', kwargs={'pk': p.id}))
 
-    return render(request, 'proposal/form_customer.html', {'form': form})
+    return render(request, 'proposal/content.html', {'form': form, 'form_name': 'customer'})
 
 
 def editProposal(request, pk):
     data = proposal.objects.get(pk=pk)
     form = proposalForm(request.POST or None, instance=data)
+    lineitem = line_item.objects.filter(proposal_id=pk)
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk}))
+        return redirect(reverse('proposal:order-summary', kwargs={'pk': pk}))
 
-    return render(request, 'proposal/form_proposal.html', {'form': form})
+    return render(request, 'proposal/content.html', {'form': form, 'lineitem': lineitem, 'form_name': 'proposal'})
+
 
 
 def editLineItem(request, pk):
-    data = proposal.objects.get(pk=pk)
-    form = proposalLineItemFormSet(request.POST or None, instance=data)
+    data = line_item.objects.get(pk=pk)
+    form = lineItemForm(request.POST or None, instance=data)
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:final-proposal', kwargs={'pk': pk}))
+        return redirect(reverse('proposal:order-summary', kwargs={'pk': data.proposal_id}))
 
-    return render(request, 'proposal/form_line_item_edit.html', {'form': form})
+    return render(request, 'proposal/content.html', {'form': form, 'form_name': 'line_item_edit'})
 
 
 # FINAL PROPOSAL --------------------------------------------------------------
