@@ -27,7 +27,7 @@
   </div>
 </div>
 <hr/>
-{% include "dashboard/letterhead.html" %}
+<div id="letterhead" letterhead-url="{% url 'dashboard:ajax_load_letterhead' %}"></div>
 <br>
 <br>
 

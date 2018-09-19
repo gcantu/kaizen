@@ -2,7 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block title %}Create Proposal{% endblock %}
+{% block title %}Manufacturing Report{% endblock %}
 
 {% block contentclass %}report-wrapper{% endblock %}
 
@@ -23,7 +23,7 @@
   </div>
 </div>
 <hr/>
-{% include "dashboard/letterhead.html" %}
+<div id="letterhead" letterhead-url="{% url 'dashboard:ajax_load_letterhead' %}"></div>
 <br>
 <br>
 
