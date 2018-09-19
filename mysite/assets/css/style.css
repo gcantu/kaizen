@@ -194,7 +194,7 @@ td {
 }
 
 .table-total-row {
-  border-top: 1px solid #aeb2b7;
+  border-top: 0.5px solid #aeb2b7;
 }
 
 /* 4.0 Forms
@@ -264,6 +264,11 @@ label {
   margin-bottom: 10px;
 }
 
+.signature {
+	border-top: 0.5px solid #aeb2b7;
+	margin-top: 40px;
+}
+
 /* 5.0 Reports
 --------------------------------------------------------------*/
 .report-wrapper {
@@ -318,6 +323,12 @@ label {
 
 .btn-lg {
   padding: 3px 10px 3px 10px;
+  border-radius: 0;
+}
+
+
+.edit-button {
+  padding: 5px;
   border-radius: 0;
 }
 
