@@ -56,16 +56,16 @@ function showField(val){ // function to render hidden fields in line item form
 
   if (val > 2 && val < 6) {
     $(".height-center-field").removeClass("hidden");
+    $(".height-field").addClass("hidden");
   } else {
     $(".height-center-field").addClass("hidden");
+    $(".height-field").removeClass("hidden");
   }
 
   if (val > 3 && val < 6) {
     $("#height-left-right-field").removeClass("hidden");
-    $(".height-field").addClass("hidden");
   } else {
     $("#height-left-right-field").addClass("hidden");
-    $(".height-field").removeClass("hidden");
   }
 };
 
