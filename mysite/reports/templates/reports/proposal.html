@@ -1,0 +1,53 @@
+<div class="row">
+  <div class = "col-lg-12 col-md-12 col-sm-12">
+    {% include "orders/detail_line_item.html" %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8 col-md-8 col-sm-12">
+    <div class="report-section">
+      <h5>Notes: </h5>
+      {{ proposal.notes }}
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="report-section">
+      <table id="total-table" style="display:none;">
+        <tbody>
+          <tr>
+            <td>Subtotal</td>
+            <td class="ra">${{ subtotal }}</td>
+          </tr>
+          <tr>
+            <td>Tax</td>
+            <td class="ra">${{ tax }}</td>
+          </tr>
+          <tr class="table-total-row">
+            <td><b>TOTAL</b></td>
+            <td class="ra">${{ total }}</td>
+          </tr>
+        </tbody>
+      </table> <!-- table WITH tax -->
+
+      <table id="total-table">
+        <tbody>
+          <tr>
+            <td><b>TOTAL</b></td>
+            <td class="ra">${{ subtotal }}</td>
+          </tr>
+        </tbody>
+      </table> <!-- table WITHOUT tax -->
+    </div>
+
+    <button id="tax-button" class="btn btn-theme02 noprint rf edit-button">
+      Add/Remove Tax
+    </button> <!-- toggle total with/without tax -->
+  </div>
+</div>
+
+<div class="row justify-content-end">
+  <div class="col-lg-4 col-md-4 col-sm-4">
+    <p class="signature textcenter">Customer Signature</p>
+  </div>
+</div>

@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import ManufacturingReport
+from .views import manufacturingReport, proposalReport
 from . import views
 
 app_name = 'reports'
 
 urlpatterns = [
-    path('<int:pk>/report', views.ManufacturingReport, name='report'),
+    path('<int:pk>/manufacturing-report', views.manufacturingReport, name='manufacturing-report'),
+    path('<int:pk>/proposal-report', views.proposalReport, name='proposal-report'),
 ]

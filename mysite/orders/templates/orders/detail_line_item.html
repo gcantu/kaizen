@@ -4,7 +4,7 @@
     <tr>
       <th colspan=9></th>
       <th colspan=3>Height</th>
-      <th>Price</th>
+      <th colspan=2>Price</th>
       <th></th>
     </tr>
     <tr>
@@ -21,6 +21,7 @@
       <th>Left</th>
       <th>Right</th>
       <th>Per Sq. Ft.</th>
+      <th>Total</th>
       <th></th>
     </tr>
   </thead>
@@ -36,11 +37,12 @@
       <td>{{ item.trim|default_if_none:"" }}</td>
       <td>{{ item.trim_style|default_if_none:"" }}</td>
       <td>{{ item.width }} {{ item.get_width_fraction_display }}</td>
-      <td>{{ item.height }} {{ item.get_height_fraction_display }}</td>
+      <td>{{ item.height|default_if_none:"" }} {{ item.get_height_fraction_display }}</td>
       <td>{{ item.height_center|default_if_none:"" }} {{ item.get_height_center_fraction_display }}</td>
       <td>{{ item.height_left|default_if_none:"" }} {{ item.get_height_left_fraction_display }}</td>
       <td>{{ item.height_right|default_if_none:"" }} {{ item.get_height_right_fraction_display }}</td>
       <td>$ {{ item.price_per_sq_ft }}</td>
+      <td>$ {{ item.totalPrice }}</td>
       <td class="hidden line-item-table-buttons">
         <button class="btn btn-theme02">
           <a href="{% url 'orders:edit-line-item' item.id %}">Edit</a>

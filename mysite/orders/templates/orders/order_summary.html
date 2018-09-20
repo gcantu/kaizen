@@ -42,6 +42,26 @@
           {% include 'orders/detail_line_item.html' %}
         </div>
       </div>
+
+      <br>
+
+      <div class="row rf">
+        <div class="col-12">
+          <button class="btn btn-theme noprint">
+            <a  href="{% url 'reports:proposal-report' proposal.id %}">Proposal</a>
+          </button> <!-- CREATE proposal -->
+          <button class="btn btn-theme noprint">
+            <a  href="{% url 'reports:manufacturing-report' proposal.id %}">Manufacturing Report</a>
+          </button> <!-- CREATE manufacturing report -->
+          <button class="btn btn-theme noprint">
+            <a  href="">Invoice</a>
+          </button> <!-- CREATE invoice -->
+          <button class="btn btn-theme noprint">
+            <a  href="{% url 'dashboard:home' %}">Exit</a>
+          </button> <!-- HOME -->
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

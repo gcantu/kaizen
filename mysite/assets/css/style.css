@@ -224,11 +224,11 @@ td {
   padding: 3px 5px 3px 5px;
 }
 
-#total-table td {
+#total-table tr, #total-table td {
   border: none;
 }
 
-.table-total-row {
+#total-table tr.table-total-row {
   border-top: 0.5px solid #aeb2b7;
 }
 
@@ -340,10 +340,13 @@ label {
   border-radius: 0;
 }
 
-
 .edit-button {
   padding: 0;
   border-radius: 0;
+}
+
+#tax-button {
+	padding: 0 5px;
 }
 
 /* 7.0 Clearings

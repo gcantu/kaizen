@@ -9,7 +9,7 @@
     </tr>
     <tr>
       <th>Stain</th>
-      <td>{{ proposal.stain }}</td>
+      <td>{{ proposal.stain|default_if_none:"" }}</td>
     </tr>
     <tr>
       <th>Color</th>
