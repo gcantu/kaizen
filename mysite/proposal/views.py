@@ -32,18 +32,7 @@ def addLineItem(request, pk):
         form = lineItemForm(request.POST)
 
         if form.is_valid():
-            item = form.save(commit=False)
-
-            t_w = item.width + item.width_fraction
-            t_h = item.height + item.height_fraction
-            sq_in = t_w * t_h
-            sq_ft = sq_in/144
-
-            total_price = item.price_per_sq_ft * sq_ft
-
-            item.total_price = round(total_price)
-            item.save()
-
+            form.save()
             return redirect(reverse('proposal:add-line-item', kwargs={'pk': pk}))
 
     return render(request, 'proposal/content.html', {'form': f, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'line_item'})
@@ -71,8 +60,8 @@ def orderSummary(request, pk):
     cust = customer.objects.get(pk=cust_id)
     lineitem = line_item.objects.filter(proposal_id=pk)
 
-    li_sum = lineitem.aggregate(Sum('total_price'))
-    subtotal = li_sum['total_price__sum']
+    li_sum = lineitem.aggregate(Sum('price_per_sq_ft'))
+    subtotal = li_sum['price_per_sq_ft__sum']
     tax = round(subtotal*.0825, 2)
     total = subtotal+tax
 
