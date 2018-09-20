@@ -33,23 +33,7 @@ $('#id_mount').on('change', function() {
 });
 
 
-$('#id_shutter_type').on('change', function() { // hide/unhide height-center field
-  var selectedItem = $(this).val();
-
-  if (selectedItem > 2 && selectedItem < 6) {
-    val = 10
-  } else {
-    val = 5
-  }
-
-  var option = 10
-  var fieldId = "#height-center-field"
-
-  showField(val, option, fieldId);
-});
-
-
-$('#id_shutter_type').on('change', function() { // hide/unhide height-left and height-right fields
+$('#id_shutter_type').on('change', function() { // hide/unhide height-center, height-left and height-right fields
   var selectedItem = $(this).val();
 
   if (selectedItem > 3 && selectedItem < 6) {
@@ -61,20 +45,27 @@ $('#id_shutter_type').on('change', function() { // hide/unhide height-left and h
   var option = 10
   var fieldId = "#height-left-right-field"
 
-  showField(val, option, fieldId);
+  // showField(val, option, fieldId);
+  showField(selectedItem);
 });
 
 
 // FUNCTIONS
-function showField(i, o, f){ // function to render hidden fields in line item form
-  var i = i;
-  var o = o;
-  var f = f;
+function showField(val){ // function to render hidden fields in line item form
+  var val = val;
 
-  if (i == o) {
-    $(f).removeClass("hidden");
+  if (val > 2 && val < 6) {
+    $(".height-center-field").removeClass("hidden");
   } else {
-    $(f).addClass("hidden");
+    $(".height-center-field").addClass("hidden");
+  }
+
+  if (val > 3 && val < 6) {
+    $("#height-left-right-field").removeClass("hidden");
+    $(".height-field").addClass("hidden");
+  } else {
+    $("#height-left-right-field").addClass("hidden");
+    $(".height-field").removeClass("hidden");
   }
 };
 

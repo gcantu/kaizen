@@ -45,12 +45,19 @@
             <div class="col-3 col-md-2 no-label">
               {% render_field  form.width_fraction class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2">
+            <div class="col-3 col-md-2 height-field">
               {{ form.height.label_tag }}
               {% render_field  form.height class="form-control" %}
             </div>
-            <div class="col-3 col-md-2 no-label">
+            <div class="col-3 col-md-2 no-label height-field">
               {% render_field  form.height_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-center-field hidden">
+              {{ form.height_center.label_tag }}
+              {% render_field  form.height_center class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-center-field hidden">
+              {% render_field  form.height_center_fraction class="custom-select mr-sm-2" %}
             </div>
             <div class="col-3 col-md-2">
               {{ form.panels.label_tag }}
@@ -59,18 +66,6 @@
             <div class="col-3 col-md-2">
               {{ form.price_per_sq_ft.label_tag }}
               {% render_field  form.price_per_sq_ft class="form-control" %}
-            </div>
-          </div>
-        </div>
-
-        <div id="height-center-field" class="form-section hidden">
-          <div  class="form-row">
-            <div class="col-3 col-md-2">
-              {{ form.height_center.label_tag }}
-              {% render_field  form.height_center class="form-control" %}
-            </div>
-            <div class="col-3 col-md-2 no-label">
-              {% render_field  form.height_center_fraction class="custom-select mr-sm-2" %}
             </div>
           </div>
         </div>
