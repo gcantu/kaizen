@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
-    'proposal.apps.ProposalConfig',
+    'orders.apps.OrdersConfig',
     'manufacturing.apps.ManufacturingConfig',
     'django.contrib.admin',
     'django.contrib.auth',

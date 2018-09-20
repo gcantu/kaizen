@@ -34,17 +34,17 @@
 <div class="row">
   <div class="col-lg-4 col-md-4 col-sm-12">
     <h3>Prepared For:</h3>
-    {% include "proposal/detail_customer.html" %}
+    {% include "orders/detail_customer.html" %}
     <button class="btn btn-theme02 noprint hidden edit-button">
-      <a href="{% url 'proposal:edit-customer' customer.id %}">Edit</a>
+      <a href="{% url 'orders:edit-customer' customer.id %}">Edit</a>
     </button> <!-- EDIT customer -->
   </div>
   <div class="col-lg-2 col-md-2 col-sm-12">
   </div>
   <div class="col-lg-6 col-md-6 col-sm-12 ra">
-    {% include "proposal/detail_proposal.html" %}
+    {% include "orders/detail_proposal.html" %}
     <button class="btn btn-theme02 noprint hidden edit-button">
-      <a  href="{% url 'proposal:edit-proposal' proposal.id %}">Edit</a>
+      <a  href="{% url 'orders:edit-proposal' proposal.id %}">Edit</a>
     </button> <!-- EDIT agents, measured by -->
   </div>
 </div>
@@ -53,11 +53,11 @@
 
 <div class="row">
   <div class = "col-lg-12 col-md-12 col-sm-12">
-    {% include "proposal/detail_line_item.html" %}
+    {% include "orders/detail_line_item.html" %}
   </div>
 </div>
 <button class="btn btn-theme02 noprint rf pl hidden edit-button">
-  <a  href="{% url 'proposal:edit-line-item' proposal.id %}">Edit</a>
+  <a  href="{% url 'orders:edit-line-item' proposal.id %}">Edit</a>
 </button> <!-- EDIT line items -->
 
 <div class="row">
@@ -67,7 +67,7 @@
       {{ proposal.notes }}
     </div>
     <button class="btn btn-theme02 noprint rf hidden edit-button">
-      <a  href="{% url 'proposal:edit-proposal' proposal.id %}">Edit</a>
+      <a  href="{% url 'orders:edit-proposal' proposal.id %}">Edit</a>
     </button>
   </div>
   <div class="col-lg-4 col-md-4 col-sm-12">

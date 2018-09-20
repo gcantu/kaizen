@@ -18,9 +18,9 @@ def addCustomer(request):
             form.save()
             p = proposal.objects.create(customer_id=form.instance.id)
             p.save()
-            return redirect(reverse('proposal:add-line-item', kwargs={'pk': p.id}))
+            return redirect(reverse('orders:add-line-item', kwargs={'pk': p.id}))
 
-    return render(request, 'proposal/content.html', {'form': f, 'form_name': 'customer'})
+    return render(request, 'orders/content.html', {'form': f, 'form_name': 'customer'})
 
 
 # LINE ITEM
@@ -33,9 +33,9 @@ def addLineItem(request, pk):
 
         if form.is_valid():
             form.save()
-            return redirect(reverse('proposal:add-line-item', kwargs={'pk': pk}))
+            return redirect(reverse('orders:add-line-item', kwargs={'pk': pk}))
 
-    return render(request, 'proposal/content.html', {'form': f, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'line_item'})
+    return render(request, 'orders/content.html', {'form': f, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'line_item'})
 
 
 # PROPOSAL
@@ -46,9 +46,9 @@ def addProposal(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:order-summary', kwargs={'pk': pk}))
+        return redirect(reverse('orders:order-summary', kwargs={'pk': pk}))
 
-    return render(request, 'proposal/content.html', {'form': form, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'proposal'})
+    return render(request, 'orders/content.html', {'form': form, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'proposal'})
 
 
 # ORDER SUMMARY
@@ -65,7 +65,7 @@ def orderSummary(request, pk):
     tax = round(subtotal*.0825, 2)
     total = subtotal+tax
 
-    return render(request, 'proposal/order_summary.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'subtotal': subtotal, 'tax': tax, 'total': total})
+    return render(request, 'orders/order_summary.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'subtotal': subtotal, 'tax': tax, 'total': total})
 
 
 # EDIT FORMS ------------------------------------------------------------------
@@ -76,9 +76,9 @@ def editCustomer(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:order-summary', kwargs={'pk': p.id}))
+        return redirect(reverse('orders:order-summary', kwargs={'pk': p.id}))
 
-    return render(request, 'proposal/content.html', {'form': form, 'form_name': 'customer'})
+    return render(request, 'orders/content.html', {'form': form, 'form_name': 'customer'})
 
 
 def editProposal(request, pk):
@@ -88,9 +88,9 @@ def editProposal(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:order-summary', kwargs={'pk': pk}))
+        return redirect(reverse('orders:order-summary', kwargs={'pk': pk}))
 
-    return render(request, 'proposal/content.html', {'form': form, 'lineitem': lineitem, 'form_name': 'proposal'})
+    return render(request, 'orders/content.html', {'form': form, 'lineitem': lineitem, 'form_name': 'proposal'})
 
 
 
@@ -100,9 +100,9 @@ def editLineItem(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect(reverse('proposal:order-summary', kwargs={'pk': data.proposal_id}))
+        return redirect(reverse('orders:order-summary', kwargs={'pk': data.proposal_id}))
 
-    return render(request, 'proposal/content.html', {'form': form, 'form_name': 'line_item_edit'})
+    return render(request, 'orders/content.html', {'form': form, 'form_name': 'line_item_edit'})
 
 
 # FINAL PROPOSAL --------------------------------------------------------------
@@ -119,7 +119,7 @@ def finalProposal(request, pk):
     tax = round(subtotal*.0825, 2)
     total = subtotal+tax
 
-    return render(request, 'proposal/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'subtotal': subtotal, 'tax': tax, 'total': total})
+    return render(request, 'orders/final_proposal.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'subtotal': subtotal, 'tax': tax, 'total': total})
 
 
 

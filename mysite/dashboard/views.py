@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from proposal.models import proposal
+from orders.models import proposal
 import json
 
 

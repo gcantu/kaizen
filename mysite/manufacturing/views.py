@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from proposal.models import line_item, proposal, customer
+from orders.models import line_item, proposal, customer
 
 
 def asFraction(n):

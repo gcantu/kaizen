@@ -125,7 +125,6 @@ class line_item(models.Model):
     height_right_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     price_per_sq_ft = models.FloatField(blank=True, null=True)
-    total_price = models.FloatField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('line-item-detail', kwargs={'pk': self.pk})
