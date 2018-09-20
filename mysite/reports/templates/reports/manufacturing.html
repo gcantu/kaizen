@@ -11,7 +11,7 @@
           <th colspan=2>Louver</th>
           <th colspan=2>Rail</th>
           <th colspan=2>Stile</th>
-          <th colspan=3></th>
+          <th colspan=4></th>
         </tr>
         <tr>
           <th></th>
@@ -31,6 +31,7 @@
           <th>Trim</th>
           <th>Tilt Rod</th>
           <th>Panels</th>
+          <th>Hinges</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,7 @@
             <td>{{ item.trim }}</td>
             <td>{{ item.tiltRod }}</td>
             <td>{{ item.panels }}</td>
+            <td>{{ item.hinges }}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -109,7 +111,6 @@
           <td>Color</td>
           <td>Louver</td>
           <td>Tilt Rod</td>
-          <td>Hinges</td>
           <td>Hinge Color</td>
         </tr>
         <tr>
@@ -118,7 +119,6 @@
           <td>{{ proposal.color }}</td>
           <td>{{ proposal.get_louver_display }}</td>
           <td>{{ proposal.tilt_rod }}</td>
-          <td>{{ proposal.hinges }}</td>
           <td>{{ proposal.hinge_color }}</td>
         </tr>
       </tbody>
