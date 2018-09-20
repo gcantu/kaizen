@@ -2,7 +2,7 @@ from django.urls import path
 from .views import ManufacturingReport
 from . import views
 
-app_name = 'manufacturing'
+app_name = 'reports'
 
 urlpatterns = [
     path('<int:pk>/report', views.ManufacturingReport, name='report'),

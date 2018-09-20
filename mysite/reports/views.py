@@ -276,4 +276,4 @@ def ManufacturingReport(request, pk):
         'totalScrews':sc_m
     }
 
-    return render(request, 'manufacturing/report.html', {'proposal': prop, 'results': results, 'customer': cust, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': line_items, 'materials': materials})
+    return render(request, 'reports/report.html', {'proposal': prop, 'results': results, 'customer': cust, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': line_items, 'materials': materials})
