@@ -383,6 +383,10 @@ label {
 	padding-left: 10px;
 }
 
+.pb {
+	padding-bottom: 20px;
+}
+
 hr {
   border: 0.5px solid #424a5d;
   margin-top: 5px;
