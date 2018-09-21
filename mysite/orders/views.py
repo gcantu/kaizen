@@ -92,4 +92,4 @@ def orderSummary(request, pk):
     cust = customer.objects.get(pk=cust_id)
     lineitem = line_item.objects.filter(proposal_id=pk)
 
-    return render(request, 'orders/order_summary.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem})
+    return render(request, 'orders/order_summary.html', {'customer': cust, 'proposal': p, 'agents': p_agents, 'measuredby': p_measuredby, 'lineitem': lineitem, 'report_name': 'order_summary'})
