@@ -1,16 +1,20 @@
+{% load static %}
+
 <div class="row mt">
   <div class = "col-lg-8 col-md-8 col-sm-12">
-    <h2>LOGO</h2>
-    <p><b>{{ company.tagline }}</b></p>
+    <div id="company-logo">
+      <img src="{% static 'img/jmblinds_logo.png' %}" alt="JM Curtain Designer and Blinds L.L.C">
+    </div>
+    <h6 class="company-tagline">Serving the Rio Grande Valley</h6>
   </div>
 
   <div class = "col-lg-4 col-md-4 col-sm-12">
     <p class="ra">
-      {{ company.address }}<br>
-      {{ company.city }}, {{ company.state }} {{ company.zip_code }}<br>
-      {{ company.phone }}<br>
-      {{ company.website }}<br>
-      <b>Toll Free:</b> {{ company.toll_free }}
+      901 Perkins Ave. Ste. A.<br>
+      Mission, TX 78572<br>
+      (956) 583-9531<br>
+      www.jmblindsrgv.com<br>
+      <b>Toll Free:</b> (1) 877-271-9894
     </p>
   </div>
 </div> <!-- END proposal header -->

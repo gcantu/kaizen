@@ -301,6 +301,16 @@ label {
   padding: 0 8px 0 10px;
 }
 
+#company-logo img {
+	max-width: 400px;
+	padding-bottom: 10px;
+}
+
+.company-tagline {
+	padding-left: 97px;
+	font-weight: 300;
+}
+
 /* 6.0 Buttons
 --------------------------------------------------------------*/
 .btn {

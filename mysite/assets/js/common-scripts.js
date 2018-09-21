@@ -82,25 +82,4 @@ function showMeasureField(val){ // function to render hidden fields in line item
 };
 
 
-// load letterhead
-$(function () {
-    var url = $("#letterhead").attr("letterhead-url");
-
-    $.ajax({                       // initialize an AJAX request
-      url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-      data: {
-      },
-      success: function (data) {   // `data` is the return of the `load_cities` view function
-        $("#letterhead").html(data);  // replace the contents of the city input with the data that came from the server
-      }
-    });
-});
-
-
-// make notes textarea smaller
-document.getElementById("id_notes").rows = "5";
-
-
-
-
 }); // Document is ready
