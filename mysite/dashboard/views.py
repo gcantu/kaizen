@@ -14,7 +14,7 @@ def Home(request):
 
 
 def load_letterhead(request):
-    with open("company.json", "r") as read_file:
+    with open("assets/company.json", "r") as read_file:
         data = json.load(read_file)
         company = data['company']
 
