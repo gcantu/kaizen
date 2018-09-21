@@ -46,12 +46,24 @@ $('#id_shutter_type').on('change', function() { // hide/unhide height-center, he
   var fieldId = "#height-left-right-field"
 
   // showField(val, option, fieldId);
-  showField(selectedItem);
+  showMeasureField(selectedItem);
 });
 
 
 // FUNCTIONS
-function showField(val){ // function to render hidden fields in line item form
+function showField(i, o, f){ // function to render hidden fields in line item form
+  var i = i;
+  var o = o;
+  var f = f;
+
+  if (i == o) {
+    $(f).removeClass("hidden");
+  } else {
+    $(f).addClass("hidden");
+  }
+};
+
+function showMeasureField(val){ // function to render hidden fields in line item form
   var val = val;
 
   if (val > 2 && val < 6) {
