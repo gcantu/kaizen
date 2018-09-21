@@ -151,6 +151,10 @@ p.summary-title {
   color: #666666;
 }
 
+.line-item-table-wrapper {
+	overflow: scroll;
+}
+
 
 /*--------------------------------------------------------------
 2.0 Navigation
@@ -230,6 +234,10 @@ td {
 
 #total-table tr.table-total-row {
   border-top: 0.5px solid #aeb2b7;
+}
+
+#line-item-detail-table, #manufacturing-table {
+	min-width: 900px;
 }
 
 /* 4.0 Forms

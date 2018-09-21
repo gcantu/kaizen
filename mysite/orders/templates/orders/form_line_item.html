@@ -59,6 +59,27 @@
             <div class="col-3 col-md-2 no-label height-center-field hidden">
               {% render_field  form.height_center_fraction class="custom-select mr-sm-2" %}
             </div>
+            <div class="col-3 col-md-2 height-lr-field hidden">
+              {{ form.height_left.label_tag }}
+              {% render_field  form.height_left class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-lr-field hidden">
+              {% render_field  form.height_left_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-lr-field hidden">
+              {{ form.height_right.label_tag }}
+              {% render_field  form.height_right class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-lr-field hidden">
+              {% render_field  form.height_right_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-dk-field hidden">
+              <label>Door Knob</label>
+              {% render_field  form.height_door_knob class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-dk-field hidden">
+              {% render_field  form.height_door_knob_fraction class="custom-select mr-sm-2" %}
+            </div>
             <div class="col-3 col-md-2">
               {{ form.panels.label_tag }}
               {% render_field  form.panels class="form-control" %}
@@ -70,25 +91,6 @@
             <div class="col-3 col-md-2">
               {{ form.price_per_sq_ft.label_tag }}
               {% render_field  form.price_per_sq_ft class="form-control" %}
-            </div>
-          </div>
-        </div>
-
-        <div id="height-left-right-field" class="form-section hidden">
-          <div class="form-row">
-            <div class="col-3 col-md-2">
-              {{ form.height_left.label_tag }}
-              {% render_field  form.height_left class="form-control" %}
-            </div>
-            <div class="col-3 col-md-2 no-label">
-              {% render_field  form.height_left_fraction class="custom-select mr-sm-2" %}
-            </div>
-            <div class="col-3 col-md-2">
-              {{ form.height_right.label_tag }}
-              {% render_field  form.height_right class="form-control" %}
-            </div>
-            <div class="col-3 col-md-2 no-label">
-              {% render_field  form.height_right_fraction class="custom-select mr-sm-2" %}
             </div>
           </div>
         </div>

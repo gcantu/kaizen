@@ -145,6 +145,8 @@ class line_item(models.Model):
     height_left_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_right_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_door_knob = models.IntegerField(blank=True, null=True)
+    height_door_knob_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     price_per_sq_ft = models.FloatField(blank=True, null=True)
 
 

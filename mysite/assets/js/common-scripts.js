@@ -36,16 +36,6 @@ $('#id_mount').on('change', function() {
 $('#id_shutter_type').on('change', function() { // hide/unhide height-center, height-left and height-right fields
   var selectedItem = $(this).val();
 
-  if (selectedItem > 3 && selectedItem < 6) {
-    val = 10
-  } else {
-    val = 5
-  }
-
-  var option = 10
-  var fieldId = "#height-left-right-field"
-
-  // showField(val, option, fieldId);
   showMeasureField(selectedItem);
 });
 
@@ -68,17 +58,24 @@ function showMeasureField(val){ // function to render hidden fields in line item
 
   if (val > 2 && val < 6) {
     $(".height-center-field").removeClass("hidden");
-    $(".height-field").addClass("hidden");
   } else {
     $(".height-center-field").addClass("hidden");
-    $(".height-field").removeClass("hidden");
   }
 
   if (val > 3 && val < 6) {
-    $("#height-left-right-field").removeClass("hidden");
+    $(".height-lr-field").removeClass("hidden");
+    $(".height-field").addClass("hidden");
   } else {
-    $("#height-left-right-field").addClass("hidden");
+    $(".height-lr-field").addClass("hidden");
+    $(".height-field").removeClass("hidden");
   }
+
+  if (val == 6) {
+    $(".height-dk-field").removeClass("hidden");
+  } else {
+    $(".height-dk-field").addClass("hidden");
+  }
+
 };
 
 

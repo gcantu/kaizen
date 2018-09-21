@@ -1,58 +1,62 @@
 
-<table id="line-item-detail-table">
-  <thead>
-    <tr>
-      <th colspan=11></th>
-      <th colspan=3>Height</th>
-      <th colspan=2>Price</th>
-      <th></th>
-    </tr>
-    <tr>
-      <th>#</th>
-      <th>Product</th>
-      <th>Type</th>
-      <th>Location</th>
-      <th>Mount</th>
-      <th>Trim</th>
-      <th>Trim Style</th>
-      <th>Panels</th>
-      <th>Hinges</th>
-      <th>Width</th>
-      <th>Height</th>
-      <th>Center</th>
-      <th>Left</th>
-      <th>Right</th>
-      <th>Per Sq. Ft.</th>
-      <th>Total</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="line-item-table-wrapper">
+  <table id="line-item-detail-table">
+    <thead>
+      <tr>
+        <th colspan=11></th>
+        <th colspan=4>Height</th>
+        <th colspan=2>Price</th>
+        <th></th>
+      </tr>
+      <tr>
+        <th>#</th>
+        <th>Product</th>
+        <th>Type</th>
+        <th>Location</th>
+        <th>Mount</th>
+        <th>Trim</th>
+        <th>Trim Style</th>
+        <th>Panels</th>
+        <th>Hinges</th>
+        <th>Width</th>
+        <th>Height</th>
+        <th>Center</th>
+        <th>Left</th>
+        <th>Right</th>
+        <th>Door Knob</th>
+        <th>Per Sq. Ft.</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  {% for item in lineitem %}
-  <tbody>
-    <tr>
-      <td>{{ forloop.counter }}</td>
-      <td>{{ item.product }}</td>
-      <td>{{ item.shutter_type }}</td>
-      <td>{{ item.location }}</td>
-      <td>{{ item.mount }}</td>
-      <td>{{ item.trim|default_if_none:"" }}</td>
-      <td>{{ item.trim_style|default_if_none:"" }}</td>
-      <td>{{ item.panels }}</td>
-      <td>{{ item.hinges }}</td>
-      <td>{{ item.width }} {{ item.get_width_fraction_display }}</td>
-      <td>{{ item.height|default_if_none:"" }} {{ item.get_height_fraction_display }}</td>
-      <td>{{ item.height_center|default_if_none:"" }} {{ item.get_height_center_fraction_display }}</td>
-      <td>{{ item.height_left|default_if_none:"" }} {{ item.get_height_left_fraction_display }}</td>
-      <td>{{ item.height_right|default_if_none:"" }} {{ item.get_height_right_fraction_display }}</td>
-      <td>$ {{ item.price_per_sq_ft }}</td>
-      <td>$ {{ item.totalPrice }}</td>
-      <td class="hidden line-item-table-buttons">
-        <button class="btn btn-theme02">
-          <a href="{% url 'orders:edit-line-item' item.id %}">Edit</a>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
+    {% for item in lineitem %}
+    <tbody>
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ item.product }}</td>
+        <td>{{ item.shutter_type }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.mount }}</td>
+        <td>{{ item.trim|default_if_none:"" }}</td>
+        <td>{{ item.trim_style|default_if_none:"" }}</td>
+        <td>{{ item.panels }}</td>
+        <td>{{ item.hinges }}</td>
+        <td>{{ item.width }} {{ item.get_width_fraction_display }}</td>
+        <td>{{ item.height|default_if_none:"" }} {{ item.get_height_fraction_display }}</td>
+        <td>{{ item.height_center|default_if_none:"" }} {{ item.get_height_center_fraction_display }}</td>
+        <td>{{ item.height_left|default_if_none:"" }} {{ item.get_height_left_fraction_display }}</td>
+        <td>{{ item.height_right|default_if_none:"" }} {{ item.get_height_right_fraction_display }}</td>
+        <td>{{ item.height_door_knob|default_if_none:"" }} {{ item.get_height_door_knob_fraction_display }}</td>
+        <td>$ {{ item.price_per_sq_ft }}</td>
+        <td>$ {{ item.totalPrice }}</td>
+        <td class="hidden line-item-table-buttons">
+          <button class="btn btn-theme02">
+            <a href="{% url 'orders:edit-line-item' item.id %}">Edit</a>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
