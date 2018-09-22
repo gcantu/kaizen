@@ -12,6 +12,7 @@
           <th colspan=1>Price</th>
         {% endif %}
         <th></th>
+        <th></th>
       </tr>
       <tr>
         <th>#</th>
@@ -33,6 +34,7 @@
           <th>Per Sq. Ft.</th>
         {% endif %}
         <th>Total</th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -62,6 +64,11 @@
         <td class="hidden line-item-table-buttons">
           <button class="btn btn-theme02">
             <a href="{% url 'orders:edit-line-item' item.id %}">Edit</a>
+          </button>
+        </td>
+        <td class="hidden line-item-table-buttons">
+          <button class="btn btn-theme03">
+            <a href="{% url 'orders:delete' item.id item.proposal_id %}">X</a>
           </button>
         </td>
       </tr>

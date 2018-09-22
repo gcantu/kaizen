@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit-proposal/<int:pk>', views.editProposal, name='edit-proposal'),
     path('edit-line-item/<int:pk>', views.editLineItem, name='edit-line-item'),
     path('order-summary/<int:pk>', views.orderSummary, name='order-summary'),
+    path('delete/<int:pk>/<int:pk2>', views.lineItemDelete.as_view(), name='delete'),
 ]

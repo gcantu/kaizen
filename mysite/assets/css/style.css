@@ -269,15 +269,6 @@ label {
   margin-top: 22px;
 }
 
-
-.form-check-delete {
-  margin-left: 40px;
-	padding: 15px;
-	border: 0.5px solid #ad0817;
-	background-color: #ad0817;
-	color: #f2f2f2;
-}
-
 .big-field {
   height: 100px;
 }
@@ -299,6 +290,10 @@ label {
 .signature {
 	border-top: 0.5px solid #aeb2b7;
 	margin-top: 40px;
+}
+
+#confirm-delete-form {
+	display:inline;
 }
 
 /* 5.0 Reports
@@ -344,6 +339,11 @@ label {
   border: 0.5px solid #F6C042;
 }
 
+.btn-theme03 {
+	background-color: #ad0817;
+  border: 0.5px solid #ad0817;
+}
+
 .btn:hover, .btn:focus,
 .btn:active, .btn.active,
 .btn a:hover {
@@ -363,7 +363,7 @@ label {
   border-radius: 0;
 }
 
-#tax-button {
+#tax-button, #confirm-button {
 	padding: 0 5px;
 }
 

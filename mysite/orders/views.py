@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from .models import customer, proposal, agent, line_item
 from .forms import customerForm, proposalForm, lineItemForm
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 
 
 # CREATE FORMS ----------------------------------------------------------------
@@ -81,6 +81,17 @@ def editLineItem(request, pk):
         return redirect(reverse('orders:order-summary', kwargs={'pk': data.proposal_id}))
 
     return render(request, 'orders/content.html', {'form': form, 'form_name': 'line_item_edit'})
+
+# DELETE LINE ITEM FORM ------------------------------------------------------
+class lineItemDelete(DeleteView):
+    model = line_item
+    template_name = 'orders/confirm_delete.html'
+
+    def get_success_url(self):
+        p_id = self.get_object().proposal_id
+        return reverse('orders:order-summary', kwargs={'pk': p_id})
+
+
 
 
 # ORDER SUMMARY --------------------------------------------------------------
