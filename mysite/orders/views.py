@@ -29,7 +29,13 @@ def addLineItem(request, pk):
         form = lineItemForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            li = form.save(commit=False)
+
+            if li.shutter_type_id == 6:
+                li.panels = 1
+
+            li.save()
+
             return redirect(reverse('orders:add-line-item', kwargs={'pk': pk}))
 
     return render(request, 'orders/content.html', {'form': f, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'line_item'})
