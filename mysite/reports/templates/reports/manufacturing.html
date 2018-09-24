@@ -10,6 +10,7 @@
             <th colspan=2>L-Frame</th>
             <th colspan=5>Height</th>
             <th>Door Handle</th>
+            <th>Resaque</th>
             <th colspan=2>Louver</th>
             <th colspan=2>Rail</th>
             <th colspan=2>Stile</th>
@@ -27,6 +28,7 @@
             <th>Divider</th>
             <th>Door Knob</th>
             <th>Cutout</th>
+            <th>L Frame</th>
             <th>Qty</th>
             <th>Measure</th>
             <th>Qty</th>
@@ -53,6 +55,7 @@
               <td>{{ item.height_divider|default_if_none:"" }} {{ item.height_divider_fraction_display|default_if_none:"" }}</td>
               <td>{{ item.height_door_knob|default_if_none:"" }} {{ item.height_door_knob_fraction_display|default_if_none:"" }}</td>
               <td>{{ item.door_handle_cutout|default_if_none:"" }}</td>
+              <td>{{ item.resaque_lframe|yesno }}</td>
               <td>{{ item.louverQty }}</td>
               <td>{{ item.louver }}</td>
               <td>{{ item.railQty }}</td>

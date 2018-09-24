@@ -84,7 +84,7 @@
               <label>Doors</label>
               {% render_field  form.panels class="form-control" %}
             </div>
-            <div class="col-4 col-md-3 cutout-field hidden">
+            <div class="col-4 col-md-3 door-field hidden">
               {{ form.door_handle_cutout.label_tag }}
               {% render_field  form.door_handle_cutout class="custom-select mr-sm-2" %}
             </div>
@@ -95,6 +95,10 @@
             <div class="col-3 col-md-2">
               {{ form.price_per_sq_ft.label_tag }}
               {% render_field  form.price_per_sq_ft class="form-control" %}
+            </div>
+            <div class="col-12 door-field hidden">
+              <label>Resaque Lframe</label>
+              {% render_field  form.resaque_lframe class="mr-sm-2" %}
             </div>
           </div>
         </div>

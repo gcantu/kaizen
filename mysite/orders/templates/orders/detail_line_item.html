@@ -7,6 +7,7 @@
           <th colspan=11></th>
           <th colspan=4>Height</th>
           <th>Door Handle</th>
+          <th>Resaque</th>
           <th colspan=2>Price</th>
         {% else %}
           <th colspan=9></th>
@@ -33,6 +34,7 @@
           <th>Right</th>
           <th>Door Knob</th>
           <th>Cutout</th>
+          <th>L frame</th>
           <th>Per Sq. Ft.</th>
         {% endif %}
         <th>Total</th>
@@ -61,6 +63,7 @@
           <td>{{ item.height_right|default_if_none:"" }} {{ item.get_height_right_fraction_display }}</td>
           <td>{{ item.height_door_knob|default_if_none:"" }} {{ item.get_height_door_knob_fraction_display }}</td>
           <td>{{ item.door_handle_cutout|default_if_none:"" }}</td>
+          <td>{{ item.resaque_lframe|yesno }}</td>
           <td>$ {{ item.price_per_sq_ft }}</td>
         {% endif %}
         <td>$ {{ item.totalPrice }}</td>

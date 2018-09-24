@@ -137,6 +137,7 @@ class line_item(models.Model):
     panels = models.IntegerField(blank=True, null=True)
     hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
     door_handle_cutout = models.CharField(max_length=5, choices=CUTOUT_CHOICES, blank=True)
+    resaque_lframe = models.BooleanField(default=False)
     width = models.IntegerField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
     height_left = models.IntegerField(blank=True, null=True)
