@@ -155,6 +155,11 @@ p.summary-title {
 	overflow: scroll;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 /*--------------------------------------------------------------
 2.0 Navigation
@@ -319,7 +324,7 @@ label {
 .btn {
   color: #fff;
   min-width: 50px;
-  padding: 0;
+  padding: 0 5px;
   border-radius: 0;
   font-size: 14px;
 }
