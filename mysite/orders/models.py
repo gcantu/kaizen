@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date, datetime
+from datetime import datetime
 from django.urls import reverse
 
 
@@ -99,8 +99,7 @@ class proposal(models.Model):
     HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
     TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
-    created_date = models.DateField(default=date.today)
-    created_time = models.TimeField(default=datetime.today().time())
+    created_date = models.DateTimeField(default=datetime.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
@@ -148,6 +147,8 @@ class line_item(models.Model):
     height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_door_knob = models.IntegerField(blank=True, null=True)
     height_door_knob_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_divider = models.IntegerField(blank=True, null=True)
+    height_divider_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     price_per_sq_ft = models.FloatField(blank=True, null=True)
 
 
