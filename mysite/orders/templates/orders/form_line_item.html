@@ -21,15 +21,15 @@
               {{ form.location.label_tag }}
               {% render_field  form.location class="form-control" %}
             </div>
-            <div class="col-5 col-md-2">
+            <div class="col-5 col-md-2 mount-field">
               {{ form.mount.label_tag }}
               {% render_field  form.mount class="custom-select mr-sm-2" %}
             </div>
-            <div id="trim-field" class="col col-md-2 col-lg-1 hidden trim-field">
+            <div class="col col-md-2 col-lg-1 hidden trim-field">
               {{ form.trim.label_tag }}
               {% render_field  form.trim class="custom-select mr-sm-2" %}
             </div>
-            <div id="trim-field" class="col-7 col-md-5 col-lg-2 hidden trim-field">
+            <div class="col-7 col-md-5 col-lg-2 hidden trim-field">
               {{ form.trim_style.label_tag }}
               {% render_field  form.trim_style class="custom-select mr-sm-2" %}
             </div>
@@ -80,7 +80,7 @@
             <div class="col-3 col-md-2 no-label height-dk-field hidden">
               {% render_field  form.height_door_knob_fraction class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2">
+            <div class="col-3 col-md-2 panel-field">
               <label>Doors</label>
               {% render_field  form.panels class="form-control" %}
             </div>
