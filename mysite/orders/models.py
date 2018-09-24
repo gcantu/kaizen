@@ -232,9 +232,14 @@ class line_item(models.Model):
         num = qty % 2
 
         if num > 0: # if the number is not even, add 1
-            louverQty = qty + 1
+            evenQty = qty + 1
         else:
-            louverQty = qty
+            evenQty = qty
+
+        if self.height_divider:
+            louverQty = evenQty - 1
+        else:
+            louverQty = evenQty
 
         return round(louverQty)
 

@@ -23,6 +23,10 @@ $('#tax-button').on('click', function() { // add/remove tax from proposal
    $("table[id=total-table]").toggle();
 });
 
+$('#divider-button').on('click', function() { // add/remove tax from proposal
+   $(".divider-field").toggle();
+});
+
 
 $('#id_mount').on('change', function() {
   var selectedItem = $(this).val();

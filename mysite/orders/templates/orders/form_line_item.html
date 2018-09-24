@@ -94,9 +94,24 @@
             </div>
           </div>
         </div>
+        <div class="form-section">
+          <div class="form-row">
+            <div class="col-3 col-md-2 divider-field" style="display:none;">
+              <label>Divider Height</label>
+              {% render_field  form.height_divider class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label divider-field" style="display:none;">
+              {% render_field  form.height_divider_fraction class="custom-select mr-sm-2" %}
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
 
     <input class="btn btn-theme rf" type="submit" value="Add"/>
   </form>
+  <button id="divider-button" class="btn btn-theme02">Add/Remove Divider</button>
 </div>
