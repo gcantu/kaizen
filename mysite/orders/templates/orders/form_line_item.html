@@ -1,0 +1,102 @@
+{% load widget_tweaks %}
+
+<p>Line Item Entry Form</p>
+<div class="inner-wrapper">
+  <form id="line-item-form" method="post">
+    {% csrf_token %}
+    {{ form.proposal.as_hidden }}
+    <div class="row">
+      <div class = "col-lg-12 col-md-12 col-sm-12">
+        <div class="form-section">
+          <div class="form-row">
+            <div class="col">
+              {{ form.product.label_tag }}
+              {% render_field  form.product class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-7 col-md-5 col-lg-3">
+              {{ form.shutter_type.label_tag }}
+              {% render_field  form.shutter_type class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-7 col-md-3 col-lg-2">
+              {{ form.location.label_tag }}
+              {% render_field  form.location class="form-control" %}
+            </div>
+            <div class="col-5 col-md-2">
+              {{ form.mount.label_tag }}
+              {% render_field  form.mount class="custom-select mr-sm-2" %}
+            </div>
+            <div id="trim-field" class="col col-md-2 col-lg-1 hidden trim-field">
+              {{ form.trim.label_tag }}
+              {% render_field  form.trim class="custom-select mr-sm-2" %}
+            </div>
+            <div id="trim-field" class="col-7 col-md-5 col-lg-2 hidden trim-field">
+              {{ form.trim_style.label_tag }}
+              {% render_field  form.trim_style class="custom-select mr-sm-2" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-row">
+            <div class="col-3  col-md-2">
+              {{ form.width.label_tag }}
+              {% render_field  form.width class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label">
+              {% render_field  form.width_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-field">
+              {{ form.height.label_tag }}
+              {% render_field  form.height class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-field">
+              {% render_field  form.height_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-center-field hidden">
+              {{ form.height_center.label_tag }}
+              {% render_field  form.height_center class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-center-field hidden">
+              {% render_field  form.height_center_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-lr-field hidden">
+              {{ form.height_left.label_tag }}
+              {% render_field  form.height_left class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-lr-field hidden">
+              {% render_field  form.height_left_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-lr-field hidden">
+              {{ form.height_right.label_tag }}
+              {% render_field  form.height_right class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-lr-field hidden">
+              {% render_field  form.height_right_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2 height-dk-field hidden">
+              <label>Door Knob</label>
+              {% render_field  form.height_door_knob class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-dk-field hidden">
+              {% render_field  form.height_door_knob_fraction class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2">
+              {{ form.panels.label_tag }}
+              {% render_field  form.panels class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2">
+              {{ form.hinges.label_tag }}
+              {% render_field  form.hinges class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-3 col-md-2">
+              {{ form.price_per_sq_ft.label_tag }}
+              {% render_field  form.price_per_sq_ft class="form-control" %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input class="btn btn-theme rf" type="submit" value="Add"/>
+  </form>
+</div>

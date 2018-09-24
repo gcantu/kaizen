@@ -1,0 +1,31 @@
+
+
+<table>
+
+  <tbody>
+    <tr>
+      <th>Finish</th>
+      <td>{{ proposal.finish }}</td>
+    </tr>
+    <tr>
+      <th>Stain</th>
+      <td>{{ proposal.stain|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <th>Color</th>
+      <td>{{ proposal.color }}</td>
+    </tr>
+    <tr>
+      <th>Louver</th>
+      <td>{{ proposal.get_louver_display }}</td>
+    </tr>
+    <tr>
+      <th>Tilt Rod</th>
+      <td>{{ proposal.tilt_rod }}</td>
+    </tr>
+    <tr>
+      <th>Hinge Color</th>
+      <td>{{ proposal.hinge_color }}</td>
+    </tr>
+  </tbody>
+</table>

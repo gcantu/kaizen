@@ -1,0 +1,62 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}New Order{% endblock %}
+
+{% block content %}
+<div class="section-wrapper">
+  <div class="inner-wrapper">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 ra">
+        {% if report_name == 'proposal' %}
+          <h1>Proposal</h1>
+        {% elif report_name == 'manufacturing' %}
+          <h1>Manufacturing</h1>
+        {% else %}
+          <h1>Invoice</h1>
+        {% endif %}
+      </div>
+    </div>
+    <hr/>
+    {% include "dashboard/letterhead.html" %}
+    <br>
+    <br>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h3>Prepared For:</h3>
+        {% include "orders/detail_customer.html" %}
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-12">
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 ra">
+        {% include "orders/detail_proposal.html" %}
+      </div>
+    </div>
+
+    <br>
+
+    {% if report_name == 'proposal' %}
+      {% include 'reports/proposal.html' %}
+    {% elif report_name == 'manufacturing' %}
+      {% include 'reports/manufacturing.html' %}
+    {% else %}
+      {% include 'reports/invoice.html' %}
+    {% endif %}
+
+    <div class="row rf">
+      <div class="col-12">
+        <button class="btn btn-theme noprint">
+          <a onclick="javascript:print();">Print</a>
+        </button> <!-- Print -->
+        <button class="btn btn-theme noprint">
+          <a  href="{% url 'orders:order-summary' proposal.id %}">Order Summary</a>
+        </button> <!-- HOME -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

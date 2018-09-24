@@ -1,3 +1,0 @@
-$(function() {
-
-}); // Document is ready

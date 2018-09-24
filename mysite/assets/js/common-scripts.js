@@ -14,6 +14,11 @@ $('#main-edit-button').on('click', function() { // add/remove tax from proposal
 });
 
 
+$('#line-item-edit-button').on('click', function() { // add/remove tax from proposal
+   $(".line-item-table-buttons").removeClass("hidden");
+});
+
+
 $('#tax-button').on('click', function() { // add/remove tax from proposal
    $("table[id=total-table]").toggle();
 });
@@ -28,35 +33,10 @@ $('#id_mount').on('change', function() {
 });
 
 
-$('#id_shutter_type').on('change', function() { // hide/unhide height-center field
+$('#id_shutter_type').on('change', function() { // hide/unhide height-center, height-left and height-right fields
   var selectedItem = $(this).val();
 
-  if (selectedItem > 2 && selectedItem < 6) {
-    val = 10
-  } else {
-    val = 5
-  }
-
-  var option = 10
-  var fieldId = "#height-center-field"
-
-  showField(val, option, fieldId);
-});
-
-
-$('#id_shutter_type').on('change', function() { // hide/unhide height-left and height-right fields
-  var selectedItem = $(this).val();
-
-  if (selectedItem > 3 && selectedItem < 6) {
-    val = 10
-  } else {
-    val = 5
-  }
-
-  var option = 10
-  var fieldId = "#height-left-right-field"
-
-  showField(val, option, fieldId);
+  showMeasureField(selectedItem);
 });
 
 
@@ -73,11 +53,30 @@ function showField(i, o, f){ // function to render hidden fields in line item fo
   }
 };
 
+function showMeasureField(val){ // function to render hidden fields in line item form
+  var val = val;
 
-// make notes textarea smaller
-document.getElementById("id_notes").rows = "5";
+  if (val > 2 && val < 6) {
+    $(".height-center-field").removeClass("hidden");
+  } else {
+    $(".height-center-field").addClass("hidden");
+  }
 
+  if (val > 3 && val < 6) {
+    $(".height-lr-field").removeClass("hidden");
+    $(".height-field").addClass("hidden");
+  } else {
+    $(".height-lr-field").addClass("hidden");
+    $(".height-field").removeClass("hidden");
+  }
 
+  if (val == 6) {
+    $(".height-dk-field").removeClass("hidden");
+  } else {
+    $(".height-dk-field").addClass("hidden");
+  }
+
+};
 
 
 }); // Document is ready

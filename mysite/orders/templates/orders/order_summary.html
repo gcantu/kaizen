@@ -1,0 +1,69 @@
+{% extends "dashboard/home.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Order Summary{% endblock %}
+
+{% block content %}
+<div class="section-wrapper">
+  <div class="inner-wrapper">
+    <div class="row">
+      <div class = "col-lg-12 col-md-12 col-sm-12 ra">
+        <h2>Order Summary</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-8 col-md-5 col-lg-4">
+          <p class="summary-title">Customer</p>
+          <button class="btn btn-theme02 noprint edit-button rf">
+            <a href="{% url 'orders:edit-customer' customer.id %}">Edit</a>
+          </button> <!-- EDIT customer -->
+          <hr/>
+          {% include 'orders/detail_customer.html' %}
+        </div>
+        <div class="col-8 col-md-5 col-lg-4">
+          <p class="summary-title">Order Details</p>
+          <button class="btn btn-theme02 noprint edit-button rf">
+            <a  href="{% url 'orders:edit-proposal' proposal.id %}">Edit</a>
+          </button> <!-- EDIT agents, measured by -->
+          <hr/>
+          {% include 'orders/detail_order.html' %}
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <p class="summary-title">Order Items</p>
+          <button id="line-item-edit-button" class="btn btn-theme02 noprint edit-button rf">
+            Edit
+          </button> <!-- EDIT agents, measured by -->
+          <hr/>
+          {% include 'orders/detail_line_item.html' %}
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row rf">
+        <div class="col-12">
+          <button class="btn btn-theme noprint">
+            <a  href="{% url 'reports:proposal-report' proposal.id %}">Proposal</a>
+          </button> <!-- CREATE proposal -->
+          <button class="btn btn-theme noprint">
+            <a  href="{% url 'reports:manufacturing-report' proposal.id %}">Manufacturing Report</a>
+          </button> <!-- CREATE manufacturing report -->
+          <button class="btn btn-theme noprint">
+            <a  href="">Invoice</a>
+          </button> <!-- CREATE invoice -->
+          <button class="btn btn-theme noprint">
+            <a  href="{% url 'dashboard:home' %}">Exit</a>
+          </button> <!-- HOME -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

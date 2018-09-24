@@ -5,6 +5,7 @@
 		1.1 Body
 		1.2 Header
 		1.3 Footer
+		1.4 Wrappers
 2.0 Navigation
 		2.1 Links
 		2.2 Main Menu
@@ -29,7 +30,7 @@ button,
 input,
 select,
 textarea {
-	color: #888888;
+	color: #666666;
 	line-height: 1.5;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
@@ -60,24 +61,13 @@ html, body {
 	 height: 100%;
 }
 
-.wrapper {
-  padding: 20px;
-}
-
-.small-wrapper {
-  max-width: 350px;
-  padding: 50px;
-  margin: auto;
-  text-align: center;
-	border: 1px solid #ced4da;
+p.summary-title {
+	display: inline-block;
+	margin: 0;
 }
 
 /* 1.2 Header
 --------------------------------------------------------------*/
-.header-wrapper {
-	padding-top: 15px;
-}
-
 #header-logo {
 	float: left;
 	padding: 5px 20px 5px 0;
@@ -123,6 +113,49 @@ html, body {
   width:100%;
 }
 
+/* 1.4 Wrappers
+--------------------------------------------------------------*/
+.header-wrapper {
+	padding-top: 15px;
+}
+
+.content-wrapper {
+  padding: 20px;
+}
+
+.section-wrapper-small {
+  max-width: 350px;
+  padding: 50px;
+  margin: auto;
+  text-align: center;
+	border: 1px solid #ced4da;
+}
+
+.section-wrapper {
+  color: #666666;
+  background-color: #ffffff;
+	border: 0.5px solid #aeb2b7;
+	max-width: 980px;
+	margin: auto;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.section-wrapper.form {
+  background-color: #e0e0e0;
+}
+
+.inner-wrapper {
+	padding: 10px 10px 40px 10px;
+	background-color: #ffffff;
+  color: #666666;
+}
+
+.line-item-table-wrapper {
+	overflow: scroll;
+}
+
+
 /*--------------------------------------------------------------
 2.0 Navigation
 --------------------------------------------------------------*/
@@ -166,13 +199,19 @@ a:focus, a:active, a:hover {
 --------------------------------------------------------------*/
 table {
   width: 100%;
+	font-size: 12px;
+}
+
+tr {
+	border: 0.5px solid #aeb2b7;
 }
 
 th {
-  background-color: #424a5d;
-  color: #fff;
+  background-color: #e0e0e0;
+  color: #666666;
   padding: 5px 0px 5px 0px;
   text-align:center;
+	font-weight: 300;
 }
 
 td {
@@ -189,32 +228,24 @@ td {
   padding: 3px 5px 3px 5px;
 }
 
-#total-table td {
+#total-table tr, #total-table td {
   border: none;
 }
 
-.table-total-row {
-  border-top: 1px solid #aeb2b7;
+#total-table tr.table-total-row {
+  border-top: 0.5px solid #aeb2b7;
+}
+
+#line-item-detail-table, #manufacturing-table {
+	min-width: 900px;
 }
 
 /* 4.0 Forms
 --------------------------------------------------------------*/
-.form-wrapper {
-  padding: 10px;
-  background-color: #ccdde9;
-  color: #666666;
-	margin: auto;
-	max-width: 650px;
-}
-
-.edit-form-wrapper {
-	max-width: 1250px;
-}
-
 .form {
-  padding: 10px 10px 38px 10px;
-  background-color: #ffffff;
+  padding: 10px;
   color: #666666;
+	border: 0.5px solid #aeb2b7;
 }
 
 .form-section {
@@ -227,6 +258,7 @@ td {
   font-size: 13px;
   border-radius: 0;
   height: 30px;
+	margin-bottom: 10px;
 }
 
 label {
@@ -235,15 +267,6 @@ label {
 
 .no-label {
   margin-top: 22px;
-}
-
-
-.form-check-delete {
-  margin-left: 40px;
-	padding: 15px;
-	border: 0.5px solid #ad0817;
-	background-color: #ad0817;
-	color: #f2f2f2;
 }
 
 .big-field {
@@ -264,21 +287,31 @@ label {
   margin-bottom: 10px;
 }
 
-/* 5.0 Reports
---------------------------------------------------------------*/
-.report-wrapper {
-  padding: 30px;
-  background-color: #ffffff;
-  color: #666666;
-	margin: auto;
-	max-width: 900px;
-	border: 1px solid #ced4da;
+.signature {
+	border-top: 0.5px solid #aeb2b7;
+	margin-top: 40px;
 }
 
+#confirm-delete-form {
+	display:inline;
+}
+
+/* 5.0 Reports
+--------------------------------------------------------------*/
 .report-section {
   border: 0.5px solid #aeb2b7;
   margin: 15px 0;
   padding: 0 8px 0 10px;
+}
+
+#company-logo img {
+	max-width: 400px;
+	padding-bottom: 10px;
+}
+
+.company-tagline {
+	padding-left: 97px;
+	font-weight: 300;
 }
 
 /* 6.0 Buttons
@@ -286,8 +319,7 @@ label {
 .btn {
   color: #fff;
   min-width: 50px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0;
   border-radius: 0;
   font-size: 14px;
 }
@@ -307,6 +339,11 @@ label {
   border: 0.5px solid #F6C042;
 }
 
+.btn-theme03 {
+	background-color: #ad0817;
+  border: 0.5px solid #ad0817;
+}
+
 .btn:hover, .btn:focus,
 .btn:active, .btn.active,
 .btn a:hover {
@@ -319,6 +356,15 @@ label {
 .btn-lg {
   padding: 3px 10px 3px 10px;
   border-radius: 0;
+}
+
+.edit-button {
+  padding: 0;
+  border-radius: 0;
+}
+
+#tax-button, #confirm-button {
+	padding: 0 5px;
 }
 
 /* 7.0 Clearings
@@ -335,6 +381,10 @@ label {
 
 .pl {
 	padding-left: 10px;
+}
+
+.pb {
+	padding-bottom: 20px;
 }
 
 hr {
