@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date
+from datetime import date, datetime
 from django.urls import reverse
 
 
@@ -100,6 +100,7 @@ class proposal(models.Model):
     TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
     created_date = models.DateField(default=date.today)
+    created_time = models.TimeField(default=datetime.today().time())
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
