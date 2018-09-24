@@ -78,10 +78,12 @@ function showMeasureField(val){ // function to render hidden fields in line item
     $(".height-dk-field").removeClass("hidden");
     $(".panel-field").addClass("hidden");
     $(".mount-field").addClass("hidden");
+    $(".cutout-field").removeClass("hidden");
   } else {
     $(".height-dk-field").addClass("hidden");
     $(".panel-field").removeClass("hidden");
     $(".mount-field").removeClass("hidden");
+    $(".cutout-field").addClass("hidden");
   }
 
 };

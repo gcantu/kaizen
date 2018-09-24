@@ -125,6 +125,7 @@ class line_item(models.Model):
     TRIM_STYLE_CHOICES = [('Deco', 'Decorative'), ('Square', 'Square (Smooth)'), ('Round', 'Round (Smooth)'), ('Z', 'Z (Primed)'), ('Other', 'Other')]
     FRACTION_CHOICES = [(0, ''), (.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
     HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
+    CUTOUT_CHOICES = [('Mosca', 'Mosca'), ('Luna', 'Luna'), ('Sol', 'Sol')]
 
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
@@ -135,6 +136,7 @@ class line_item(models.Model):
     trim_style = models.CharField(max_length=10, choices=TRIM_STYLE_CHOICES, blank=True)
     panels = models.IntegerField(blank=True, null=True)
     hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
+    door_handle_cutout = models.CharField(max_length=5, choices=CUTOUT_CHOICES, blank=True)
     width = models.IntegerField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
     height_left = models.IntegerField(blank=True, null=True)
