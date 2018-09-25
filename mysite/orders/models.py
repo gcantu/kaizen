@@ -152,27 +152,47 @@ class line_item(models.Model):
     height_door_knob_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_divider = models.IntegerField(blank=True, null=True)
     height_divider_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_middle = models.IntegerField(blank=True, null=True)
+    height_middle_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     price_per_sq_ft = models.FloatField(blank=True, null=True)
 
 
-    def modHeight(self): # calculate height for shutter model #7: round (square+arch)
-        if self.shutter_type_id == 3:
-            h = self.height_center - (self.width / 2)
-            return (h)
+    def modHeight(self):
+        # adjust height for:
+        # shutter model #7: height center - (width / 2)
+        # shutter model #8: height center - width
+        # shutter model #12: height center
+        h_c = self.height_center + self.height_center_fraction
+        w = self.width + self.width_fraction
+
+        if self.shutter_type_id == 7:
+            h = h_c - (w / 2)
+        elif self.shutter_type_id == 8:
+            h = h_c - w
+        elif self.shutter_type_id == 12:
+            h = h_c
         else:
-            h = self.height
-            return (h)
+            h = self.height + self.height_fraction
+        return (h)
 
     # L frame width and height
     # ------------------------------------------------------
     def LframeW(self): # L frame width
         width = self.width + self.width_fraction
-        Lwidth = width - 0.375 # -3/8
+
+        if self.shutter_type_id == 4:
+            Lwidth = width
+        else:
+            Lwidth = width - 0.375 # -3/8
         return round(Lwidth, 4)
 
     def LframeH(self): # L frame height
-        height = none_sum(self.modHeight(), self.height_fraction)
-        Lheight = (height - 0.25) if height > 0 else 0 # -1/4
+        height = self.modHeight()
+
+        if self.shutter_type_id == 4:
+            Lheight = height
+        else:
+            Lheight = (height - 0.25) if height > 0 else 0 # -1/4
         return round(Lheight, 4)
 
     # L frame height center, left and right

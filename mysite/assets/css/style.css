@@ -14,9 +14,10 @@
 4.0 Forms
 5.0 Reports
 6.0 Buttons
-7.0 Clearings
-8.0 Others
-9.0 Responsive Structure
+7.0 Images
+8.0 Clearings
+9.0 Others
+10.0 Responsive Structure
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -372,13 +373,26 @@ label {
 	padding: 0 5px;
 }
 
-/* 7.0 Clearings
+/* 7.0 Images
+--------------------------------------------------------------*/
+.shutter-model-img {
+	max-width: 300px;
+	max-height: 260px;
+}
+
+.shutter-model-img-guide {
+	max-width: 320px;
+	max-height: 280px;
+}
+
+
+/* 8.0 Clearings
 --------------------------------------------------------------*/
 .clearfix {
 	display: block;
 }
 
-/* 8.0 Others
+/* 9.0 Others
 --------------------------------------------------------------*/
 .mt {
 	margin-top: 10px;
@@ -413,7 +427,7 @@ hr {
   display:none;
 }
 
-/* 9.0 Responsive Structure
+/* 10.0 Responsive Structure
 --------------------------------------------------------------*/
 @media print {
 
