@@ -135,6 +135,35 @@
           <img class="shutter-model-img-guide" src="" alt="">
         </div>
 
+        <div class="form-section">
+          <div class="form-row">
+              <div class="col-4">
+                {{ form.finish.label_tag }}
+                {% render_field  form.finish class="custom-select mr-sm-2" %}
+              </div>
+              <div id="stain-field" class="col-4 hidden">
+                {{ form.stain.label_tag }}
+                {% render_field  form.stain class="custom-select mr-sm-2" %}
+              </div>
+              <div class="col-4">
+                {{ form.color.label_tag }}
+                {% render_field  form.color class="form-control" %}
+              </div>
+              <div class="col-3">
+                {{ form.louver.label_tag }}
+                {% render_field  form.louver class="custom-select mr-sm-2" %}
+              </div>
+              <div class="col">
+                {{ form.tilt_rod.label_tag }}
+                {% render_field  form.tilt_rod class="custom-select mr-sm-2" %}
+              </div>
+              <div class="col-4">
+                {{ form.hinge_color.label_tag }}
+                {% render_field  form.hinge_color class="custom-select mr-sm-2" %}
+              </div>
+          </div>
+        </div>
+
         <div class="form-section divider-field" style="display:none;">
           <div class="form-row">
             <div class="col-4">
@@ -146,6 +175,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
 

@@ -93,22 +93,12 @@ class shutter_type(models.Model):
 
 
 class proposal(models.Model):
-    FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
-    STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
-    LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
-    HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
-    TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
+
     created_date = models.DateTimeField(default=datetime.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
-    finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
-    stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
-    color = models.CharField(max_length=100, blank=True)
-    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
-    hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
-    tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
     notes = models.TextField(blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
 
@@ -124,7 +114,12 @@ class line_item(models.Model):
     TRIM_CHOICES = [(0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4')]
     TRIM_STYLE_CHOICES = [('Deco', 'Decorative'), ('Square', 'Square (Smooth)'), ('Round', 'Round (Smooth)'), ('Z', 'Z (Primed)'), ('Other', 'Other')]
     FRACTION_CHOICES = [(0, ''), (.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
+    FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
+    STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
+    LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
     HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
+    HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
+    TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
     CUTOUT_CHOICES = [('Mosca', 'Mosca'), ('Luna', 'Luna'), ('Sol', 'Sol')]
 
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
@@ -135,7 +130,13 @@ class line_item(models.Model):
     trim = models.IntegerField(choices=TRIM_CHOICES, blank=True, null=True)
     trim_style = models.CharField(max_length=10, choices=TRIM_STYLE_CHOICES, blank=True)
     panels = models.IntegerField(blank=True, null=True)
+    finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
+    stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
+    color = models.CharField(max_length=100, blank=True)
+    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
     hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
+    hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
+    tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
     door_handle_cutout = models.CharField(max_length=5, choices=CUTOUT_CHOICES, blank=True)
     resaque_lframe = models.BooleanField(default=False)
     width = models.IntegerField(blank=True, null=True)
@@ -363,22 +364,22 @@ class line_item(models.Model):
         new = as_fraction(prev)
         return new if prev > 0 else None
 
-    def rail(self):
+    def railMeasure(self):
         prev = self.r()
         new = as_fraction(prev)
         return new
 
-    def louver(self):
+    def louverMeasure(self):
         prev = self.l()
         new = as_fraction(prev)
         return new
 
-    def stile(self):
+    def stileMeasure(self):
         prev = self.s()
         new = as_fraction(prev)
         return new
 
-    def tiltRod(self):
+    def tiltRodMeasure(self):
         prev = self.tr()
         new = as_fraction(prev)
         return new
