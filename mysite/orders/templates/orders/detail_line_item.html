@@ -3,40 +3,38 @@
   <table id="line-item-detail-table">
     <thead>
       <tr>
-        {% if report_name == 'order_summary' %}
-          <th colspan=11></th>
-          <th colspan=4>Height</th>
-          <th>Door Handle</th>
-          <th>Resaque</th>
-          <th colspan=2>Price</th>
-        {% else %}
-          <th colspan=9></th>
-          <th colspan=1>Price</th>
-        {% endif %}
-        <th></th>
-        <th></th>
+        <th colspan=17></th>
+        <th colspan=5>Height</th>
+        <th colspan=2>Door Handle</th>
+        <th>Resaque</th>
+        <th colspan=2>Price</th>
       </tr>
+
       <tr>
         <th>#</th>
         <th>Product</th>
         <th>Type</th>
         <th>Location</th>
         <th>Mount</th>
-        <th>Trim</th>
-        <th>Trim Style</th>
+        <th colspan=2>Trim</th>
         <th>Doors</th>
-        <th>Hinges</th>
-        {% if report_name == 'order_summary' %}
-          <th>Width</th>
-          <th>Height</th>
-          <th>Center</th>
-          <th>Left</th>
-          <th>Right</th>
-          <th>Door Knob</th>
-          <th>Cutout</th>
-          <th>L frame</th>
-          <th>Per Sq. Ft.</th>
-        {% endif %}
+        <th>Louver</th>
+        <th>Tilt Rod</th>
+        <th>Finish</th>
+        <th>Stain</th>
+        <th>Color</th>
+        <th colspan=2>Hinges</th>
+        <th>Width</th>
+        <th>Height</th>
+        <th>Center</th>
+        <th>Left</th>
+        <th>Right</th>
+        <th>Middle</th>
+        <th>Divider</th>
+        <th>Height</th>
+        <th>Cutout</th>
+        <th>L frame</th>
+        <th>Per Sq. Ft.</th>
         <th>Total</th>
         <th></th>
         <th></th>
@@ -54,18 +52,24 @@
         <td>{{ item.trim|default_if_none:"" }}</td>
         <td>{{ item.trim_style|default_if_none:"" }}</td>
         <td>{{ item.panels }}</td>
+        <td>{{ item.get_louver_display }}</td>
+        <td>{{ item.tilt_rod }}</td>
+        <td>{{ item.finish }}</td>
+        <td>{{ item.stain|default_if_none:"" }}</td>
+        <td>{{ item.color }}</td>
         <td>{{ item.hinges }}</td>
-        {% if report_name == 'order_summary' %}
-          <td>{{ item.width }} {{ item.get_width_fraction_display }}</td>
-          <td>{{ item.height|default_if_none:"" }} {{ item.get_height_fraction_display }}</td>
-          <td>{{ item.height_center|default_if_none:"" }} {{ item.get_height_center_fraction_display }}</td>
-          <td>{{ item.height_left|default_if_none:"" }} {{ item.get_height_left_fraction_display }}</td>
-          <td>{{ item.height_right|default_if_none:"" }} {{ item.get_height_right_fraction_display }}</td>
-          <td>{{ item.height_door_knob|default_if_none:"" }} {{ item.get_height_door_knob_fraction_display }}</td>
-          <td>{{ item.door_handle_cutout|default_if_none:"" }}</td>
-          <td>{{ item.resaque_lframe|yesno }}</td>
-          <td>$ {{ item.price_per_sq_ft }}</td>
-        {% endif %}
+        <td>{{ item.hinge_color }}</td>
+        <td>{{ item.width }} {{ item.get_width_fraction_display }}</td>
+        <td>{{ item.height|default_if_none:"" }} {{ item.get_height_fraction_display }}</td>
+        <td>{{ item.height_center|default_if_none:"" }} {{ item.get_height_center_fraction_display }}</td>
+        <td>{{ item.height_left|default_if_none:"" }} {{ item.get_height_left_fraction_display }}</td>
+        <td>{{ item.height_right|default_if_none:"" }} {{ item.get_height_right_fraction_display }}</td>
+        <td>{{ item.height_middle|default_if_none:"" }} {{ item.get_height_middle_fraction_display }}</td>
+        <td>{{ item.height_divider|default_if_none:"" }} {{ item.get_height_divider_fraction_display }}</td>
+        <td>{{ item.height_door_knob|default_if_none:"" }} {{ item.get_height_door_knob_fraction_display }}</td>
+        <td>{{ item.door_handle_cutout|default_if_none:"" }}</td>
+        <td>{{ item.resaque_lframe|yesno }}</td>
+        <td>$ {{ item.price_per_sq_ft }}</td>
         <td>$ {{ item.totalPrice }}</td>
         <td class="hidden line-item-table-buttons">
           <button class="btn btn-theme02">

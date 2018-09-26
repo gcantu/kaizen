@@ -1,6 +1,32 @@
 <div class="row">
   <div class = "col-lg-12 col-md-12 col-sm-12">
-    {% include "orders/detail_line_item.html" %}
+    <table id="line-item-summary-table" style="text-align: left;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for item in lineitem %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ item.location }}</td>
+          <td>
+            {{ item.product }}, {{ item.shutter_type }} <br><br>
+            <b>Finish: </b>{{ item.stain|default_if_none:"" }} {{ item.finish }} - {{ item.color }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>Mount: </b>{{ item.mount }} {{ item.trim|default_if_none:"" }} {{ item.get_trim_style_display|default_if_none:"" }}<br>
+            <b>Doors: </b>{{ item.panels }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Louver: </b>{{ item.get_louver_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Hinge Color:
+            </b>{{ item.hinge_color }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Tilt rod: </b>{{ item.tilt_rod }}<br>
+          </td>
+          <td>$ {{ item.totalPrice }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 

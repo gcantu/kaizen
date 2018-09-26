@@ -28,7 +28,11 @@
             <a  href="{% url 'orders:edit-proposal' proposal.id %}">Edit</a>
           </button> <!-- EDIT agents, measured by -->
           <hr/>
-          {% include 'orders/detail_order.html' %}
+          {% include 'orders/detail_proposal.html' %}
+          <div class="report-section">
+            <h6>Notes: </h6>
+            {{ proposal.notes }}
+          </div>
         </div>
       </div>
       <br>
