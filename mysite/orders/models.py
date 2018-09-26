@@ -399,6 +399,13 @@ class line_item(models.Model):
         total_price = self.price_per_sq_ft * sq_ft
         return round(total_price)
 
+    # update save method: capitalize location and color
+    # ------------------------------------------------------
+    def save(self, *args, **kwargs):
+        self.location = self.location.capitalize()
+        self.color = self.color.capitalize()
+        return super(line_item, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('line-item-detail', kwargs={'pk': self.pk})
 
