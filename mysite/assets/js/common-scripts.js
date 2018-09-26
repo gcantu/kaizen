@@ -111,6 +111,12 @@ function showMeasureField(val){ // function to render hidden fields in line item
     $(".door-field").addClass("hidden");
   }
 
+  if (val == 4 || val == 6 || val == 8 || val == 13 || val == 15) {
+    $(".tpost-field").addClass("hidden");
+  } else {
+    $(".tpost-field").removeClass("hidden");
+  }
+
 };
 
 

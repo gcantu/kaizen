@@ -114,6 +114,10 @@
               <label>Doors</label>
               {% render_field  form.panels class="form-control" %}
             </div>
+            <div class="col-3 col-md-2 tpost-field">
+              <label># of T-posts</label>
+              {% render_field  form.t_post class="form-control" %}
+            </div>
             <div class="col-3">
               {{ form.hinges.label_tag }}
               {% render_field  form.hinges class="custom-select mr-sm-2" %}

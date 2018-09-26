@@ -3,11 +3,12 @@
   <table id="line-item-detail-table">
     <thead>
       <tr>
-        <th colspan=17></th>
+        <th colspan=18></th>
         <th colspan=5>Height</th>
         <th colspan=2>Door Handle</th>
         <th>Resaque</th>
         <th colspan=2>Price</th>
+        <th colspan=2 class="hidden line-item-table-buttons"></th>
       </tr>
 
       <tr>
@@ -18,6 +19,7 @@
         <th>Mount</th>
         <th colspan=2>Trim</th>
         <th>Doors</th>
+        <th># of Tposts</th>
         <th>Louver</th>
         <th>Tilt Rod</th>
         <th>Finish</th>
@@ -36,8 +38,7 @@
         <th>L frame</th>
         <th>Per Sq. Ft.</th>
         <th>Total</th>
-        <th></th>
-        <th></th>
+        <th colspan=2 class="hidden line-item-table-buttons"></th>
       </tr>
     </thead>
 
@@ -52,6 +53,7 @@
         <td>{{ item.trim|default_if_none:"" }}</td>
         <td>{{ item.trim_style|default_if_none:"" }}</td>
         <td>{{ item.panels }}</td>
+        <td>{{ item.t_post|default_if_none:"" }}</td>
         <td>{{ item.get_louver_display }}</td>
         <td>{{ item.tilt_rod }}</td>
         <td>{{ item.finish }}</td>

@@ -130,6 +130,7 @@ class line_item(models.Model):
     trim = models.IntegerField(choices=TRIM_CHOICES, blank=True, null=True)
     trim_style = models.CharField(max_length=10, choices=TRIM_STYLE_CHOICES, blank=True)
     panels = models.IntegerField(blank=True, null=True)
+    t_post = models.IntegerField(blank=True, null=True)
     finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
     stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
     color = models.CharField(max_length=100, blank=True)
