@@ -31,8 +31,9 @@ def addLineItem(request, pk):
         if form.is_valid():
             li = form.save(commit=False)
 
-            if li.shutter_type_id == 6:
+            if li.shutter_type_id == 4:
                 li.panels = 1
+                li.louver = 2.5
 
             li.save()
 

@@ -102,10 +102,12 @@ function showMeasureField(val){ // function to render hidden fields in line item
   if (val == 4) {
     $(".panel-field").addClass("hidden");
     $(".mount-field").addClass("hidden");
+    $(".louver-field").addClass("hidden");
     $(".door-field").removeClass("hidden");
   } else {
     $(".panel-field").removeClass("hidden");
     $(".mount-field").removeClass("hidden");
+    $(".louver-field").removeClass("hidden");
     $(".door-field").addClass("hidden");
   }
 
