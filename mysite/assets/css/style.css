@@ -155,7 +155,7 @@ p.summary-title {
 }
 
 .manuf-section-wrapper {
-	padding: 0 15px 10px 15px;
+	padding: 0 5px 10px 15px;
 }
 
 /*--------------------------------------------------------------
@@ -462,6 +462,9 @@ input[type=number]::-webkit-outer-spin-button {
 .img-col {
 	margin: auto;
 	text-align:center;
+	max-width: 110px;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 /* 8.0 Titles
@@ -544,6 +547,10 @@ hr {
 --------------------------------------------------------------*/
 @media print {
 
+	html, body, #content, #page {
+        height: 99%;
+    }
+
   .noprint {
     display: none;
   }
@@ -551,6 +558,10 @@ hr {
   .wrapper {
     margin:0;
   }
+
+	.inner-wrapper {
+		padding-bottom: 0;
+	}
 
   th, td {
     border: 0.5px solid #aeb2b7;
