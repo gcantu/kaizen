@@ -26,7 +26,7 @@
 
   {% endfor %}
 
-    <div class="col-10">
+    <div class="col no-padding">
       <table class="table-theme02">
       {% for item in i.list %}
       {% if forloop.first %}
@@ -47,7 +47,7 @@
             <th colspan=2 class="left-border">Louver</th>
             <th colspan=2 class="left-border">Rail</th>
             <th colspan=2 class="left-border">Stile</th>
-            <th colspan=5 class="left-border"></th>
+            <th colspan=6 class="left-border"></th>
           </tr>
           <tr>
             <th>#</th>
@@ -78,6 +78,7 @@
             <th>Divider</th>
             <th>Doors</th>
             <th>Hinges</th>
+            <th># Tpost</th>
           </tr>
         </thead>
       {% endif %}
@@ -108,11 +109,12 @@
             <td>{{ item.railMeasure }}</td>
             <td class="left-border">{{ item.stileQty }}</td>
             <td>{{ item.stileMeasure }}</td>
-            <td class="left-border">{{ item.trim }}</td>
+            <td class="left-border">{{ item.trim|default_if_none:"" }}</td>
             <td>{{ item.tiltRodMeasure }}</td>
             <td>{{ item.height_divider|default_if_none:"" }} {{ item.height_divider_fraction_display|default_if_none:"" }}</td>
             <td>{{ item.panels }}</td>
             <td>{{ item.hinges }}</td>
+            <td>{{ item.tpost }}</td>
           </tr>
         </tbody>
       {% endfor %}

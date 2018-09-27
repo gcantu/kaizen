@@ -449,7 +449,7 @@ input[type=number]::-webkit-outer-spin-button {
 	max-height: 260px;
 }
 
-.shutter-model-img-guide {
+#line-item-form  .shutter-model-img-guide {
 	max-width: 320px;
 	max-height: 280px;
 }
