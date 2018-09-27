@@ -25,7 +25,7 @@ def manufacturingReport(request, pk):
     p_measuredby = prop.measured_by.all()
     cust_id = prop.customer_id
     cust = customer.objects.get(pk=cust_id)
-    lineitem = line_item.objects.filter(proposal_id=pk)
+    lineitem = line_item.objects.filter(proposal_id=pk).order_by('shutter_type_id')
 
     materials = {
         'totalLframeMaterial': round(sum(i.LframeMaterial() for i in lineitem)),

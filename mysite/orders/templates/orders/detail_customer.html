@@ -1,9 +1,24 @@
 
-<h6>{{ customer.first_name }} {{ customer.last_name }}</h6>
-<p>
-<b>Address:</b> {{ customer.address }}, {{ customer.city }}, {{ customer.zip_code }}
-<br>
-<b>Phone:</b> {{ customer.home_phone }}
-<br>
-<b>Email:</b> {{ customer.email }}
-</p>
+{% filter upper %}
+    <h6> {{ customer.first_name }} {{ customer.last_name }}</h6>
+    <hr>
+{% endfilter %}
+
+
+
+<table class="detail-table">
+  <tbody>
+    <tr>
+      <th>Address: </th>
+      <td>{{ customer.address }}, {{ customer.city }}, {{ customer.zip_code }}</td>
+    </tr>
+    <tr>
+      <th>Phone: </th>
+      <td>{{ customer.home_phone }}</td>
+    </tr>
+    <tr>
+      <th>Email: </th>
+      <td>{{ customer.email }}  </td>
+    </tr>
+  </tbody>
+</table>

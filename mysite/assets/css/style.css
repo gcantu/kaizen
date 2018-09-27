@@ -9,15 +9,15 @@
 2.0 Navigation
 		2.1 Links
 		2.2 Main Menu
-		2.3 Content Menu
 3.0 Tables
 4.0 Forms
 5.0 Reports
 6.0 Buttons
 7.0 Images
-8.0 Clearings
-9.0 Others
-10.0 Responsive Structure
+8.0 Titles
+9.0 Clearings
+10.0 Others
+11.0 Responsive Structure
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -31,7 +31,7 @@ button,
 input,
 select,
 textarea {
-	color: #666666;
+	color: #515151;
 	line-height: 1.5;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
@@ -87,7 +87,7 @@ p.summary-title {
 }
 
 #header-title a {
-	color: #666666;
+	color: #515151;
 	font-size: 34px;
 }
 
@@ -133,7 +133,6 @@ p.summary-title {
 }
 
 .section-wrapper {
-  color: #666666;
   background-color: #ffffff;
 	border: 0.5px solid #aeb2b7;
 	max-width: 980px;
@@ -149,17 +148,14 @@ p.summary-title {
 .inner-wrapper {
 	padding: 10px 10px 40px 10px;
 	background-color: #ffffff;
-  color: #666666;
 }
 
 .line-item-table-wrapper {
 	overflow: scroll;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.manuf-section-wrapper {
+	padding: 0 15px 10px 15px;
 }
 
 /*--------------------------------------------------------------
@@ -193,46 +189,25 @@ a:focus, a:active, a:hover {
   padding: 0 10px;
 }
 
-/* 2.3 Content Menu
---------------------------------------------------------------*/
-.content-menu {
-	max-width: 900px;
-	margin: auto;
-	padding-top: 10px;
-}
-
 /* 3.0 Tables
 --------------------------------------------------------------*/
 table {
   width: 100%;
 	font-size: 12px;
+	color: #5d5d5d;
+	text-align: center;
 }
 
-tr {
+tr, td, th {
 	border: 0.5px solid #aeb2b7;
+	padding: 0 3px;
 }
 
 th {
   background-color: #e0e0e0;
-  color: #666666;
-  padding: 5px 0px 5px 0px;
-  text-align:center;
-	font-weight: 300;
-	border: 0.5px solid #aeb2b7;
-}
-
-td {
-  border: 0.5px solid #aeb2b7;
-  padding: 3px 15px 3px 5px;
-  text-align:center;
-}
-
-.m-table th {
-  border: 0.5px solid #aeb2b7;
-}
-
-.m-table td {
-  padding: 3px 5px 3px 5px;
+	font-weight: 550;
+	font-size: 12px;
+	letter-spacing: .3px;
 }
 
 #total-table tr, #total-table td {
@@ -243,10 +218,62 @@ td {
   border-top: 0.5px solid #aeb2b7;
 }
 
-#line-item-detail-table, #manufacturing-table {
-	min-width: 1800px;
+#line-item-detail-table {
+	min-width: 1550px;
 }
 
+.table-theme02 th,
+.table-theme02 tr,
+.table-theme02 td {
+	border: none;
+}
+
+.table-theme02 th {
+	background-color: #ffffff;
+}
+
+.table-theme02 td {
+	padding: 5px 0;
+}
+
+.table-theme02 thead {
+	border-bottom: 0.5px solid #666666;
+}
+
+.table-theme02 {
+	width: auto;
+	min-width: 700px;
+}
+
+.table-theme03 {
+	width: auto;
+}
+
+
+.table-theme03 tr,
+.table-theme03 td,
+.table-theme03 th {
+	border: none;
+	text-align: center;
+}
+
+.table-theme03 tr:first-child {
+	border-top: 0.5px solid #666666;
+}
+
+.table-theme03 th {
+	background-color: #ffffff;
+}
+
+.table-theme03 td {
+	padding-right: 30px;
+}
+
+.table-theme03 {
+	border-top: 0.5px solid #666666;
+}
+
+/* summarized line items for proposal report */
 #line-item-summary-table td,
 #line-item-summary-table th {
 	text-align:left;
@@ -264,11 +291,30 @@ table + #line-item-summary-table {
 	border-bottom: 0.5px solid #aeb2b7;
 }
 
+.detail-table tr,
+.detail-table th,
+.detail-table td  {
+	border: none;
+	text-align: left;
+	font-size: 13px;
+	background-color: #ffffff;
+	letter-spacing: 0.5px;
+}
+
+.detail-table th {
+	font-weight: 500;
+}
+
+
+.left-border {
+	border-left: 0.5px solid #666666 !important;
+}
+
 /* 4.0 Forms
 --------------------------------------------------------------*/
 .form {
   padding: 10px;
-  color: #666666;
+  color: #515151;
 	border: 0.5px solid #aeb2b7;
 }
 
@@ -320,6 +366,12 @@ label {
 	display:inline;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* 5.0 Reports
 --------------------------------------------------------------*/
 .report-section {
@@ -350,7 +402,6 @@ label {
 
 .btn a {
   color: #fff;
-  padding: 5px 15px;
 }
 
 .btn-theme {
@@ -393,7 +444,7 @@ label {
 
 /* 7.0 Images
 --------------------------------------------------------------*/
-.shutter-model-img {
+#line-item-form .shutter-model-img {
 	max-width: 300px;
 	max-height: 260px;
 }
@@ -403,17 +454,52 @@ label {
 	max-height: 280px;
 }
 
+.section-wrapper img {
+	max-width: 130px;
+	max-height: 130px;
+}
 
-/* 8.0 Clearings
+.img-col {
+	margin: auto;
+	text-align:center;
+}
+
+/* 8.0 Titles
+--------------------------------------------------------------*/
+h6 {
+	font-size:13px;
+	letter-spacing: 1.5px;
+	margin-top: 10px;
+	margin-bottom: 0;
+	padding-left: 2px;
+}
+
+.section-title {
+	background-color: #e0e0e0;
+	padding-left: 20px;
+	padding-top: 5px;
+	height: 30px;
+	margin-bottom: 5px;
+}
+
+/* 9.0 Clearings
 --------------------------------------------------------------*/
 .clearfix {
 	display: block;
 }
 
-/* 9.0 Others
+/* 10.0 Others
 --------------------------------------------------------------*/
 .mt {
 	margin-top: 10px;
+}
+
+.ml {
+	margin-left: 10px;
+}
+
+.mb {
+	margin-bottom: 10px;
 }
 
 .pl {
@@ -425,12 +511,17 @@ label {
 }
 
 hr {
-  border: 0.5px solid #424a5d;
+  border: 0.5px solid #888888;
   margin-top: 5px;
+	margin-bottom: 15px;
 }
 
 .ra {
   text-align: right;
+}
+
+.la {
+  text-align: left;
 }
 
 .rf {
@@ -445,7 +536,11 @@ hr {
   display:none;
 }
 
-/* 10.0 Responsive Structure
+.no-padding {
+	padding: 0;
+}
+
+/* 11.0 Responsive Structure
 --------------------------------------------------------------*/
 @media print {
 
@@ -457,14 +552,13 @@ hr {
     margin:0;
   }
 
-  th {
+  th, td {
     border: 0.5px solid #aeb2b7;
-    color: #666666;
+    color: #515151;
   }
 
-  td {
-    border: 0.5px solid #aeb2b7;
-		color: #262626;
-  }
+	footer {
+		display: none;
+	}
 
 }
