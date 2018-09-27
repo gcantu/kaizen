@@ -164,7 +164,7 @@ class line_item(models.Model):
         # shutter model #7: height center - (width / 2)
         # shutter model #8: height center - width
         # shutter model #12: height center
-        h_c = self.height_center + self.height_center_fraction
+        h_c = none_sum(self.height_center, self.height_center_fraction)
         w = self.width + self.width_fraction
 
         if self.shutter_type_id == 7:
@@ -174,7 +174,7 @@ class line_item(models.Model):
         elif self.shutter_type_id == 12:
             h = h_c
         else:
-            h = self.height + self.height_fraction
+            h = none_sum(self.height, self.height_fraction)
         return (h)
 
     # L frame width and height
