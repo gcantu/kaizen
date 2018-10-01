@@ -6,6 +6,12 @@
 
 {% block content %}
 <div class="section-wrapper form">
+  {% if edit or form_name == 'line_item' %}
+  <button class="btn btn-theme rf">
+    <a  href="{% url 'orders:order-summary' id %}">Go Back</a>
+  </button>
+  {% endif %}
+
   {% if form_name == 'customer' %}
     {% include 'orders/form_customer.html' %}
   {% elif form_name == 'proposal' %}
@@ -15,7 +21,7 @@
   {% endif %}
 </div>
 
-{% if form_name != 'customer' and form_name != 'line_item_edit' %}
+{% if form_name != 'customer' and not edit %}
 <div class="section-wrapper">
   <div class="inner-wrapper">
     <p>Order Summary</p>

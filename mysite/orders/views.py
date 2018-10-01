@@ -39,7 +39,7 @@ def addLineItem(request, pk):
 
             return redirect(reverse('orders:add-line-item', kwargs={'pk': pk}))
 
-    return render(request, 'orders/content.html', {'form': f, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'line_item'})
+    return render(request, 'orders/content.html', {'form': f, 'lineitem': lineitem, 'proposal_id': pk, 'form_name': 'line_item', 'id': pk})
 
 
 def addProposal(request, pk):
@@ -64,19 +64,18 @@ def editCustomer(request, pk):
         form.save()
         return redirect(reverse('orders:order-summary', kwargs={'pk': p.id}))
 
-    return render(request, 'orders/content.html', {'form': form, 'form_name': 'customer'})
+    return render(request, 'orders/content.html', {'form': form, 'form_name': 'customer', 'edit': True, 'id': pk})
 
 
 def editProposal(request, pk):
     data = proposal.objects.get(pk=pk)
     form = proposalForm(request.POST or None, instance=data)
-    lineitem = line_item.objects.filter(proposal_id=pk)
 
     if form.is_valid():
         form.save()
         return redirect(reverse('orders:order-summary', kwargs={'pk': pk}))
 
-    return render(request, 'orders/content.html', {'form': form, 'lineitem': lineitem, 'form_name': 'proposal'})
+    return render(request, 'orders/content.html', {'form': form, 'form_name': 'proposal', 'edit': True, 'id': pk})
 
 
 def editLineItem(request, pk):
@@ -87,7 +86,7 @@ def editLineItem(request, pk):
         form.save()
         return redirect(reverse('orders:order-summary', kwargs={'pk': data.proposal_id}))
 
-    return render(request, 'orders/content.html', {'form': form, 'form_name': 'line_item_edit'})
+    return render(request, 'orders/content.html', {'form': form, 'form_name': 'line_item', 'edit': True, 'id': data.proposal_id})
 
 # DELETE LINE ITEM FORM ------------------------------------------------------
 class lineItemDelete(DeleteView):
