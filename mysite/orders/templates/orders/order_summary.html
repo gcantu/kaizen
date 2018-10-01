@@ -39,9 +39,12 @@
       <div class="row">
         <div class="col-12">
           <p class="summary-title">Order Items</p>
+          <button id="line-item-add-button" class="btn btn-theme04 noprint edit-button rf">
+            <a  href="{% url 'orders:add-line-item' proposal.id %}">Add</a>
+          </button> <!-- ADD line item -->
           <button id="line-item-edit-button" class="btn btn-theme02 noprint edit-button rf">
             Edit
-          </button> <!-- EDIT agents, measured by -->
+          </button> <!-- EDIT line items -->
           <hr/>
           {% include 'orders/detail_line_item.html' %}
         </div>

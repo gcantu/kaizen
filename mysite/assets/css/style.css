@@ -419,6 +419,12 @@ input[type=number]::-webkit-outer-spin-button {
   border: 0.5px solid #ad0817;
 }
 
+.btn-theme04 {
+	background-color: #5eb901;
+  border: 0.5px solid #5eb901;
+	margin-left: 5px;
+}
+
 .btn:hover, .btn:focus,
 .btn:active, .btn.active,
 .btn a:hover {
