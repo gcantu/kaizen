@@ -310,6 +310,16 @@ table + #line-item-summary-table {
 	border-left: 0.5px solid #666666 !important;
 }
 
+#total-table th {
+	background-color: #ffffff;
+	text-align: left;
+	border: none;
+}
+
+#total-table td {
+	text-align: right;
+}
+
 /* 4.0 Forms
 --------------------------------------------------------------*/
 .form {
@@ -370,6 +380,17 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+#id_add_tax {
+	width: 20px;
+	float: left;
+	margin-top: 3px;
+}
+
+#id_down_payment {
+	width: 60px;
+	float: right;
 }
 
 /* 5.0 Reports

@@ -16,8 +16,10 @@
     {% include 'orders/form_customer.html' %}
   {% elif form_name == 'proposal' %}
     {% include 'orders/form_proposal.html' %}
-  {% else %}
+  {% elif form_name == 'line_item' %}
     {% include 'orders/form_line_item.html' %}
+  {% else %}
+    {% include 'orders/form_price.html' %}
   {% endif %}
 </div>
 

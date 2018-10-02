@@ -100,6 +100,12 @@ class proposal(models.Model):
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
     notes = models.TextField(blank=True)
+    order_subtotal = models.FloatField(default=0)
+    order_tax = models.FloatField(default=0)
+    order_total = models.FloatField(default=0)
+    order_down_payment = models.FloatField(default=0)
+    order_balance = models.FloatField(default=0)
+    add_tax = models.BooleanField(default=False)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
 
     def get_absolute_url(self):

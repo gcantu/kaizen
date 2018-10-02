@@ -18,11 +18,6 @@ $('#line-item-edit-button').on('click', function() { // add/remove tax from prop
    $(".line-item-table-buttons").removeClass("hidden");
 });
 
-
-$('#tax-button').on('click', function() { // add/remove tax from proposal
-   $("table[id=total-table]").toggle();
-});
-
 $('#divider-button').on('click', function() { // add/remove divider field in line item form
    $(".divider-field").toggle();
 });
@@ -58,6 +53,37 @@ $('#id_shutter_type').on('change', function() { // hide/unhide height-center, he
   showMeasureField(selectedItem);
 });
 
+
+$('#id_add_tax').on('change', function() { // add/remove tax from price
+  var subtotal = parseInt($('#order-subtotal').html());
+  var dwn_pmt = parseInt($('#id_order_down_payment').val());
+  var tax = 0;
+
+  if ( $('#id_add_tax').is( ":checked" ) ) {
+    var tax = (Math.round((subtotal*0.0825)*100))/100;
+  }
+
+  if (!dwn_pmt) {
+    var dwn_pmt = 0
+  }
+
+  var total = subtotal+tax
+
+  var balance = (Math.round((total-dwn_pmt)*100))/100
+
+  $('#order-tax').html(tax);
+  $('#order-total').html(total);
+  $('#order-balance').html(balance);
+});
+
+
+$('#id_order_down_payment').on('keyup',function(){ // input down payment and calculate balance
+ var dwn_pmt = $(this).val();
+ var total = $('#order-total').html();
+ var balance = (Math.round((total-dwn_pmt)*100))/100
+
+ $('#order-balance').html(balance);
+});
 
 // FUNCTIONS
 function showField(i, o, f){ // function to render hidden fields in line item form

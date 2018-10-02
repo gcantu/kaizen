@@ -1,0 +1,31 @@
+
+<table id="total-table" class="detail-table">
+  <tbody>
+    <tr>
+      <th>Subtotal: </th>
+      <td>
+        <div>${{ proposal.order_subtotal }}</div>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Tax: </th>
+      <td>${{ proposal.order_tax }} </td>
+    </tr>
+
+    <tr class="table-total-row">
+      <th>Total: </th>
+      <td>${{ proposal.order_total }}</td>
+    </tr>
+
+    <tr>
+      <th>Down Payment: </th>
+      <td>${{ proposal.order_down_payment }}</td>
+    </tr>
+
+    <tr class="table-total-row">
+      <th>Balance</th>
+      <td>{{ proposal.order_balance }}</td>
+    </tr>
+  </tbody>
+</table>

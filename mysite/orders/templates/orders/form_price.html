@@ -1,0 +1,76 @@
+{% load widget_tweaks %}
+
+<p>Price Details</p>
+<div class="inner-wrapper">
+  <div class="section-wrapper-small">
+    <form id="proposal-form" method="post">
+      {% csrf_token %}
+      {{ form.customer.as_hidden }}
+      {{ form.status.as_hidden }}
+      {{ form.created_date.as_hidden }}
+      {{ form.agents.as_hidden }}
+      {{ form.measured_by.as_hidden }}
+      {{ form.notes.as_hidden }}
+      {{ form.order_subtotal.as_hidden }}
+      {{ form.order_tax.as_hidden }}
+      {{ form.order_total.as_hidden }}
+      {{ form.order_balance.as_hidden }}
+      <table id="total-table">
+        <tbody>
+          <tr>
+            <th>Subtotal</th>
+            <td id="order-subtotal" class="ra">{{ proposal.order_subtotal }}</td>
+          </tr>
+          <tr>
+            <th>
+              <label for="id_add_tax" class="mt">Tax</label>
+              {% render_field  form.add_tax class="form-control" %}
+            </th>
+
+            <td id="order-tax" class="ra">{{ proposal.order_tax }}</td>
+          </tr>
+
+          <tr class="table-total-row">
+            <th><b>TOTAL</b></th>
+            <td id="order-total" class="ra">{{ proposal.order_total }}</td>
+          </tr>
+
+          <tr>
+            <th>Down Payment</th>
+            <td>
+              {% render_field  form.order_down_payment class="form-control" %}
+            </td>
+          </tr>
+
+          <tr class="table-total-row">
+            <th><b>Balance</b></th>
+            <td id="order-balance" class="ra">{{ proposal.order_balance }}</td>
+          </tr>
+        </tbody>
+      </table> <!-- table WITH tax -->
+
+      <input class="btn btn-theme rf" type="submit" value="OK"/>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- <table id="total-table">
+  <tbody>
+    <tr>
+      <td>Subtotal</td>
+      <td id="order-subtotal" class="ra">{{ subtotal }}</td>
+    </tr>
+    <tr>
+      <td>Tax
+        <input type="checkbox" class="form-check-input" id="tax-check">
+      </td>
+      <td id="order-tax" class="ra">0</td>
+    </tr>
+    <tr class="table-total-row">
+      <td><b>TOTAL</b></td>
+      <td id="order-total" class="ra">{{ subtotal }}</td>
+    </tr>
+  </tbody>
+</table>  -->

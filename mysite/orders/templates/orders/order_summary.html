@@ -34,6 +34,14 @@
             {{ proposal.notes }}
           </div>
         </div>
+        <div class="col-8 col-md-5 col-lg-4">
+          <p class="summary-title">Price Details</p>
+          <button class="btn btn-theme02 noprint edit-button rf">
+            <a  href="{% url 'orders:edit-price' proposal.id %}">Edit</a>
+          </button> <!-- EDIT price -->
+          <hr/>
+          {% include 'orders/detail_price.html' %}
+        </div>
       </div>
       <br>
       <div class="row">
@@ -61,7 +69,7 @@
             <a  href="{% url 'reports:manufacturing-report' proposal.id %}">Manufacturing Report</a>
           </button> <!-- CREATE manufacturing report -->
           <button class="btn btn-theme noprint">
-            <a  href="">Invoice</a>
+            <a  href="{% url 'reports:invoice-report' proposal.id %}">Invoice</a>
           </button> <!-- CREATE invoice -->
           <button class="btn btn-theme noprint">
             <a  href="{% url 'dashboard:home' %}">Exit</a>

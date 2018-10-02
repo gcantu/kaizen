@@ -33,29 +33,32 @@
 <div class="row pb">
   <div class="col-lg-8 col-md-8 col-sm-12">
     <div class="report-section">
-      <h5>Notes: </h5>
-      {{ proposal.notes }}
+      <h5>Acceptance of Order: </h5>
+      <p>
+        The above prices, specifications and conditions are
+        satisfactory and are hereby accepted. You are authorized
+        to do the work as specified. I am fully aware that there are
+        <b>NO CANCELLATIONS</b> and my deposit will not be refunded
+        under no circumstances. Payment will be made as outlined
+        and agreed upon. By signing below I agree to the terms and
+        conditions specified above.
+      </p>
     </div>
   </div>
   <div class="col-lg-4 col-md-4 col-sm-12">
     <div class="report-section">
-      <table id="total-table">
-        <tbody>
-          <tr>
-            <td>Subtotal</td>
-            <td class="ra">{{ subtotal }}</td>
-          </tr>
-          <tr>
-            <td>Tax
-            </td>
-            <td class="ra">{{ tax }}</td>
-          </tr>
-          <tr class="table-total-row">
-            <td><b>TOTAL</b></td>
-            <td class="ra">{{ total }}</td>
-          </tr>
-        </tbody>
-      </table> <!-- END total table -->
+      {% include "orders/detail_price.html" %}
     </div>
+  </div>
+</div>
+
+
+
+<div class="row justify-content-end">
+  <div class="col-4">
+    <p class="signature textcenter">Customer Signature</p>
+  </div>
+  <div class="col-2">
+    <p class="signature textcenter">Date</p>
   </div>
 </div>

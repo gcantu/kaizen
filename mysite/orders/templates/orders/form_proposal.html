@@ -6,6 +6,12 @@
     {% csrf_token %}
     {{ form.customer.as_hidden }}
     {{ form.status.as_hidden }}
+    {{ form.order_subtotal.as_hidden }}
+    {{ form.order_tax.as_hidden }}
+    {{ form.order_total.as_hidden }}
+    {{ form.order_down_payment.as_hidden }}
+    {{ form.order_balance.as_hidden }}
+    {{ form.add_tax.as_hidden }}
     <div class="form-row">
       <div class="form-group col-3 col-md-2">
         {{ form.created_date.label_tag }}
