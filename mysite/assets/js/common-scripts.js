@@ -85,6 +85,33 @@ $('#id_order_down_payment').on('keyup',function(){ // input down payment and cal
  $('#order-balance').html(balance);
 });
 
+
+$('#pending-filter').on('click', function() { // show measurement guide in line item form
+   $('.trProposal:contains(Completed)').hide();
+   $('.trProposal:contains(Pending)').show();
+   $("#pending-filter").addClass("active");
+   $("#completed-filter").removeClass("active");
+   $("#all-filter").removeClass("active");
+});
+
+$('#completed-filter').on('click', function() { // show measurement guide in line item form
+   $('.trProposal:contains(Pending)').hide();
+   $('.trProposal:contains(Completed)').show();
+   $("#pending-filter").removeClass("active");
+   $("#completed-filter").addClass("active");
+   $("#all-filter").removeClass("active");
+});
+
+$('#all-filter').on('click', function() { // show measurement guide in line item form
+   $('.trProposal').show();
+   $("#pending-filter").removeClass("active");
+   $("#completed-filter").removeClass("active");
+   $("#all-filter").addClass("active");
+});
+
+
+
+
 // FUNCTIONS
 function showField(i, o, f){ // function to render hidden fields in line item form
   var i = i;
@@ -144,6 +171,5 @@ function showMeasureField(val){ // function to render hidden fields in line item
   }
 
 };
-
 
 }); // Document is ready

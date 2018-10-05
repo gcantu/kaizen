@@ -93,7 +93,7 @@ class shutter_type(models.Model):
 
 
 class proposal(models.Model):
-    STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
+    STATUS_CHOICES = [('Pending', 'Pending'), ('Completed', 'Completed'), ('Deleted', 'Deleted')]
 
     created_date = models.DateTimeField(default=datetime.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)

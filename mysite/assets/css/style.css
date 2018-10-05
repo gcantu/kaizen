@@ -9,6 +9,7 @@
 2.0 Navigation
 		2.1 Links
 		2.2 Main Menu
+		2.3 List Menu
 3.0 Tables
 4.0 Forms
 5.0 Reports
@@ -187,6 +188,35 @@ a:focus, a:active, a:hover {
 
 .main-menu ul {
   padding: 0 10px;
+}
+
+/* 2.3 List Menu
+--------------------------------------------------------------*/
+.list-menu {
+  padding-bottom: 20px;
+}
+
+.list-menu li {
+  border-right: 1px solid #515151;
+
+}
+
+.list-menu li:first-child {
+  border-left: 1px solid #515151;
+}
+
+.list-menu .nav-link {
+	padding: 0 15px;
+}
+
+a.nav-link.active {
+	text-decoration: underline;
+	color: #515151;
+}
+
+.list-menu a:active {
+	text-decoration: underline;
+	color: #515151;
 }
 
 /* 3.0 Tables

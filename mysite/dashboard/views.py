@@ -9,7 +9,8 @@ def Login(request):
 
 
 def Home(request):
-    p = proposal.objects.all()
+    p = proposal.objects.exclude(status="Deleted")
+
     return render(request, 'dashboard/home.html', {'proposals': p})
 
 

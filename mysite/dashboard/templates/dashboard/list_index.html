@@ -1,5 +1,18 @@
 {% load widget_tweaks %}
 
+<div class="list-menu">
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a id="all-filter" class="nav-link active" href="#">All</a>
+    </li>
+    <li class="nav-item">
+      <a id="pending-filter" class="nav-link" href="#">Pending</a>
+    </li>
+    <li class="nav-item">
+      <a id="completed-filter" class="nav-link" href="#">Completed</a>
+    </li>
+  </ul>
+</div>
 
 <table class="textcenter">
   <thead>
@@ -12,7 +25,7 @@
   </thead>
   <tbody>
     {% for p in proposals %}
-      <tr>
+      <tr class="trProposal">
         <td>{{ p.created_date }}</td>
         <td>{{ p.customer }}</td>
         <td>
