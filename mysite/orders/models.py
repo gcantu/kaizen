@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, date
 from django.urls import reverse
 
 
@@ -96,6 +96,7 @@ class proposal(models.Model):
     STATUS_CHOICES = [('Pending', 'Pending'), ('Completed', 'Completed'), ('Deleted', 'Deleted')]
 
     created_date = models.DateTimeField(default=datetime.today)
+    installation_date = models.DateField(default=date.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
@@ -134,7 +135,7 @@ class line_item(models.Model):
     shutter_type = models.ForeignKey(shutter_type, models.SET_NULL, blank=True, null=True)
     location = models.CharField(max_length=100, blank=True)
     mount = models.CharField(max_length=3, choices=MOUNT_CHOICES, blank=True)
-    trim = models.IntegerField(choices=TRIM_CHOICES, blank=True, null=True)
+    trim = models.IntegerField(choices=TRIM_CHOICES, default=0)
     trim_style = models.CharField(max_length=10, choices=TRIM_STYLE_CHOICES, blank=True)
     panels = models.IntegerField(blank=True, null=True)
     t_post = models.IntegerField(blank=True, null=True)
