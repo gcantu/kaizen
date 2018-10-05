@@ -262,10 +262,13 @@ class line_item(models.Model):
 
         num = qty % 2
 
-        if num > 0: # if the number is not even, add 1
-            evenQty = qty + 1
-        else:
+        if (num == 0 or panels == 1):
             evenQty = qty
+        else:
+            evenQty = round(qty) + 1 # if the number is not even, add 1
+
+            if (evenQty % 2 == 1): # if the number is still not even, add 1
+                evenQty = evenQty + 1
 
         if self.height_divider:
             louverQty = evenQty - 1
