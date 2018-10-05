@@ -114,7 +114,7 @@
             <td>{{ item.height_divider|default_if_none:"" }} {{ item.height_divider_fraction_display|default_if_none:"" }}</td>
             <td>{{ item.panels }}</td>
             <td>{{ item.hinges }}</td>
-            <td>{{ item.tpost }}</td>
+            <td>{{ item.t_post|default_if_none:"" }}</td>
           </tr>
         </tbody>
       {% endfor %}
