@@ -35,6 +35,9 @@ def addLineItem(request, pk):
                 li.panels = 1
                 li.louver = 2.5
 
+            if li.finish == 'Paint':
+                li.stain = 'None'
+
             li.save()
 
             return redirect(reverse('orders:add-line-item', kwargs={'pk': pk}))
@@ -91,7 +94,17 @@ def editLineItem(request, pk):
     form = lineItemForm(request.POST or None, instance=data)
 
     if form.is_valid():
-        form.save()
+        li = form.save(commit=False)
+
+        if li.shutter_type_id == 4:
+            li.panels = 1
+            li.louver = 2.5
+
+        if li.finish == 'Paint':
+            li.stain = None
+
+        li.save()
+
         return redirect(reverse('orders:order-summary', kwargs={'pk': data.proposal_id}))
 
     return render(request, 'orders/content.html', {'form': form, 'form_name': 'line_item', 'edit': True, 'id': data.proposal_id})
