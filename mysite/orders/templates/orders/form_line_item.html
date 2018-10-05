@@ -26,11 +26,15 @@
             {{ form.mount.label_tag }}
             {% render_field  form.mount class="custom-select mr-sm-2" %}
             </div>
+            <div class=" col hidden trim-field">
+            {{ form.frame_type.label_tag }}
+            {% render_field  form.frame_type class="custom-select mr-sm-2" %}
+            </div>
             <div class="col-2 hidden trim-field">
             {{ form.trim.label_tag }}
             {% render_field  form.trim class="custom-select mr-sm-2" %}
             </div>
-            <div class="col hidden trim-field">
+            <div class="col-3 hidden trim-field">
             {{ form.trim_style.label_tag }}
             {% render_field  form.trim_style class="custom-select mr-sm-2" %}
             </div>

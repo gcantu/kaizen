@@ -119,6 +119,7 @@ class line_item(models.Model):
     MOUNT_CHOICES = [('Int', 'Interior'), ('Ext', 'Exterior')]
     TRIM_CHOICES = [(0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4')]
     TRIM_STYLE_CHOICES = [('Deco', 'Decorative'), ('Square', 'Square (Smooth)'), ('Round', 'Round (Smooth)'), ('Z', 'Z (Primed)'), ('Other', 'Other')]
+    LFRAME_CHOICES = [('LF 3/4', 'LF 3/4'), ('LF 1"', 'LF 1"')]
     FRACTION_CHOICES = [(0, ''), (.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
     FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
     STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
@@ -146,6 +147,7 @@ class line_item(models.Model):
     tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
     door_handle_cutout = models.CharField(max_length=5, choices=CUTOUT_CHOICES, blank=True)
     resaque_lframe = models.BooleanField(default=False)
+    frame_type = models.CharField(max_length=10, choices=LFRAME_CHOICES, blank=True)
     width = models.IntegerField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
     height_left = models.IntegerField(blank=True, null=True)
@@ -225,13 +227,30 @@ class line_item(models.Model):
     def r(self): # rail
         panels = self.panels
         Lwidth = self.LframeW()
+        tpost = self.t_post if self.t_post else 0
+        frame = self.frame_type
 
-        if panels == 1:
-            rail = Lwidth - 5.6875 # 5 11/16
-        elif panels == 2:
-            rail = ((Lwidth - 1.25) - 8.625) / 2
-        else: # 4 panels
-            rail = (((Lwidth / 2) - 1.75) - 8.625) / 2 # 1 1/4, 8 5/8
+        if tpost > 0:
+            if frame == "LF 3/4":
+                if panels == 2:
+                    rail = (Lwidth / 2) - 5.5 # 5 1/2
+                elif panels == 4:
+                    rail = ((Lwidth / 2) - 9.75) / 2 # 9 3/4
+            else: # LF 1"
+                if panels == 2:
+                    rail = (Lwidth / 2) - 5.75 # 5 3/4
+                elif panels == 4:
+                    rail = ((Lwidth / 2) - 10) / 2
+        else:
+            if panels == 1:
+                rail = Lwidth - 5.6875 # 5 11/16
+            elif panels == 2:
+                rail = ((Lwidth - 1.25) - 8.625) / 2
+            else: # 4 panels
+                rail = (((Lwidth / 2) - 1.75) - 8.625) / 2 # 1 1/4, 8 5/8
+
+
+
         return round(rail, 4)
 
     def l(self): # louver

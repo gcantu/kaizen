@@ -144,6 +144,10 @@
                 <th>Trim: </th>
                 <td>{{ item.get_trim_style_display|default_if_none:"" }}</td>
               {% endif %}
+              {% if item.frame_type %}
+                <th>Frame: </th>
+                <td>{{ item.frame_type|default_if_none:"" }}</td>
+              {% endif %}
           </tbody>
         </table>
       {% endif %}
