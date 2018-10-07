@@ -534,8 +534,6 @@ input[type=number]::-webkit-outer-spin-button {
   border: 0.5px solid #5eb901;
 }
 
-
-
 #tax-button, #confirm-button {
 	padding: 0 5px;
 }
@@ -551,6 +549,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .line-item-table-buttons {
 	display:none;
+}
+
+.icon-btn {
+	color: #f2f2f2;
+	font-size: 20px;
+	padding-right: 5px;
 }
 
 /* 7.0 Images
@@ -594,6 +598,12 @@ h6 {
 	padding-top: 5px;
 	height: 30px;
 	margin-bottom: 5px;
+}
+
+.list-title {
+	font-size: 28px;
+	color: #25b4c1;
+	font-weight: 400;
 }
 
 .list-item-title {
@@ -664,9 +674,12 @@ hr {
 	padding: 0;
 }
 
-
 .no-margin {
 	margin: 0;
+}
+
+.inline {
+	display: inline-block;
 }
 
 /* 11.0 Responsive Structure

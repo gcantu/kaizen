@@ -18,8 +18,10 @@
     <div class="list-section clearfix textcenter">
       {% if status == "Completed" %}
         <p>Do you want to mark this order as completed?</p>
-      {% else %}
+      {% elif status == "Deleted" %}
         <p>Are you sure you want to delete this order?</p>
+      {% else %}
+        <p>Do you want to restore this order?</p>
       {% endif %}
 
 

@@ -1,5 +1,6 @@
 {% load widget_tweaks %}
 
+{% if status != "Deleted" %}
 <div class="row">
   <div class="col">
     <div class="list-menu">
@@ -23,6 +24,9 @@
     </div>
   </div>
 </div>
+{% else %}
+<div class="list-title">Deleted Orders</div>
+{% endif %}
 
 {% for p in proposals %}
   <div class="row">
@@ -35,7 +39,10 @@
           <a class="btn btn-complete" href="{% url 'orders:confirm-status' p.id 'Completed' %}" role="button">&#x2714;</a>
           {% endif %}
 
+          {% if status != "Deleted" %}
           <a class="btn btn-delete" href="{% url 'orders:confirm-status' p.id 'Deleted' %}" role="button">&#x2718;</a>
+          {% endif %}
+
         </div>
         <br>
 
@@ -43,8 +50,15 @@
         <div class="month-field" value="{{ p.created_date.month }}"><b>Created date:</b> {{ p.created_date }}</div>
         <div><b>Installation date:</b> {{ p.installation_date }}</div>
         <br>
-        <div class="rf">
-          <a class="btn" href="{% url 'orders:order-summary' p.id %}" role="button">View</a>
+
+        <div class="row rf">
+          <div class="col">
+            <a class="btn" href="{% url 'orders:order-summary' p.id %}" role="button">View</a>
+
+            {% if status == "Deleted" %}
+              <a class="btn" href="{% url 'orders:confirm-status' p.id 'Pending' %}" role="button">Restore</a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
