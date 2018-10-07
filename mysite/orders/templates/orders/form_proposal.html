@@ -6,38 +6,21 @@
     {% csrf_token %}
     {{ form.customer.as_hidden }}
     {{ form.status.as_hidden }}
+    {{ form.order_subtotal.as_hidden }}
+    {{ form.order_tax.as_hidden }}
+    {{ form.order_total.as_hidden }}
+    {{ form.order_down_payment.as_hidden }}
+    {{ form.order_balance.as_hidden }}
+    {{ form.add_tax.as_hidden }}
     <div class="form-row">
       <div class="form-group col-3 col-md-2">
         {{ form.created_date.label_tag }}
         {% render_field  form.created_date class="form-control" %}
       </div>
-    </div>
-
-    <div class="form-row">
-        <div class="col-4 col-md-2">
-          {{ form.finish.label_tag }}
-          {% render_field  form.finish class="custom-select mr-sm-2" %}
-        </div>
-        <div id="stain-field" class="col-4 col-md-2 hidden">
-          {{ form.stain.label_tag }}
-          {% render_field  form.stain class="custom-select mr-sm-2" %}
-        </div>
-        <div class="col-4 col-md-2">
-          {{ form.color.label_tag }}
-          {% render_field  form.color class="form-control" %}
-        </div>
-        <div class="col-4 col-md-2">
-          {{ form.louver.label_tag }}
-          {% render_field  form.louver class="custom-select mr-sm-2" %}
-        </div>
-        <div class="col-4 col-md-2">
-          {{ form.tilt_rod.label_tag }}
-          {% render_field  form.tilt_rod class="custom-select mr-sm-2" %}
-        </div>
-        <div class="col-4 col-md-2">
-          {{ form.hinge_color.label_tag }}
-          {% render_field  form.hinge_color class="custom-select mr-sm-2" %}
-        </div>
+      <div class="form-group col-3 col-md-2">
+        {{ form.installation_date.label_tag }}
+        {% render_field  form.installation_date class="form-control" %}
+      </div>
     </div>
 
     <div class="form-row">
@@ -55,6 +38,6 @@
         </div>
     </div>
 
-    <input class="btn btn-theme rf" type="submit" value="OK"/>
+    <input class="btn rf" type="submit" value="OK"/>
   </form>
 </div>

@@ -1,4 +1,5 @@
 {% load widget_tweaks %}
+{% load static %}
 
 <p>Line Item Entry Form</p>
 <div class="inner-wrapper">
@@ -6,32 +7,36 @@
     {% csrf_token %}
     {{ form.proposal.as_hidden }}
     <div class="row">
-      <div class = "col-lg-12 col-md-12 col-sm-12">
+      <div class = "col-lg-7 col-md-7 col-sm-7">
         <div class="form-section">
           <div class="form-row">
+            <div class="col-3">
+            {{ form.product.label_tag }}
+            {% render_field  form.product class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-9">
+            {{ form.shutter_type.label_tag }}
+            {% render_field  form.shutter_type class="custom-select mr-sm-2" %}
+            </div>
             <div class="col">
-              {{ form.product.label_tag }}
-              {% render_field  form.product class="custom-select mr-sm-2" %}
+            {{ form.location.label_tag }}
+            {% render_field  form.location class="form-control" %}
             </div>
-            <div class="col-7 col-md-5 col-lg-3">
-              {{ form.shutter_type.label_tag }}
-              {% render_field  form.shutter_type class="custom-select mr-sm-2" %}
+            <div class=" col mount-field">
+            {{ form.mount.label_tag }}
+            {% render_field  form.mount class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-7 col-md-3 col-lg-2">
-              {{ form.location.label_tag }}
-              {% render_field  form.location class="form-control" %}
+            <div class=" col hidden trim-field">
+            {{ form.frame_type.label_tag }}
+            {% render_field  form.frame_type class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-5 col-md-2">
-              {{ form.mount.label_tag }}
-              {% render_field  form.mount class="custom-select mr-sm-2" %}
+            <div class="col-2 hidden trim-field">
+            {{ form.trim.label_tag }}
+            {% render_field  form.trim class="custom-select mr-sm-2" %}
             </div>
-            <div id="trim-field" class="col col-md-2 col-lg-1 hidden trim-field">
-              {{ form.trim.label_tag }}
-              {% render_field  form.trim class="custom-select mr-sm-2" %}
-            </div>
-            <div id="trim-field" class="col-7 col-md-5 col-lg-2 hidden trim-field">
-              {{ form.trim_style.label_tag }}
-              {% render_field  form.trim_style class="custom-select mr-sm-2" %}
+            <div class="col-3 hidden trim-field">
+            {{ form.trim_style.label_tag }}
+            {% render_field  form.trim_style class="custom-select mr-sm-2" %}
             </div>
           </div>
         </div>
@@ -52,51 +57,138 @@
             <div class="col-3 col-md-2 no-label height-field">
               {% render_field  form.height_fraction class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2 height-center-field hidden">
-              {{ form.height_center.label_tag }}
-              {% render_field  form.height_center class="form-control" %}
+          </div>
+          <div class="form-row">
+            <div class="col-3 col-md-2 door-field hidden">
+              <label>Door Knob</label>
+              {% render_field  form.height_door_knob class="form-control" %}
             </div>
-            <div class="col-3 col-md-2 no-label height-center-field hidden">
-              {% render_field  form.height_center_fraction class="custom-select mr-sm-2" %}
+            <div class="col-3 col-md-2 no-label door-field hidden">
+              {% render_field  form.height_door_knob_fraction class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2 height-lr-field hidden">
+            <div class="col-4 door-field hidden">
+              {{ form.door_handle_cutout.label_tag }}
+              {% render_field  form.door_handle_cutout class="custom-select mr-sm-2" %}
+            </div>
+            <div class="col-6 door-field hidden">
+              <label>Resaque Lframe</label>
+              {% render_field  form.resaque_lframe class="mr-sm-2" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section height-center-field hidden">
+          <div class="form-row">
+            <div class="col-3 height-lr-field hidden">
               {{ form.height_left.label_tag }}
               {% render_field  form.height_left class="form-control" %}
             </div>
             <div class="col-3 col-md-2 no-label height-lr-field hidden">
               {% render_field  form.height_left_fraction class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2 height-lr-field hidden">
+            <div class="col-3 height-m-field hidden">
+              {{ form.height_middle.label_tag }}
+              {% render_field  form.height_middle class="form-control" %}
+            </div>
+            <div class="col-3 col-md-2 no-label height-m-field hidden">
+              {% render_field  form.height_middle_fraction class="custom-select mr-sm-2" %}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-3 height-lr-field hidden">
               {{ form.height_right.label_tag }}
               {% render_field  form.height_right class="form-control" %}
             </div>
             <div class="col-3 col-md-2 no-label height-lr-field hidden">
               {% render_field  form.height_right_fraction class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2 height-dk-field hidden">
-              <label>Door Knob</label>
-              {% render_field  form.height_door_knob class="form-control" %}
+            <div class="col-3 height-center-field hidden">
+              {{ form.height_center.label_tag }}
+              {% render_field  form.height_center class="form-control" %}
             </div>
-            <div class="col-3 col-md-2 no-label height-dk-field hidden">
-              {% render_field  form.height_door_knob_fraction class="custom-select mr-sm-2" %}
+            <div class="col-3 col-md-2 no-label height-center-field hidden">
+              {% render_field  form.height_center_fraction class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2">
-              {{ form.panels.label_tag }}
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-row">
+            <div class="col-3 col-md-2 panel-field">
+              <label>Doors</label>
               {% render_field  form.panels class="form-control" %}
             </div>
-            <div class="col-3 col-md-2">
+            <div class="col-3 col-md-2 tpost-field">
+              <label># of T-posts</label>
+              {% render_field  form.t_post class="form-control" %}
+            </div>
+            <div class="col-3">
               {{ form.hinges.label_tag }}
               {% render_field  form.hinges class="custom-select mr-sm-2" %}
             </div>
-            <div class="col-3 col-md-2">
+            <div class="col-3">
               {{ form.price_per_sq_ft.label_tag }}
               {% render_field  form.price_per_sq_ft class="form-control" %}
             </div>
           </div>
         </div>
       </div>
+
+      <div class = "col-lg-5 col-md-5 col-sm-5">
+        <div class="form-section textcenter shutter-model-img-section">
+          <img class="shutter-model-img" src="" alt="">
+        </div>
+
+        <div class="form-section textcenter shutter-model-img-guide-section" style="display: none;">
+          <img class="shutter-model-img-guide" src="" alt="">
+        </div>
+
+        <div class="form-section">
+          <div class="form-row">
+              <div class="col-4">
+                {{ form.finish.label_tag }}
+                {% render_field  form.finish class="custom-select mr-sm-2" %}
+              </div>
+              <div id="stain-field" class="col-4 hidden">
+                {{ form.stain.label_tag }}
+                {% render_field  form.stain class="custom-select mr-sm-2" %}
+              </div>
+              <div class="col-4">
+                {{ form.color.label_tag }}
+                {% render_field  form.color class="form-control" %}
+              </div>
+              <div class="col-3 louver-field">
+                {{ form.louver.label_tag }}
+                {% render_field  form.louver class="custom-select mr-sm-2" %}
+              </div>
+              <div class="col">
+                {{ form.tilt_rod.label_tag }}
+                {% render_field  form.tilt_rod class="custom-select mr-sm-2" %}
+              </div>
+              <div class="col-5">
+                {{ form.hinge_color.label_tag }}
+                {% render_field  form.hinge_color class="custom-select mr-sm-2" %}
+              </div>
+          </div>
+        </div>
+
+        <div class="form-section divider-field" style="display:none;">
+          <div class="form-row">
+            <div class="col-4">
+              <label>Divider Height</label>
+              {% render_field  form.height_divider class="form-control" %}
+            </div>
+            <div class="col-3 no-label">
+              {% render_field  form.height_divider_fraction class="custom-select mr-sm-2" %}
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <input class="btn btn-theme rf" type="submit" value="Add"/>
+    <input class="btn rf" type="submit" value="Add"/>
   </form>
+  <button id="divider-button" class="btn btn-yellow">Add/Remove Divider</button>
+  <button id="measurement-guide-button" class="btn btn-yellow">Show/Hide Measurement Guide</button>
 </div>

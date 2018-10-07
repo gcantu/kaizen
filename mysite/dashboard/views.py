@@ -9,13 +9,12 @@ def Login(request):
 
 
 def Home(request):
-    p = proposal.objects.all()
-    return render(request, 'dashboard/home.html', {'proposals': p})
+    p = proposal.objects.filter(status="Pending")
+
+    return render(request, 'dashboard/home.html', {'proposals': p, 'status': 'Pending'})
 
 
-def load_letterhead(request):
-    with open("assets/company.json", "r") as read_file:
-        data = json.load(read_file)
-        company = data['company']
+def updateList(request, status):
+    p = proposal.objects.filter(status=status)
 
-    return render(request, 'dashboard/letterhead.html', {'company': company})
+    return render(request, 'dashboard/home.html', {'proposals': p, 'status': status})

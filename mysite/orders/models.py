@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date
+from datetime import datetime, date
 from django.urls import reverse
 
 
@@ -93,23 +93,20 @@ class shutter_type(models.Model):
 
 
 class proposal(models.Model):
-    FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
-    STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
-    LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
-    HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
-    TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
-    STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
-    created_date = models.DateField(default=date.today)
+    STATUS_CHOICES = [('Pending', 'Pending'), ('Completed', 'Completed'), ('Deleted', 'Deleted')]
+
+    created_date = models.DateTimeField(default=datetime.today)
+    installation_date = models.DateField(default=date.today)
     customer = models.ForeignKey(customer, models.SET_NULL, blank=True, null=True)
     agents = models.ManyToManyField(agent)
     measured_by = models.ManyToManyField(agent, related_name='proposal_measured_by')
-    finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
-    stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
-    color = models.CharField(max_length=100, blank=True)
-    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
-    hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
-    tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
     notes = models.TextField(blank=True)
+    order_subtotal = models.FloatField(default=0)
+    order_tax = models.FloatField(default=0)
+    order_total = models.FloatField(default=0)
+    order_down_payment = models.FloatField(default=0)
+    order_balance = models.FloatField(default=0)
+    add_tax = models.BooleanField(default=False)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
 
     def get_absolute_url(self):
@@ -123,18 +120,35 @@ class line_item(models.Model):
     MOUNT_CHOICES = [('Int', 'Interior'), ('Ext', 'Exterior')]
     TRIM_CHOICES = [(0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4')]
     TRIM_STYLE_CHOICES = [('Deco', 'Decorative'), ('Square', 'Square (Smooth)'), ('Round', 'Round (Smooth)'), ('Z', 'Z (Primed)'), ('Other', 'Other')]
+    LFRAME_CHOICES = [('LF 3/4', 'LF 3/4'), ('LF 1"', 'LF 1"')]
     FRACTION_CHOICES = [(0, ''), (.125, '1/8'), (.25, '1/4'), (.375, '3/8'), (.5, '1/2'), (.625, '5/8'), (.75, '3/4'), (.875, '7/8')]
+    FINISH_CHOICES = [('Paint', 'Paint'), ('Stain', 'Stain')]
+    STAIN_CHOICES = [('Ash', 'Ash'), ('Basswood', 'Basswood'), ('Knotty Alder', 'Knotty Alder'), ('Maple', 'Maple'), ('Pine', 'Pine')]
+    LOUVER_CHOICES = [(2.5, '2 1/2'), (3.5, '3 1/2'), (4.5, '4 1/2')]
     HINGE_CHOICES = [('LR', 'Left/Right'), ('L', 'Left'), ('R', 'Right')]
+    HINGE_COLOR_CHOICES = [('Bronze', 'Bronze'), ('Nickel', 'Nickel'), ('White', 'White'), ('Bright White', 'Bright-White'), ('Off White', 'Off-White'), ('No Hinges', 'No Hinges'), ('Other', 'Other')]
+    TILT_ROD_CHOICES = [('Normal', 'Normal'), ('Side and Back', 'Side and Back'), ('Aluminum', 'Aluminum')]
+    CUTOUT_CHOICES = [('Mosca', 'Mosca'), ('Luna', 'Luna'), ('Sol', 'Sol')]
 
     proposal = models.ForeignKey(proposal, models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(product, models.SET_NULL, blank=True, null=True)
     shutter_type = models.ForeignKey(shutter_type, models.SET_NULL, blank=True, null=True)
     location = models.CharField(max_length=100, blank=True)
     mount = models.CharField(max_length=3, choices=MOUNT_CHOICES, blank=True)
-    trim = models.IntegerField(choices=TRIM_CHOICES, blank=True, null=True)
+    trim = models.IntegerField(choices=TRIM_CHOICES, default=0)
     trim_style = models.CharField(max_length=10, choices=TRIM_STYLE_CHOICES, blank=True)
     panels = models.IntegerField(blank=True, null=True)
+    t_post = models.IntegerField(blank=True, null=True)
+    finish = models.CharField(max_length=5, choices=FINISH_CHOICES, blank=True, null=True)
+    stain = models.CharField(max_length=15, choices=STAIN_CHOICES, blank=True, null=True)
+    color = models.CharField(max_length=100, blank=True)
+    louver = models.FloatField(choices=LOUVER_CHOICES, blank=True, null=True)
     hinges = models.CharField(max_length=2, choices=HINGE_CHOICES, blank=True)
+    hinge_color = models.CharField(max_length=15, choices=HINGE_COLOR_CHOICES, blank=True)
+    tilt_rod = models.CharField(max_length=15, choices=TILT_ROD_CHOICES, blank=True)
+    door_handle_cutout = models.CharField(max_length=5, choices=CUTOUT_CHOICES, blank=True)
+    resaque_lframe = models.BooleanField(default=False)
+    frame_type = models.CharField(max_length=10, choices=LFRAME_CHOICES, blank=True)
     width = models.IntegerField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
     height_left = models.IntegerField(blank=True, null=True)
@@ -147,27 +161,49 @@ class line_item(models.Model):
     height_center_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     height_door_knob = models.IntegerField(blank=True, null=True)
     height_door_knob_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_divider = models.IntegerField(blank=True, null=True)
+    height_divider_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
+    height_middle = models.IntegerField(blank=True, null=True)
+    height_middle_fraction = models.FloatField(choices=FRACTION_CHOICES, default=0)
     price_per_sq_ft = models.FloatField(blank=True, null=True)
 
 
-    def modHeight(self): # calculate height for shutter model #7: round (square+arch)
-        if self.shutter_type_id == 3:
-            h = self.height_center - (self.width / 2)
-            return (h)
+    def modHeight(self):
+        # adjust height for:
+        # shutter model #7: height center - (width / 2)
+        # shutter model #8: height center - width
+        # shutter model #12: height center
+        h_c = none_sum(self.height_center, self.height_center_fraction)
+        w = self.width + self.width_fraction
+
+        if self.shutter_type_id == 7:
+            h = h_c - (w / 2)
+        elif self.shutter_type_id == 8:
+            h = h_c - w
+        elif self.shutter_type_id == 12:
+            h = h_c
         else:
-            h = self.height
-            return (h)
+            h = none_sum(self.height, self.height_fraction)
+        return (h)
 
     # L frame width and height
     # ------------------------------------------------------
     def LframeW(self): # L frame width
         width = self.width + self.width_fraction
-        Lwidth = width - 0.375 # -3/8
+
+        if self.shutter_type_id == 4:
+            Lwidth = width
+        else:
+            Lwidth = width - 0.375 # -3/8
         return round(Lwidth, 4)
 
     def LframeH(self): # L frame height
-        height = none_sum(self.modHeight(), self.height_fraction)
-        Lheight = (height - 0.25) if height > 0 else 0 # -1/4
+        height = self.modHeight()
+
+        if self.shutter_type_id == 4:
+            Lheight = height
+        else:
+            Lheight = (height - 0.25) if height > 0 else 0 # -1/4
         return round(Lheight, 4)
 
     # L frame height center, left and right
@@ -192,13 +228,30 @@ class line_item(models.Model):
     def r(self): # rail
         panels = self.panels
         Lwidth = self.LframeW()
+        tpost = self.t_post if self.t_post else 0
+        frame = self.frame_type
 
-        if panels == 1:
-            rail = Lwidth - 5.6875 # 5 11/16
-        elif panels == 2:
-            rail = ((Lwidth - 1.25) - 8.625) / 2
-        else: # 4 panels
-            rail = (((Lwidth / 2) - 1.75) - 8.625) / 2 # 1 1/4, 8 5/8
+        if tpost > 0:
+            if frame == "LF 3/4":
+                if panels == 2:
+                    rail = (Lwidth / 2) - 5.5 # 5 1/2
+                elif panels == 4:
+                    rail = ((Lwidth / 2) - 9.75) / 2 # 9 3/4
+            else: # LF 1"
+                if panels == 2:
+                    rail = (Lwidth / 2) - 5.75 # 5 3/4
+                elif panels == 4:
+                    rail = ((Lwidth / 2) - 10) / 2
+        else:
+            if panels == 1:
+                rail = Lwidth - 5.6875 # 5 11/16
+            elif panels == 2:
+                rail = ((Lwidth - 1.25) - 8.625) / 2
+            else: # 4 panels
+                rail = (((Lwidth / 2) - 1.75) - 8.625) / 2 # 1 1/4, 8 5/8
+
+
+
         return round(rail, 4)
 
     def l(self): # louver
@@ -229,10 +282,18 @@ class line_item(models.Model):
 
         num = qty % 2
 
-        if num > 0: # if the number is not even, add 1
-            louverQty = qty + 1
+        if (num == 0 or panels == 1):
+            evenQty = qty
         else:
-            louverQty = qty
+            evenQty = round(qty) + 1 # if the number is not even, add 1
+
+            if (evenQty % 2 == 1): # if the number is still not even, add 1
+                evenQty = evenQty + 1
+
+        if self.height_divider:
+            louverQty = evenQty - 1
+        else:
+            louverQty = evenQty
 
         return round(louverQty)
 
@@ -333,22 +394,22 @@ class line_item(models.Model):
         new = as_fraction(prev)
         return new if prev > 0 else None
 
-    def rail(self):
+    def railMeasure(self):
         prev = self.r()
         new = as_fraction(prev)
         return new
 
-    def louver(self):
+    def louverMeasure(self):
         prev = self.l()
         new = as_fraction(prev)
         return new
 
-    def stile(self):
+    def stileMeasure(self):
         prev = self.s()
         new = as_fraction(prev)
         return new
 
-    def tiltRod(self):
+    def tiltRodMeasure(self):
         prev = self.tr()
         new = as_fraction(prev)
         return new
@@ -367,6 +428,13 @@ class line_item(models.Model):
 
         total_price = self.price_per_sq_ft * sq_ft
         return round(total_price)
+
+    # update save method: capitalize location and color
+    # ------------------------------------------------------
+    def save(self, *args, **kwargs):
+        self.location = self.location.capitalize()
+        self.color = self.color.capitalize()
+        return super(line_item, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('line-item-detail', kwargs={'pk': self.pk})

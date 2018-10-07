@@ -1,0 +1,64 @@
+<div class="row">
+  <div class = "col-lg-12 col-md-12 col-sm-12">
+    <table id="line-item-summary-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for item in lineitem %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ item.location }}</td>
+          <td>
+            {{ item.product }}, {{ item.shutter_type }} <br><br>
+            <b>Finish: </b>{{ item.stain|default_if_none:"" }} {{ item.finish }} - {{ item.color }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>Mount: </b>{{ item.mount }} {{ item.trim|default_if_none:"" }} {{ item.get_trim_style_display|default_if_none:"" }}<br>
+            <b>Doors: </b>{{ item.panels }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Louver: </b>{{ item.get_louver_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Hinge Color:
+            </b>{{ item.hinge_color }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Tilt rod: </b>{{ item.tilt_rod }}<br>
+          </td>
+          <td>$ {{ item.totalPrice }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row pb">
+  <div class="col-lg-8 col-md-8 col-sm-12">
+    <div class="report-section">
+      <h5>Acceptance of Order: </h5>
+      <p>
+        The above prices, specifications and conditions are
+        satisfactory and are hereby accepted. You are authorized
+        to do the work as specified. I am fully aware that there are
+        <b>NO CANCELLATIONS</b> and my deposit will not be refunded
+        under no circumstances. Payment will be made as outlined
+        and agreed upon. By signing below I agree to the terms and
+        conditions specified above.
+      </p>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="report-section">
+      {% include "orders/detail_price.html" %}
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row justify-content-end">
+  <div class="col-4">
+    <p class="signature textcenter">Customer Signature</p>
+  </div>
+  <div class="col-2">
+    <p class="signature textcenter">Date</p>
+  </div>
+</div>

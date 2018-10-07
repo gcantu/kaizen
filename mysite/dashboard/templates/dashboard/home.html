@@ -6,20 +6,16 @@
 
 {% block logolink %}{% url 'dashboard:home' %}{% endblock %}
 
-{% block navbar %}
-<div class="row main-menu justify-content-end noprint">
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'dashboard:home' %}">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'orders:add-customer' %}">New Proposal</a>
-    </li>
-  </ul>
-</div>
-{% endblock %} <!-- END navigation bar -->
-
-
 {% block content %}
-  {% include "dashboard/list_index.html" %}
+<div class="inner-wrapper">
+  <div class="row">
+    <div class="col-md-2">
+      {% include "dashboard/side_menu.html" %}
+    </div>
+
+    <div class="col-md-6 offset-md-2">
+      {% include "dashboard/list_index.html" %}
+    </div>
+  </div>
+</div>
 {% endblock %} <!-- END content -->

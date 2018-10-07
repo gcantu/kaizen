@@ -1,26 +1,45 @@
 
-<p>
-  <div>
-    <b>Date:</b> {{ proposal.created_date }}
-  </div>
-  <div id="proposalId" value="{{ proposal.id }}">
-    <b>Proposal ID:</b> {{ proposal.id }}
-  </div>
+<table class="detail-table">
+  <tbody>
+    <tr>
+      <th>Proposal ID: </th>
+      <td>
+        <div id="proposalId" value="{{ proposal.id }}">{{ proposal.id }}</div>
+      </td>
+    </tr>
+    
+    <tr>
+      <th>Created Date: </th>
+      <td>{{ proposal.created_date.date }}</td>
+    </tr>
 
-  <b>Agents: </b>
-  {% for agent in agents %}
-    {{ agent.first_name }} {{ agent.last_name }}
-    {% if forloop.last %}
-    {% else %},&nbsp;
-    {% endif %}
-  {% endfor %}
+    <tr>
+      <th>Installation Date: </th>
+      <td>{{ proposal.installation_date }}</td>
+    </tr>
 
-  <br>
-  <b>Measured by: </b>
-  {% for agent in measuredby %}
-    {{ agent.first_name }} {{ agent.last_name }}
-    {% if forloop.last %}
-    {% else %},&nbsp;
-    {% endif %}
-  {% endfor %}
-</p>
+    <tr>
+      <th>Agents: </th>
+      <td>
+        {% for agent in agents %}
+          {{ agent.first_name }} {{ agent.last_name }}
+          {% if forloop.last %}
+          {% else %},&nbsp;
+          {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Measured by: </th>
+      <td>
+        {% for agent in measuredby %}
+          {{ agent.first_name }} {{ agent.last_name }}
+          {% if forloop.last %}
+          {% else %},&nbsp;
+          {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+  </tbody>
+</table>

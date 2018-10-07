@@ -1,79 +1,169 @@
 {% load widget_tweaks %}
+{% load static %}
 
-<div class="line-item-table-wrapper">
-  <div class="row mt">
-    <div class = "col-lg-12 col-md-12 col-sm-12">
-      <table id="manufacturing-table" class="textcenter m-table">
-        <thead>
-          <tr>
-            <th colspan=3></th>
-            <th colspan=2>L-Frame</th>
-            <th colspan=4>Height</th>
-            <th colspan=2>Louver</th>
-            <th colspan=2>Rail</th>
-            <th colspan=2>Stile</th>
-            <th colspan=4></th>
-          </tr>
-          <tr>
-            <th></th>
-            <th>Product Type</th>
-            <th>Location</th>
-            <th>Width</th>
-            <th>Height</th>
-            <th>Center</th>
-            <th>Left</th>
-            <th>Right</th>
-            <th>Door Knob</th>
-            <th>Qty</th>
-            <th>Measure</th>
-            <th>Qty</th>
-            <th>Measure</th>
-            <th>Qty</th>
-            <th>Measure</th>
-            <th>Trim</th>
-            <th>Tilt Rod</th>
-            <th>Panels</th>
-            <th>Hinges</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in lineitem %}
-            <tr>
-              <td>{{ forloop.counter }}</td>
-              <td>{{ item.shutter_type }}</td>
-              <td>{{ item.location }}</td>
-              <td>{{ item.LframeWidth }}</td>
-              <td>{{ item.LframeHeight|default_if_none:"" }}</td>
-              <td>{{ item.LframeHeightCenter|default_if_none:"" }}</td>
-              <td>{{ item.LframeHeightLeft|default_if_none:"" }}</td>
-              <td>{{ item.LframeHeightRight|default_if_none:"" }}</td>
-              <td>{{ item.height_door_knob|default_if_none:"" }} {{ item.height_door_knob_fraction_display|default_if_none:"" }}</td>
-              <td>{{ item.louverQty }}</td>
-              <td>{{ item.louver }}</td>
-              <td>{{ item.railQty }}</td>
-              <td>{{ item.rail }}</td>
-              <td>{{ item.stileQty }}</td>
-              <td>{{ item.stile }}</td>
-              <td>{{ item.trim }}</td>
-              <td>{{ item.tiltRod }}</td>
-              <td>{{ item.panels }}</td>
-              <td>{{ item.hinges }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
 
 <br>
+{% regroup lineitem by shutter_type_id as lineitem_list %}
 
-<div class="row mt">
-  <div class = "col-lg-8 col-md-8 col-sm-12">
-    <table id="manufacturing-materials-table" class="textcenter m-table">
-      <thead>
-        <th colspan=9>Materials needed:</th>
-      </thead>
+{% for i in lineitem_list %}
+<div class="section-wrapper no-padding">
+  {% for item in i.list %}
+
+    {% if forloop.first %}
+      <div class="section-title">
+      {{ item.shutter_type }}
+    </div> <!-- END section title -->
+      <div class="manuf-section-wrapper">
+      <div class="row">
+      <div class="col-2 no-padding img-col">
+        {% with img_id=i.grouper|stringformat:"s" %}
+        {% with 'img/model'|add:img_id|add:'.png' as image_static %}
+          <img class="shutter-model-img" src="{% static image_static %}" alt="JM Curtain Designer and Blinds L.L.C">
+        {% endwith %}
+        {% endwith %}
+      </div> <!-- END image column -->
+    {% endif %}
+
+  {% endfor %}
+
+    <div class="col no-padding">
+      <table class="table-theme02">
+      {% for item in i.list %}
+      {% if forloop.first %}
+        <thead>
+          <tr>
+            <th colspan=2></th>
+            <th colspan=2 class="left-border">L Frame</th>
+
+            {% if i.grouper > 5 %}
+            <th colspan=3 class="left-border">Height</th>
+            {% endif %}
+
+            {% if i.grouper == 4 %}
+            <th colspan=2 class="left-border">Door Handle</th>
+            <th  class="left-border">Resaque</th>
+            {% endif %}
+
+            <th colspan=2 class="left-border">Louver</th>
+            <th colspan=2 class="left-border">Rail</th>
+            <th colspan=2 class="left-border">Stile</th>
+            <th colspan=6 class="left-border"></th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Location</th>
+            <th class="left-border">Width</th>
+            <th>Height</th>
+
+            {% if i.grouper > 5 %}
+            <th class="left-border">Center</th>
+            <th>Left</th>
+            <th>Right</th>
+            {% endif %}
+
+            {% if i.grouper == 4 %}
+            <th class="left-border">Height</th>
+            <th>Cutout</th>
+            <th  class="left-border">L Frame</th>
+            {% endif %}
+
+            <th class="left-border">Qty</th>
+            <th>Medida</th>
+            <th class="left-border">Qty</th>
+            <th>Medida</th>
+            <th class="left-border">Qty</th>
+            <th>Medida</th>
+            <th class="left-border">Trim</th>
+            <th>Trod</th>
+            <th>Divider</th>
+            <th>Doors</th>
+            <th>Hinges</th>
+            <th># Tpost</th>
+          </tr>
+        </thead>
+      {% endif %}
+        <tbody>
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ item.location }}</td>
+            <td class="left-border">{{ item.LframeWidth }}</td>
+            <td>{{ item.LframeHeight|default_if_none:"" }}</td>
+
+            {% if i.grouper > 5 %}
+            <td class="left-border">{{ item.LframeHeightCenter|default_if_none:"" }}</td>
+            <td>{{ item.LframeHeightLeft|default_if_none:"" }}</td>
+            <td>{{ item.LframeHeightRight|default_if_none:"" }}</td>
+            {% endif %}
+
+            {% if i.grouper == 4 %}
+            <td class="left-border">{{ item.height_door_knob|default_if_none:"" }} {{ item.height_door_knob_fraction_display|default_if_none:"" }}</td>
+            <td>{{ item.door_handle_cutout|default_if_none:"" }}</td>
+            <td  class="left-border">{{ item.resaque_lframe|yesno:"Yes," }}</td>
+            {% endif %}
+
+
+
+            <td class="left-border">{{ item.louverQty }}</td>
+            <td>{{ item.louverMeasure }}</td>
+            <td class="left-border">{{ item.railQty }}</td>
+            <td>{{ item.railMeasure }}</td>
+            <td class="left-border">{{ item.stileQty }}</td>
+            <td>{{ item.stileMeasure }}</td>
+            <td class="left-border">{{ item.trim|default_if_none:"" }}</td>
+            <td>{{ item.tiltRodMeasure }}</td>
+            <td>{{ item.height_divider|default_if_none:"" }} {{ item.height_divider_fraction_display|default_if_none:"" }}</td>
+            <td>{{ item.panels }}</td>
+            <td>{{ item.hinges }}</td>
+            <td>{{ item.t_post|default_if_none:"" }}</td>
+          </tr>
+        </tbody>
+      {% endfor %}
+      </table> <!-- END table -->
+
+      <br>
+
+      {% for item in i.list %}
+      {% if forloop.first %}
+        <table class="table-theme03 la">
+          <thead>
+            <tr>
+              Order Details:
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Finish: </th>
+              <td>{{ item.stain|default_if_none:"" }} {{ item.finish }} - {{ item.color }}</td>
+              <th>Louver: </th>
+              <td>{{ item.get_louver_display }}</td>
+              <th>Trod: </th>
+              <td>{{ item.tilt_rod }}</td>
+              <th>Hinge Color: </th>
+              <td>{{ item.hinge_color }}</td>
+              {% if item.trim_style %}
+                <th>Trim: </th>
+                <td>{{ item.get_trim_style_display|default_if_none:"" }}</td>
+              {% endif %}
+              {% if item.frame_type %}
+                <th>Frame: </th>
+                <td>{{ item.frame_type|default_if_none:"" }}</td>
+              {% endif %}
+          </tbody>
+        </table>
+      {% endif %}
+      {% endfor %}
+    </div> <!-- END column -->
+  </div> <!-- END row -->
+</div>
+</div>
+<br>
+{% endfor %}
+
+
+<div class="row">
+  <div class="col-9">
+    <h6>MATERIALS:</h6>
+    <table class="table-theme03 mb">
       <tbody>
         <tr>
           <td>L frame</td>
@@ -81,7 +171,7 @@
           <td>Rail</td>
           <td>Stile</td>
           <td>Tilt Rod</td>
-          <td>Panels</td>
+          <td>Doors</td>
           <td>Hinges</td>
           <td>Magnets</td>
           <td>Screws</td>
@@ -96,34 +186,6 @@
           <td>{{ materials.totalHinges }}</td>
           <td>{{ materials.totalMagnets }}</td>
           <td>{{ materials.totalScrews }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="row mt">
-  <div class = "col-lg-8 col-md-8 col-sm-12">
-    <table id="manufacturing-details-table" class="textcenter m-table">
-      <thead>
-        <th colspan=7>Order Details:</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Finish</td>
-          <td>Stain</td>
-          <td>Color</td>
-          <td>Louver</td>
-          <td>Tilt Rod</td>
-          <td>Hinge Color</td>
-        </tr>
-        <tr>
-          <td>{{ proposal.finish }}</td>
-          <td>{{ proposal.stain }}</td>
-          <td>{{ proposal.color }}</td>
-          <td>{{ proposal.get_louver_display }}</td>
-          <td>{{ proposal.tilt_rod }}</td>
-          <td>{{ proposal.hinge_color }}</td>
         </tr>
       </tbody>
     </table>

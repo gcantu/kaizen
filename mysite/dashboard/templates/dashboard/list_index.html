@@ -1,43 +1,67 @@
 {% load widget_tweaks %}
+{% load humanize %}
 
+{% if status != "Deleted" %}
+<div class="row">
+  <div class="col">
+    <div class="list-menu">
+      <ul class="nav">
+        {% if status == "Pending" %}
+        <li class="nav-item">
+          <a id="active-filter" class="nav-link active" href="{% url 'dashboard:update-list' 'Pending' %}">Active</a>
+        </li>
+        <li class="nav-item">
+          <a id="completed-filter" class="nav-link" href="{% url 'dashboard:update-list' 'Completed' %}">Completed</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a id="active-filter" class="nav-link" href="{% url 'dashboard:update-list' 'Pending' %}">Active</a>
+        </li>
+        <li class="nav-item">
+          <a id="completed-filter" class="nav-link active" href="{% url 'dashboard:update-list' 'Completed' %}">Completed</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="list-title">Deleted Orders</div>
+{% endif %}
 
-<table class="textcenter">
-  <thead>
-    <th>Created Date</th>
-    <th>Customer</th>
-    <th>Agents</th>
-    <th>Measured By</th>
-    <th>Status</th>
-    <th></th>
-  </thead>
-  <tbody>
-    {% for p in proposals %}
-      <tr>
-        <td>{{ p.created_date }}</td>
-        <td>{{ p.customer }}</td>
-        <td>
-          {% for a in p.agents.all %}
-            {{ a }}
-            {% if forloop.last %}
-            {% else %},&nbsp;
+{% for p in proposals %}
+  <div class="row">
+    <div class="col">
+      <div class="list-section clearfix" value="{{ p.status }}">
+        <div class="lf"><h6 class="no-margin list-item-title">{{ p.customer }} - ${{ p.order_total|floatformat|intcomma }}</h6></div>
+
+        <div class="rf">
+          {% if status == "Pending" %}
+          <a class="btn btn-complete" href="{% url 'orders:confirm-status' p.id 'Completed' %}" role="button">&#x2714;</a>
+          {% endif %}
+
+          {% if status != "Deleted" %}
+          <a class="btn btn-delete" href="{% url 'orders:confirm-status' p.id 'Deleted' %}" role="button">&#x2718;</a>
+          {% endif %}
+
+        </div>
+        <br>
+
+        <br>
+        <div class="month-field" value="{{ p.created_date.month }}"><b>Created date:</b> {{ p.created_date }}</div>
+        <div><b>Installation date:</b> {{ p.installation_date }}</div>
+        <br>
+
+        <div class="row rf">
+          <div class="col">
+            <a class="btn" href="{% url 'orders:order-summary' p.id %}" role="button">View</a>
+
+            {% if status == "Deleted" %}
+              <a class="btn" href="{% url 'orders:confirm-status' p.id 'Pending' %}" role="button">Restore</a>
             {% endif %}
-          {% endfor %}
-        </td>
-        <td>
-          {% for m in p.measured_by.all %}
-            {{ m }}
-            {% if forloop.last %}
-            {% else %},&nbsp;
-            {% endif %}
-          {% endfor %}
-        </td>
-        <td>{{ p.status }}</td>
-        <td>
-          <button class="btn btn-theme">
-            <a class="btn btn-theme" href="{% url 'orders:order-summary' p.id %}">View</a>
-          </button>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}

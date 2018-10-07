@@ -1,4 +1,4 @@
-{% extends "dashboard/home.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -6,23 +6,31 @@
 
 {% block content %}
 <div class="section-wrapper form">
+  {% if edit or form_name == 'line_item' %}
+  <button class="btn rf">
+    <a  href="{% url 'orders:order-summary' id %}">Go Back</a>
+  </button>
+  {% endif %}
+
   {% if form_name == 'customer' %}
     {% include 'orders/form_customer.html' %}
   {% elif form_name == 'proposal' %}
     {% include 'orders/form_proposal.html' %}
-  {% else %}
+  {% elif form_name == 'line_item' %}
     {% include 'orders/form_line_item.html' %}
+  {% else %}
+    {% include 'orders/form_price.html' %}
   {% endif %}
 </div>
 
-{% if form_name != 'customer' and form_name != 'line_item_edit' %}
+{% if form_name != 'customer' and not edit %}
 <div class="section-wrapper">
   <div class="inner-wrapper">
     <p>Order Summary</p>
     {% include 'orders/detail_line_item.html' %}
     <br>
     {% if form_name == 'line_item' %}
-    <button class="btn btn-theme rf">
+    <button class="btn rf">
       <a href="{% url 'orders:add-proposal' proposal_id %}">Next</a>
     </button>
     {% endif %}
