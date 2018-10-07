@@ -9,7 +9,11 @@
 {% block content %}
 <div class="inner-wrapper">
     <div class="row">
-      <div class="col-md-8 offset-md-1">
+      <div class="col-md-2">
+        {% include "dashboard/side_menu.html" %}
+      </div>
+
+      <div class="col-md-6 offset-md-2">
         {% include "dashboard/list_index.html" %}
       </div>
     </div>

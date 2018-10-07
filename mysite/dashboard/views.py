@@ -9,6 +9,12 @@ def Login(request):
 
 
 def Home(request):
-    p = proposal.objects.exclude(status="Deleted")
+    p = proposal.objects.filter(status="Pending")
 
-    return render(request, 'dashboard/home.html', {'proposals': p})
+    return render(request, 'dashboard/home.html', {'proposals': p, 'status': 'Pending'})
+
+
+def updateList(request, status):
+    p = proposal.objects.filter(status=status)
+
+    return render(request, 'dashboard/home.html', {'proposals': p, 'status': status})

@@ -86,27 +86,14 @@ $('#id_order_down_payment').on('keyup',function(){ // input down payment and cal
 });
 
 
-$('#pending-filter').on('click', function() { // show measurement guide in line item form
-   $('.trProposal:contains(Completed)').hide();
-   $('.trProposal:contains(Pending)').show();
-   $("#pending-filter").addClass("active");
-   $("#completed-filter").removeClass("active");
-   $("#all-filter").removeClass("active");
-});
+$('#monthFilter').on('change', function() {
+  var selectedItem = $(this).val();
+  $( "div.month-field[value='" + selectedItem + "']" ).parent().show();
+  $( "div.month-field[value!='" + selectedItem + "']" ).parent().hide();
 
-$('#completed-filter').on('click', function() { // show measurement guide in line item form
-   $('.trProposal:contains(Pending)').hide();
-   $('.trProposal:contains(Completed)').show();
-   $("#pending-filter").removeClass("active");
-   $("#completed-filter").addClass("active");
-   $("#all-filter").removeClass("active");
-});
-
-$('#all-filter').on('click', function() { // show measurement guide in line item form
-   $('.trProposal').show();
-   $("#pending-filter").removeClass("active");
-   $("#completed-filter").removeClass("active");
-   $("#all-filter").addClass("active");
+  if (selectedItem == 0) {
+    $( "div.month-field" ).parent().show();
+  }
 });
 
 
