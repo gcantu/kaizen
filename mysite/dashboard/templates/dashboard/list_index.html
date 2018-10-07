@@ -1,56 +1,39 @@
 {% load widget_tweaks %}
 
-<div class="list-menu">
-  <ul class="nav justify-content-center">
-    <li class="nav-item">
-      <a id="all-filter" class="nav-link active" href="#">All</a>
-    </li>
-    <li class="nav-item">
-      <a id="pending-filter" class="nav-link" href="#">Pending</a>
-    </li>
-    <li class="nav-item">
-      <a id="completed-filter" class="nav-link" href="#">Completed</a>
-    </li>
-  </ul>
-</div>
 
-<table class="textcenter">
-  <thead>
-    <th>Created Date</th>
-    <th>Customer</th>
-    <th>Agents</th>
-    <th>Measured By</th>
-    <th>Status</th>
-    <th></th>
-  </thead>
-  <tbody>
-    {% for p in proposals %}
-      <tr class="trProposal">
-        <td>{{ p.created_date }}</td>
-        <td>{{ p.customer }}</td>
-        <td>
-          {% for a in p.agents.all %}
-            {{ a }}
-            {% if forloop.last %}
-            {% else %},&nbsp;
-            {% endif %}
-          {% endfor %}
-        </td>
-        <td>
-          {% for m in p.measured_by.all %}
-            {{ m }}
-            {% if forloop.last %}
-            {% else %},&nbsp;
-            {% endif %}
-          {% endfor %}
-        </td>
-        <td>{{ p.status }}</td>
-        <td>
-          <button class="btn btn-theme">
-            <a href="{% url 'orders:order-summary' p.id %}">View</a>
-          </button>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% for p in proposals %}
+  {% cycle True False as row silent %}
+
+  {% if row %}
+  <div class="row">
+  {% endif %}
+
+    <div class="col-6">
+      <div class="list-section clearfix">
+        <div class="lf"><h6 class="no-margin list-item-title">{{ p.customer }} - ${{ p.order_total|floatformat }}</h6></div>
+
+        <div class="rf">
+          <a class="btn btn-complete" href="{% url 'orders:confirm-status' p.id 'Completed' %}" role="button">&#x2714;</a>
+
+          <a class="btn btn-delete" href="{% url 'orders:confirm-status' p.id 'Deleted' %}" role="button">&#x2718;</a>
+
+        </div>
+        <br>
+
+        <br>
+        <div><b>Installation date:</b> {{ p.installation_date }}</div>
+        <br>
+        <div class="rf">
+          <a class="btn" href="{% url 'orders:order-summary' p.id %}" role="button">View</a>
+
+
+
+        </div>
+      </div>
+    </div>
+
+  {% if not row or forloop.last %}
+  </div>
+  {% endif %}
+
+{% endfor %}

@@ -1,10 +1,8 @@
-{% extends "dashboard/home.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
 {% block title %}Confirm Delete{% endblock %}
-
-{% block contentclass %}small-wrapper{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -72,9 +70,9 @@
 <div class="section-wrapper-small">
   <form id="confirm-delete-form" method="post">{% csrf_token %}
       <p>Are you sure you want to delete this item?</p>
-      <input id="confirm-button" class="btn btn-theme" type="submit" value="Confirm">
+      <input id="confirm-button" class="btn" type="submit" value="Confirm">
   </form>
-  <button class="btn btn-theme03 noprint">
+  <button class="btn">
     <a  href="{% url 'orders:order-summary' object.proposal_id %}">Cancel</a>
   </button> <!-- HOME -->
 </div>

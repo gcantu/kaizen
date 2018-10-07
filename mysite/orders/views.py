@@ -129,7 +129,9 @@ def editPrice(request, pk):
 
     return render(request, 'orders/content.html', {'proposal': p, 'form': form, 'form_name': 'price', 'edit': True, 'id': pk})
 
-# DELETE LINE ITEM FORM ------------------------------------------------------
+# DELETE FORMS ------------------------------------------------------
+
+# Line Item
 class lineItemDelete(DeleteView):
     model = line_item
     template_name = 'orders/confirm_delete.html'
@@ -138,6 +140,20 @@ class lineItemDelete(DeleteView):
         p_id = self.get_object().proposal_id
         return reverse('orders:order-summary', kwargs={'pk': p_id})
 
+# Proposal
+def confirm_status(request, pk, status):
+    p = proposal.objects.get(pk=pk)
+
+    return render(request, 'orders/confirm_status_update.html', {'p': p, 'status': status})
+
+
+def update_status(request, pk, status):
+    p = proposal.objects.get(pk=pk)
+
+    p.status = status
+    p.save()
+
+    return redirect(reverse('dashboard:home'))
 
 
 

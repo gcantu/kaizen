@@ -55,7 +55,7 @@ html, body {
 
 .container {
     max-width: 100%;
-    background-color: #fff;
+		padding: 0 25px;
 }
 
 #content {
@@ -68,16 +68,23 @@ p.summary-title {
 	margin: 0;
 }
 
+
+.list-section {
+  border: 0.5px solid #aeb2b7;
+  margin-bottom: 15px;
+	padding: 10px;
+}
+
 /* 1.2 Header
 --------------------------------------------------------------*/
 #header-logo {
 	float: left;
-	padding: 5px 20px 5px 0;
+	padding: 0 5px 10px 0;
 }
 
 #header-logo img {
   margin-bottom: 0;
-  max-height: 60px;
+  max-height: 40px;
   height: auto;
   width: auto;
 }
@@ -89,7 +96,6 @@ p.summary-title {
 
 #header-title a {
 	color: #515151;
-	font-size: 34px;
 }
 
 #header-title a:hover {
@@ -98,7 +104,7 @@ p.summary-title {
 
 #header-text{
 	float: left;
-  padding-right: 30px;
+	padding-top: 7px;
 }
 
 #header-text p {
@@ -121,7 +127,15 @@ p.summary-title {
 	padding-top: 15px;
 }
 
+.menu-wrapper {
+  padding-top: 8px;
+}
+
 .content-wrapper {
+  padding: 20px;
+}
+
+.footer-wrapper {
   padding: 20px;
 }
 
@@ -178,16 +192,7 @@ a:focus, a:active, a:hover {
 --------------------------------------------------------------*/
 .main-menu {
   background-color: #424a5d;
-}
-
-.main-menu a {
-  color: #f2f2f2;
-  font-weight: 400;
-  letter-spacing: .5px;
-}
-
-.main-menu ul {
-  padding: 0 10px;
+	height: 45px;
 }
 
 /* 2.3 List Menu
@@ -249,7 +254,7 @@ th {
 }
 
 #line-item-detail-table {
-	min-width: 1550px;
+	min-width: 1650px;
 }
 
 .table-theme02 th,
@@ -445,59 +450,105 @@ input[type=number]::-webkit-outer-spin-button {
 --------------------------------------------------------------*/
 .btn {
   color: #fff;
-  min-width: 50px;
-  padding: 0 5px;
+  padding: 2px 6px;
   border-radius: 0;
-  font-size: 14px;
+  font-size: 12px;
+	background-color: #424a5d;
+  border: 0.5px solid #424a5d;
+	letter-spacing: 0.5px;
 }
 
 .btn a {
   color: #fff;
 }
 
-.btn-theme {
-  background-color: #424a5d;
-  border: 0.5px solid #424a5d;
-}
-
-.btn-theme02 {
-  background-color: #F6C042;
-  border: 0.5px solid #F6C042;
-}
-
-.btn-theme03 {
-	background-color: #ad0817;
-  border: 0.5px solid #ad0817;
-}
-
-.btn-theme04 {
-	background-color: #5eb901;
-  border: 0.5px solid #5eb901;
-	margin-left: 5px;
+.btn-radius {
+	border-radius: 4px;
 }
 
 .btn:hover, .btn:focus,
 .btn:active, .btn.active,
 .btn a:hover {
   color: #fff;
-  background-color: #888888;
-  border-color: #888888;
+  background-color: #7a808d;
+  border-color: #7a808d;
   cursor: pointer;
 }
 
-.btn-lg {
-  padding: 3px 10px 3px 10px;
-  border-radius: 0;
+.btn-main {
+	background-color: #25b4c1;
+	border-color: #25b4c1;
+	letter-spacing: 1px;
+	padding: 5px 10px;
 }
 
-.edit-button {
-  padding: 0;
-  border-radius: 0;
+.btn-main.btn:hover {
+	background-color: #66cad3;
+	border-color: #66cad3;
 }
+
+.btn-yellow {
+  background-color: #F6C042;
+  border: 0.5px solid #F6C042;
+}
+
+.btn-yellow.btn:hover {
+	background-color: #f9d37a;
+	border-color: #f9d37a;
+}
+
+.btn-red {
+	background-color: #ad0817;
+  border: 0.5px solid #ad0817;
+}
+
+.btn-red.btn:hover {
+	background-color: #cc7f7f;
+	border-color: #cc7f7f;
+}
+
+.btn-green {
+	background-color: #84bc4d;
+  border: 0.5px solid #84bc4d;
+}
+
+.btn-green.btn:hover {
+	background-color: #a2cc78;
+	border-color: #a2cc78;
+}
+
+
+.btn-delete, .btn-complete {
+	background-color: #aeb2b7;
+  border: 0.5px solid #aeb2b7;
+	border-radius: 50px;
+}
+
+.btn.btn-delete:hover {
+	background-color: #ad0817;
+  border: 0.5px solid #ad0817;
+}
+
+.btn.btn-complete:hover {
+	background-color: #5eb901;
+  border: 0.5px solid #5eb901;
+}
+
+
 
 #tax-button, #confirm-button {
 	padding: 0 5px;
 }
+
+#logout-button {
+	padding-top: 4px;
+	float: right;
+}
+
+#confirm-delete-button {
+	display: inline-block;
+}
+
 
 /* 7.0 Images
 --------------------------------------------------------------*/
@@ -540,6 +591,12 @@ h6 {
 	padding-top: 5px;
 	height: 30px;
 	margin-bottom: 5px;
+}
+
+.list-item-title {
+	font-size: 20px;
+	color: #424a5d;
+	letter-spacing: 0;
 }
 
 /* 9.0 Clearings
@@ -588,6 +645,10 @@ hr {
   float: right;
 }
 
+.lf {
+  float: left;
+}
+
 .textcenter {
   text-align: center;
 }
@@ -598,6 +659,11 @@ hr {
 
 .no-padding {
 	padding: 0;
+}
+
+
+.no-margin {
+	margin: 0;
 }
 
 /* 11.0 Responsive Structure

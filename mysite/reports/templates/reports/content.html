@@ -1,4 +1,4 @@
-{% extends "dashboard/home.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -8,7 +8,7 @@
 <div class="section-wrapper">
   <div class="inner-wrapper">
 
-    {% include "dashboard/letterhead.html" %}
+    {% include "letterhead.html" %}
     <hr/>
 
     <div class="row">
@@ -48,10 +48,10 @@
 
     <div class="row rf">
       <div class="col-12">
-        <button class="btn btn-theme noprint">
+        <button class="btn noprint">
           <a onclick="javascript:print();">Print</a>
         </button> <!-- Print -->
-        <button class="btn btn-theme noprint">
+        <button class="btn noprint">
           <a  href="{% url 'orders:order-summary' proposal.id %}">Order Summary</a>
         </button> <!-- HOME -->
       </div>

@@ -17,6 +17,10 @@
         {{ form.created_date.label_tag }}
         {% render_field  form.created_date class="form-control" %}
       </div>
+      <div class="form-group col-3 col-md-2">
+        {{ form.installation_date.label_tag }}
+        {% render_field  form.installation_date class="form-control" %}
+      </div>
     </div>
 
     <div class="form-row">
@@ -34,6 +38,6 @@
         </div>
     </div>
 
-    <input class="btn btn-theme rf" type="submit" value="OK"/>
+    <input class="btn rf" type="submit" value="OK"/>
   </form>
 </div>

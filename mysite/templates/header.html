@@ -1,0 +1,21 @@
+{% load static %}
+<header class="noprint">
+  <div class="container">
+    <div class="header-wrapper clearfix">
+      <div id="header-logo">
+        <img src="{% static 'img/shutterize_logo.png' %}" alt="Shutterize Software">
+      </div>
+
+      <div id="header-text">
+        <h4 id="header-title">
+          <a href="{% url 'dashboard:home' %}" title="Shutterize" rel="home">Shutterize</a>
+        </h4>
+      </div>
+
+      <div id="logout-button">
+        <a class="btn btn-radius btn-main" href="{% url 'dashboard:login-page' %}" role="button">Logout</a>
+      </div>
+
+    </div>
+  </div>
+</header>

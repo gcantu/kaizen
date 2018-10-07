@@ -1,4 +1,4 @@
-{% extends "dashboard/home.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -16,17 +16,13 @@
       <div class="row">
         <div class="col-8 col-md-5 col-lg-4">
           <p class="summary-title">Customer</p>
-          <button class="btn btn-theme02 noprint edit-button rf">
-            <a href="{% url 'orders:edit-customer' customer.id %}">Edit</a>
-          </button> <!-- EDIT customer -->
+          <a class="btn btn-yellow rf" href="{% url 'orders:edit-customer' customer.id %}" role="button">Edit</a> <!-- EDIT customer -->
           <hr/>
           {% include 'orders/detail_customer.html' %}
         </div>
         <div class="col-8 col-md-5 col-lg-4">
           <p class="summary-title">Order Details</p>
-          <button class="btn btn-theme02 noprint edit-button rf">
-            <a  href="{% url 'orders:edit-proposal' proposal.id %}">Edit</a>
-          </button> <!-- EDIT agents, measured by -->
+          <a class="btn btn-yellow rf" href="{% url 'orders:edit-proposal' proposal.id %}" role="button">Edit</a> <!-- EDIT agents, measured by -->
           <hr/>
           {% include 'orders/detail_proposal.html' %}
           <div class="report-section">
@@ -36,9 +32,7 @@
         </div>
         <div class="col-8 col-md-5 col-lg-4">
           <p class="summary-title">Price Details</p>
-          <button class="btn btn-theme02 noprint edit-button rf">
-            <a  href="{% url 'orders:edit-price' proposal.id %}">Edit</a>
-          </button> <!-- EDIT price -->
+          <a class="btn btn-yellow rf" href="{% url 'orders:edit-price' proposal.id %}" role="button">Edit</a> <!-- EDIT price -->
           <hr/>
           {% include 'orders/detail_price.html' %}
         </div>
@@ -47,12 +41,10 @@
       <div class="row">
         <div class="col-12">
           <p class="summary-title">Order Items</p>
-          <button id="line-item-add-button" class="btn btn-theme04 noprint edit-button rf">
-            <a  href="{% url 'orders:add-line-item' proposal.id %}">Add</a>
-          </button> <!-- ADD line item -->
-          <button id="line-item-edit-button" class="btn btn-theme02 noprint edit-button rf">
-            Edit
-          </button> <!-- EDIT line items -->
+          <div class="rf">
+            <button id="line-item-edit-button" class="btn btn-yellow">Edit</button> <!-- EDIT line items -->
+            <a class="btn btn-green" href="{% url 'orders:add-line-item' proposal.id %}" role="button">Add</a> <!-- ADD line item -->
+          </div>
           <hr/>
           {% include 'orders/detail_line_item.html' %}
         </div>
@@ -62,18 +54,13 @@
 
       <div class="row rf">
         <div class="col-12">
-          <button class="btn btn-theme noprint">
-            <a  href="{% url 'reports:proposal-report' proposal.id %}">Proposal</a>
-          </button> <!-- CREATE proposal -->
-          <button class="btn btn-theme noprint">
-            <a  href="{% url 'reports:manufacturing-report' proposal.id %}">Manufacturing Report</a>
-          </button> <!-- CREATE manufacturing report -->
-          <button class="btn btn-theme noprint">
-            <a  href="{% url 'reports:invoice-report' proposal.id %}">Invoice</a>
-          </button> <!-- CREATE invoice -->
-          <button class="btn btn-theme noprint">
-            <a  href="{% url 'dashboard:home' %}">Exit</a>
-          </button> <!-- HOME -->
+          <a class="btn" href="{% url 'reports:proposal-report' proposal.id %}" role="button">Proposal</a> <!-- CREATE proposal -->
+
+          <a class="btn" href="{% url 'reports:manufacturing-report' proposal.id %}" role="button">Manufacturing Report</a> <!-- CREATE manufacturing report -->
+
+          <a class="btn" href="{% url 'reports:invoice-report' proposal.id %}" role="button">Invoice</a> <!-- CREATE invoice -->
+
+          <a class="btn" href="{% url 'dashboard:home' %}" role="button">Exit</a> <!-- HOME -->
         </div>
       </div>
 

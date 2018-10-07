@@ -3,15 +3,16 @@
   <table id="line-item-detail-table">
     <thead>
       <tr>
+        <th colspan=2 class="hidden line-item-table-buttons"></th>
         <th colspan=19></th>
         <th colspan=5>Height</th>
         <th colspan=2>Door Handle</th>
         <th>Resaque</th>
         <th colspan=2>Price</th>
-        <th colspan=2 class="hidden line-item-table-buttons"></th>
       </tr>
 
       <tr>
+        <th colspan=2 class="hidden line-item-table-buttons"></th>
         <th>#</th>
         <th>Product</th>
         <th>Type</th>
@@ -39,13 +40,18 @@
         <th>L frame</th>
         <th>Per Sq. Ft.</th>
         <th>Total</th>
-        <th colspan=2 class="hidden line-item-table-buttons"></th>
       </tr>
     </thead>
 
     {% for item in lineitem %}
     <tbody>
       <tr>
+        <td class="hidden line-item-table-buttons">
+          <a class="btn btn-yellow" href="{% url 'orders:edit-line-item' item.id %}" role="button">Edit</a>
+        </td>
+        <td class="hidden line-item-table-buttons">
+          <a class="btn btn-red" href="{% url 'orders:delete' item.id item.proposal_id %}" role="button">X</a>
+        </td>
         <td>{{ forloop.counter }}</td>
         <td>{{ item.product }}</td>
         <td>{{ item.shutter_type }}</td>
@@ -75,16 +81,6 @@
         <td>{{ item.resaque_lframe|yesno:"Yes," }}</td>
         <td>$ {{ item.price_per_sq_ft }}</td>
         <td>$ {{ item.totalPrice }}</td>
-        <td class="hidden line-item-table-buttons">
-          <button class="btn btn-theme02">
-            <a href="{% url 'orders:edit-line-item' item.id %}">Edit</a>
-          </button>
-        </td>
-        <td class="hidden line-item-table-buttons">
-          <button class="btn btn-theme03">
-            <a href="{% url 'orders:delete' item.id item.proposal_id %}">X</a>
-          </button>
-        </td>
       </tr>
     </tbody>
     {% endfor %}

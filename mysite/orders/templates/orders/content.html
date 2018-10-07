@@ -1,4 +1,4 @@
-{% extends "dashboard/home.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -7,7 +7,7 @@
 {% block content %}
 <div class="section-wrapper form">
   {% if edit or form_name == 'line_item' %}
-  <button class="btn btn-theme rf">
+  <button class="btn rf">
     <a  href="{% url 'orders:order-summary' id %}">Go Back</a>
   </button>
   {% endif %}
@@ -30,7 +30,7 @@
     {% include 'orders/detail_line_item.html' %}
     <br>
     {% if form_name == 'line_item' %}
-    <button class="btn btn-theme rf">
+    <button class="btn rf">
       <a href="{% url 'orders:add-proposal' proposal_id %}">Next</a>
     </button>
     {% endif %}

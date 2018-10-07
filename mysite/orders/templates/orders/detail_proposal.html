@@ -2,15 +2,20 @@
 <table class="detail-table">
   <tbody>
     <tr>
-      <th>Date: </th>
-      <td>{{ proposal.created_date }}</td>
-    </tr>
-
-    <tr>
       <th>Proposal ID: </th>
       <td>
         <div id="proposalId" value="{{ proposal.id }}">{{ proposal.id }}</div>
       </td>
+    </tr>
+    
+    <tr>
+      <th>Created Date: </th>
+      <td>{{ proposal.created_date.date }}</td>
+    </tr>
+
+    <tr>
+      <th>Installation Date: </th>
+      <td>{{ proposal.installation_date }}</td>
     </tr>
 
     <tr>
