@@ -15,7 +15,7 @@ $('#main-edit-button').on('click', function() { // add/remove tax from proposal
 
 
 $('#line-item-edit-button').on('click', function() { // add/remove tax from proposal
-   $(".line-item-table-buttons").removeClass("hidden");
+   $(".line-item-table-buttons").toggle();
 });
 
 $('#divider-button').on('click', function() { // add/remove divider field in line item form

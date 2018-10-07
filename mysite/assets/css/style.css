@@ -549,6 +549,9 @@ input[type=number]::-webkit-outer-spin-button {
 	display: inline-block;
 }
 
+.line-item-table-buttons {
+	display:none;
+}
 
 /* 7.0 Images
 --------------------------------------------------------------*/

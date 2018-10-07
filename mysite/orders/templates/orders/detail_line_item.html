@@ -3,7 +3,7 @@
   <table id="line-item-detail-table">
     <thead>
       <tr>
-        <th colspan=2 class="hidden line-item-table-buttons"></th>
+        <th colspan=2 class="line-item-table-buttons"></th>
         <th colspan=19></th>
         <th colspan=5>Height</th>
         <th colspan=2>Door Handle</th>
@@ -12,7 +12,7 @@
       </tr>
 
       <tr>
-        <th colspan=2 class="hidden line-item-table-buttons"></th>
+        <th colspan=2 class="line-item-table-buttons"></th>
         <th>#</th>
         <th>Product</th>
         <th>Type</th>
@@ -46,10 +46,10 @@
     {% for item in lineitem %}
     <tbody>
       <tr>
-        <td class="hidden line-item-table-buttons">
+        <td class="line-item-table-buttons">
           <a class="btn btn-yellow" href="{% url 'orders:edit-line-item' item.id %}" role="button">Edit</a>
         </td>
-        <td class="hidden line-item-table-buttons">
+        <td class="line-item-table-buttons">
           <a class="btn btn-red" href="{% url 'orders:delete' item.id item.proposal_id %}" role="button">X</a>
         </td>
         <td>{{ forloop.counter }}</td>
