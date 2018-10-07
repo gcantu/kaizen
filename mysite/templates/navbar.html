@@ -2,9 +2,21 @@
 <div class="main-menu noprint">
   <div class="container">
     <div class="menu-wrapper">
-        <div id="create-button">
-          <a class="btn btn-radius btn-main" href="{% url 'orders:add-customer' %}" role="button">New Proposal</a>
-        </div>
+
+      <div id="create-button" class="inline">
+        <a class="btn btn-radius btn-main" href="{% url 'orders:add-customer' %}" role="button">New Proposal</a>
+      </div>
+
+      <div class="rf">
+        <a class="icon-btn" href="{% url 'dashboard:home' %}" role="button">
+          <i class="fas fa-home"></i>
+        </a>
+
+        <a class="icon-btn" href="{% url 'dashboard:update-list' 'Deleted' %}" role="button">
+          <i class="far fa-trash-alt"></i>
+        </a>
+      </div>
+
     </div>
   </div>
 </div>
